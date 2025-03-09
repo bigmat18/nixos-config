@@ -24,6 +24,7 @@ font pango:monospace 12
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xinput set-prop "bcm5974" "libinput Accel Speed" 0.7
 exec --no-startup-id xrandr --output eDP-1 --dpi 144
+exec_always --no-startup-id nitrogen --restore
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 

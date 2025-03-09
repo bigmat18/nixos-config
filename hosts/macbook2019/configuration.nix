@@ -69,13 +69,13 @@
         };
       };
       displayManager = {
-	startx.enable = true;
-	lightdm.enable = lib.mkForce false;
-        defaultSession = "none+i3";
-      };
-      libinput = {
-      	enable = true;
-      };
+	      startx.enable = true;
+	      lightdm.enable = lib.mkForce false;
+          defaultSession = "none+i3";
+        };
+        libinput = {
+      	  enable = true;
+        };
     };
     gvfs.enable = true;
     gnome.gnome-keyring.enable = true;
