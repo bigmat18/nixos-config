@@ -1,0 +1,120 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        output_format = "i3bar"
+        colors = false
+        interval = 5
+        color_good = "#aaff00"    # Verde chiaro (per stato "buono")
+        color_degraded = "#00dddd" # Blu chiaro (per stato "degradato")
+        color_bad = "#ff8800"
+        markup = "pango"
+}
+
+order += "volume master"
+order += "wireless _first_"
+order += "cpu_usage"
+order += "memory"
+order += "cpu_temperature 0"
+order += "tztime localdate"
+order += "battery 0"
+order += "tztime localtime"
+# order += "load"
+# order += "disk /home"
+# order += "ipv6"
+# order += "run_watch VPN"
+# order += "ethernet eno16777736"
+# order += "run_watch DHCP"
+
+# Volume
+volume master {
+    format = "<span color='#b8bb26' size='large'> </span> <span bgcolor='#b8bb26' foreground='black'> %volume </span>"
+    format_muted = "<span color='#fb4934'> %volume</span>"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+# Wireless
+wireless _first_ {
+    format_up = "<span color='#83a598' size='large'> </span> <span bgcolor='#83a598' foreground='black'>%quality %essid </span>"
+    format_down = "<span color='#fb4934'>  Offline</span>"
+}
+
+# Disk
+disk "/" {
+    format = "<span color='#8ec07c' size='large'> </span> <span bgcolor='#8ec07c' foreground='black'> %avail </span>"
+    prefix_type = custom
+}
+
+# Memory
+memory {
+    format = "<span color='#d3869b' size='large'> </span> <span bgcolor='#d3869b' foreground='white'> %used </span>"
+    threshold_degraded = "10%"
+    format_degraded = "MEMORY: %free"
+}
+
+# CPU Temperature
+cpu_temperature 0 {
+    format = "<span color='#fb8c00' size='large'>󱠇 </span> <span bgcolor='#fb8c00' foreground='white'> %degrees °C </span>"
+    max_threshold = 50
+}
+
+# Time (Local Date)
+tztime localdate {
+    format = "<span color='#d79921' size='large'> </span> <span bgcolor='#d79921' foreground='black'> %a %d-%m-%Y </span>"
+}
+
+# Battery
+battery 0 {
+    format = "<span color='#8ec07c' size='large'>%status</span> <span bgcolor='#8ec07c' foreground='black'> %percentage </span>"
+    status_chr = "⚡  "
+    status_bat = " "
+    status_unk = "? UNK"
+    status_full = "󰂄 FULL"
+}
+
+# Time (Local Time)
+tztime localtime {
+    format = "<span color='#00bfa5' size='large'>  </span><span bgcolor='#00bfa5' foreground='black'> %I:%M %p </span> "
+}
+
+# Disk (Home)
+disk "/home" {
+    format = "  %avail "
+    prefix_type = custom
+}
+
+# Run Watch DHCP
+run_watch DHCP {
+    pidfile = "/var/run/dhclient*.pid"
+}
+
+# Run Watch VPN
+run_watch VPN {
+    pidfile = "/var/run/vpnc/pid"
+}
+
+# Ethernet
+ethernet eno16777736 {
+    format_up = " %ip "
+    format_down = "  "
+}
+
+# CPU Usage
+cpu_usage {
+    format = "  %usage "
+}
+
+# Load
+load {
+    format = "  %1min "
+    max_threshold = 5
+}
+
+

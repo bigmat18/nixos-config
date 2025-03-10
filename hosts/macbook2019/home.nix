@@ -11,10 +11,12 @@
 
   home.file = {
     ".config/i3/config".source = ../../dotfiles/i3/config;
+    ".config/i3status/config".source = ../../dotfiles/i3status/config;
     ".xinitrc".source = ../../dotfiles/.xinitrc;
     ".bash_profile".source = ../../dotfiles/.bash_profile;
-    ".config/nitrogen/bg-save.cfg".source = ../../dotfiles/nitrogen/bg-save.cfg;
+    ".config/nitrogen/bg-saved.cfg".source = ../../dotfiles/nitrogen/bg-saved.cfg;
     ".config/nitrogen/bg.png".source = ../../dotfiles/nitrogen/bg.png;
+    ".config/rclone/rclone.conf".source = ../../dotfiles/rclone/rclone.conf;
   };
 
   home.sessionVariables = {
@@ -27,10 +29,8 @@
     enable = true;
     backend = "glx";
     opacityRules = [
-      "80:class_g = '.*'"
+      "80:class_g = 'Alacritty'"
     ];
-    activeOpacity = 1;
-    inactiveOpacity = 0.5;
     vSync = true;
   };
 

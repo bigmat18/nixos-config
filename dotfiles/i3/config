@@ -24,6 +24,8 @@ font pango:monospace 12
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xinput set-prop "bcm5974" "libinput Accel Speed" 0.7
 exec --no-startup-id xrandr --output eDP-1 --dpi 144
+exec --no-startup-id rclone mount iclouddrive: ~/icloud/ --vfs-cache-mode full &
+ 
 exec_always --no-startup-id nitrogen --restore
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -189,4 +191,25 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        position top
+        font pango:DejaVu Sans Mono 10
+        separator_symbol " "
+        colors {
+                background #282828 
+                statusline #ebdbb2 
+                separator  #928374
+
+                focused_workspace  #d79921 #282828 #d79921
+                active_workspace   #a89984 #282828 #a89984
+                inactive_workspace #928374 #282828 #928374
+                urgent_workspace   #fb4934 #282828 #fb4934
+        }
+        padding 3px 0
+        tray_output primary
+        tray_padding 5px
+        workspace_min_width 50
 }
+
+default_border pixel 0
+default_floating_border pixel 0
+gaps inner 10
