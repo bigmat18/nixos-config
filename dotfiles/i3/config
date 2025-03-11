@@ -24,7 +24,8 @@ font pango:monospace 12
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xinput set-prop "bcm5974" "libinput Accel Speed" 0.7
 exec --no-startup-id xrandr --output eDP-1 --dpi 144
-exec --no-startup-id rclone mount iclouddrive: ~/icloud/ --vfs-cache-mode full &
+exec --no-startup-id rclone mount iclouddrive: ~/icloud/ --vfs-cache-mode full
+exec --no-startup-id picom
  
 exec_always --no-startup-id nitrogen --restore
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
@@ -210,6 +211,17 @@ bar {
         workspace_min_width 50
 }
 
-default_border pixel 0
-default_floating_border pixel 0
-gaps inner 10
+default_border pixel 2
+default_floating_border pixel 2
+gaps inner 8
+
+set $bg_color      #282828 
+set $inactive_bg   #3c3836
+set $text_color    #ebdbb2
+set $focus_bg      #d79921
+set $urgent_bg     #cc241d
+
+client.focused          $focus_bg $focus_bg $text_color $bg_color
+client.unfocused        $focus_bg $focus_bg $text_color $bg_color
+client.focused_inactive $focus_bg $focus_bg $text_color $bg_color
+client.urgent           $urgent_bg $urgent_bg $text_color $bg_color

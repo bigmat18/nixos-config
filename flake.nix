@@ -10,27 +10,30 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, ...}@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, ...}@inputs:
     let 
       system = "x86_64-linux"; 
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       pkgs = nixpkgs.legacyPackages.${system};
+      formatter = pkgs.nixfmt-rfc-style;
     in
     {
       nixosConfigurations.macbook2019 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
+
         modules = [
           ./hosts/macbook2019/configuration.nix
-          ./nix/substituter.nix
+          ./system/substituter.nix
 
           nixos-hardware.nixosModules.apple-t2
-          inputs.home-manager.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.bigmat18 = import ./hosts/macbook2019/home.nix;
+          }
         ];
       };
     };

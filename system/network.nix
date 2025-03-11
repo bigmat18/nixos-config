@@ -1,7 +1,5 @@
-{ pkgs, lib, ...}:
-
 {
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;
   networking.wireless.networks = {
      "TIM-32947764" = {
       	psk = "ECtGxGAxFFxHXDKbDexU2YGt";

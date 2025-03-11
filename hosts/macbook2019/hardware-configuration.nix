@@ -9,9 +9,12 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [];
+  boot.extraModprobeConfig = ''
+      options hid-appletb-kbd mode=2
+  '';
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/6b8a31e0-08b0-42db-a6a8-bff72ebe073a";
@@ -38,4 +41,15 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.firmware = [
+    (pkgs.stdenvNoCC.mkDerivation (final: {
+     	name = "brcm-firmware";
+      src = ../../firmware/brcm;
+      installPhase = ''
+        mkdir -p $out/lib/firmware/brcm
+        cp ${final.src}/* "$out/lib/firmware/brcm"
+      '';
+    }))
+  ];
 }
