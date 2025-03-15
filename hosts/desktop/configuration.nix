@@ -12,7 +12,6 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-  # edit as per your location and timezone
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "it_IT.UTF-8";
 
@@ -23,12 +22,6 @@
       enable = true;
       autorun = false;
       videoDrivers = [ "nvidia" ];
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          i3status
-        ];
-      };
       desktopManager = {
         xterm.enable = false;
         xfce = {
@@ -67,15 +60,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    alacritty
-    dmenu
     git
     networkmanagerapplet
-    nitrogen
     pasystray
     picom
     pulseaudioFull
-    rofi
     vim
     unrar
     unzip
@@ -84,9 +73,9 @@
     obsidian
     fastfetch
     htop
+    firefox
 
-    xorg.xbacklight
-    brightnessctl
+    discord
   ];
 
   programs.light.enable = true;
@@ -99,7 +88,7 @@
 
   programs = {
     thunar.enable = true;
-    firefox.enable = true;
+    zsh.enable = true;
   };
 
   security = {

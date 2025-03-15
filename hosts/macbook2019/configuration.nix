@@ -9,7 +9,6 @@
     ../../system/users.nix
   ];
 
-  # edit as per your location and timezone
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "it_IT.UTF-8";
 
@@ -20,12 +19,6 @@
       enable = true;
       autorun = false;
       videoDrivers = [ "amdgpu" ];
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          i3status
-        ];
-      };
       desktopManager = {
         xterm.enable = false;
         xfce = {
@@ -64,15 +57,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    alacritty
-    dmenu
     git
     networkmanagerapplet
-    nitrogen
     pasystray
     picom
     pulseaudioFull
-    rofi
     vim
     unrar
     unzip
@@ -81,12 +70,9 @@
     obsidian
     fastfetch
     htop
-
-    xorg.xbacklight
-    brightnessctl
+    thunar
+    firefox
   ];
-
-  programs.light.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -96,7 +82,7 @@
 
   programs = {
     thunar.enable = true;
-    firefox.enable = true;
+    zsh.enable = true;
   };
 
   security = {

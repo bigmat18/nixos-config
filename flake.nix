@@ -38,16 +38,16 @@
       };
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
-	modules = [
-	  ./hosts/desktop/configuration.nix
-	  ./system/substituter.nix
+        modules = [
+          ./hosts/desktop/configuration.nix
+          ./system/substituter.nix
 
-	  home-manager.nixosModules.home-manager
-	  {
-    	    home-manager.extraSpecialArgs = { inherit inputs; };
-	    home-manager.users.bigmat18 = import ./hosts/macbook2019/home.nix;
-	  }
-	];
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.bigmat18 = import ./hosts/desktop/home.nix;
+          }
+        ];
       };
     };
 }
