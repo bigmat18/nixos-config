@@ -52,4 +52,6 @@
       '';
     }))
   ];
+
+  hardware.opengl.enable = true;
 }

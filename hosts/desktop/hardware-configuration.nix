@@ -24,6 +24,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   }; 
 
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport32Bit = true;
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/11106953-3375-49d6-b729-93ee2383c3fb";
       fsType = "ext4";
