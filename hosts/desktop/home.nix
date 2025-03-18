@@ -3,6 +3,7 @@
 {
   imports = [
     ../../home
+    ../../home/obs-studio
   ];
 
   services.i3.startupCommands = [
