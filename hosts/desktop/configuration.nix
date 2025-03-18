@@ -22,14 +22,6 @@
       enable = true;
       autorun = false;
       videoDrivers = [ "nvidia" ];
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = false;
-          noDesktop = true;
-          enableXfwm = false;
-        };
-      };
       displayManager = {
 	      startx.enable = true;
 	      lightdm.enable = lib.mkForce false;
@@ -40,7 +32,6 @@
         };
     };
     gvfs.enable = true;
-    gnome.gnome-keyring.enable = true;
     blueman.enable = true;
     pipewire = {
       enable = true;
@@ -65,6 +56,7 @@
     pasystray
     picom
     pulseaudioFull
+    pavucontrol
     vim
     unrar
     unzip
@@ -76,6 +68,8 @@
     firefox
 
     discord
+    spotify
+    mpv
   ];
 
   programs.light.enable = true;
@@ -93,6 +87,7 @@
 
   security = {
     rtkit.enable = true;
+    polkit.enable = true;
   };
   
   hardware = {
