@@ -10,8 +10,8 @@
   ];
 
   time.timeZone = "Europe/Rome";
-  i18n.defaultLocale = "it_IT.UTF-8";
-
+  i18n.defaultLocale = "en_US.UTF-8";
+  
   services = {
     xserver = {
       layout = "it";
@@ -58,7 +58,6 @@
 
   environment.systemPackages = with pkgs; [
     git
-    networkmanagerapplet
     pasystray
     picom
     pulseaudioFull
@@ -70,8 +69,10 @@
     obsidian
     fastfetch
     htop
-    thunar
     firefox
+
+    networkmanager
+    networkmanagerapplet
   ];
 
   fonts.packages = with pkgs; [
