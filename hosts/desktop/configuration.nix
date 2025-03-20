@@ -66,7 +66,7 @@
     fastfetch
     htop
     firefox
-
+    
     discord
     spotify
     mpv

@@ -8,17 +8,25 @@ pkgs.mkShell {
       ninja
       gdb
 
-      mesa.dev
-      libGL
+      mesa
       xorg.libX11.dev
       xorg.libXrandr
       xorg.libXinerama
       xorg.libXcursor
       xorg.libXxf86vm
       xorg.libXi
+
+      vulkan-headers
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-tools
+
+      wayland 
+      wayland-protocols
   ];
 
   shellHook = ''
+    export LD_LIBRARY_PATH=${pkgs.vulkan-loader}/lib:$LD_LIBRARY_PATH
     export SHELL=${pkgs.zsh}/bin/zsh
     exec ${pkgs.zsh}/bin/zsh
     echo "✅ Ambiente di sviluppo C++ pronto!"
