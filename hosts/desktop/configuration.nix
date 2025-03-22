@@ -22,6 +22,14 @@
       enable = true;
       autorun = false;
       videoDrivers = [ "nvidia" ];
+      desktopManager = {
+        xterm.enable = false;
+        xfce = {
+          enable = false;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+      };
       displayManager = {
 	      startx.enable = true;
 	      lightdm.enable = lib.mkForce false;
@@ -70,6 +78,11 @@
     discord
     spotify
     mpv
+
+    xclip
+    wl-clipboard
+
+    vscodium
   ];
 
   programs.light.enable = true;

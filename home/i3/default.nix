@@ -59,7 +59,8 @@ in
 
           keybindings = {
             "${modifier}+Return"  = "exec alacritty";
-            "${modifier}+Shift+s" = "exec flameshot gui";
+            # "${modifier}+Shift+s" = "exec flameshot gui";
+            "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d"       = "exec rofi -show drun";
             "${modifier}+Shift+c" = "reload";
