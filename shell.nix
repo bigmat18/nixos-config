@@ -9,6 +9,7 @@ pkgs.mkShell {
       gdb
 
       mesa
+      libGL
       xorg.libX11.dev
       xorg.libXrandr
       xorg.libXinerama
