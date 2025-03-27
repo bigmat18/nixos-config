@@ -7,6 +7,7 @@ pkgs.mkShell {
       pkg-config
       ninja
       gdb
+      gdbgui
 
       mesa
       libGL

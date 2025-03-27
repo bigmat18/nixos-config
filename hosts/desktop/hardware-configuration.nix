@@ -17,7 +17,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
@@ -50,4 +50,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.keyboard.qmk.enable = true;
 }
