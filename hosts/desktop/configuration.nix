@@ -17,15 +17,19 @@
 
   services = {
     xserver = {
-      layout = "it";
+      layout = "us";
       xkbVariant = "";
+      xkbOptions = "compose:ralt";
       enable = true;
       autorun = false;
       videoDrivers = [ "nvidia" ];
+      windowManager.i3 = {
+        enable = true;
+      };
       desktopManager = {
         xterm.enable = false;
         xfce = {
-          enable = false;
+          enable = true;
           noDesktop = true;
           enableXfwm = false;
         };
@@ -33,11 +37,9 @@
       displayManager = {
 	      startx.enable = true;
 	      lightdm.enable = lib.mkForce false;
-          defaultSession = "none+i3";
-        };
-        libinput = {
-      	  enable = true;
-        };
+        defaultSession = "none+i3";
+      };
+      libinput.enable = true;
     };
     gvfs.enable = true;
     blueman.enable = true;
@@ -68,12 +70,13 @@
     vim
     unrar
     unzip
-    vscode
     rclone
     obsidian
     fastfetch
     htop
     firefox
+    
+    vscode
     
     discord
     spotify
@@ -81,8 +84,10 @@
 
     xclip
     wl-clipboard
+    appimage-run
 
-    vscodium
+    wget
+    via
   ];
 
   programs.light.enable = true;
@@ -96,6 +101,7 @@
   programs = {
     thunar.enable = true;
     zsh.enable = true;
+    dconf.enable = true;
   };
 
   security = {
@@ -106,7 +112,7 @@
   hardware = {
     bluetooth.enable = true;
   };
-
+  
   # Don't touch this
   system.stateVersion = "23.05";
 }
