@@ -54,4 +54,6 @@
   ];
 
   hardware.opengl.enable = true;
+  hardware.keyboard.qmk.enable = true;
+  hardware.enableRedistributableFirmware = true;
 }

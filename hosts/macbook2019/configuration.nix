@@ -14,7 +14,7 @@
   
   services = {
     xserver = {
-      layout = "it";
+      layout = "us";
       xkbVariant = "";
       enable = true;
       autorun = false;
@@ -76,6 +76,17 @@
 
     brightnessctl
     powertop
+    vscode
+    discord
+    spotify
+    mpv
+
+    xclip
+    wl-clipboard
+    appimage-run
+
+    wget
+    via
   ];
 
   fonts.packages = with pkgs; [
