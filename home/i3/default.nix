@@ -72,6 +72,9 @@ in
             "XF86AudioMute"        = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ${refresh_i3status}";
             "XF86AudioMicMute"     = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
 
+            "XF86MonBrightnessUp"  = "exec brightnessctl set +10%";
+            "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
+
             "${modifier}+1" = "workspace number 1";
             "${modifier}+2" = "workspace number 2";
             "${modifier}+3" = "workspace number 3";
