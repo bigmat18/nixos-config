@@ -27,11 +27,14 @@
       command = "xrandr --output DisplayPort-1 --rotate inverted && " +
                 "xrandr --output DisplayPort-2 --rotate inverted && " +
                 "xrandr --output DisplayPort-5 --rotate inverted && " +
-                "xrandr --output DisplayPort-2 --left-of DisplayPort-1 " +
-                "xrandr --output DisplayPort-5 --left-of DisplayPort-1 " +
-                "xrandr --output eDP-1 --left-of DisplayPort-2 " +
-                "xrandr --output eDP-1 --left-of DisplayPort-5 ";
+                "xrandr --output DisplayPort-2 --left-of DisplayPort-1 &&" +
+                "xrandr --output DisplayPort-5 --left-of DisplayPort-1 &&" +
+                "xrandr --output eDP-1 --left-of DisplayPort-2 &&" +
+                "xrandr --output eDP-1 --left-of DisplayPort-5";
 
+    }
+    {
+      command = "xset s off -dpms";
     }
   ];
 }
