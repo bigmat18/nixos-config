@@ -194,53 +194,53 @@ in
           };
 
           bars = [
-            # {
-            #   statusCommand = "i3status";
-            #   position = "top";
-            #   fonts = {
-            #     names = ["DejaVu Sans Mono"];
-            #     size = 12.0;
-            #   };
+            {
+              statusCommand = "i3status";
+              position = "top";
+              fonts = {
+                names = ["DejaVu Sans Mono"];
+                size = 12.0;
+              };
 
-            #   colors = {
-            #     background = bg_color;
-            #     statusline = text_color;
-            #     separator = "#928374";
+              colors = {
+                background = bg_color;
+                statusline = text_color;
+                separator = "#928374";
 
-            #     focusedWorkspace = {
-            #       border = focus_bg;
-            #       background = bg_color;
-            #       text = focus_bg;
-            #     };
+                focusedWorkspace = {
+                  border = focus_bg;
+                  background = bg_color;
+                  text = focus_bg;
+                };
 
-            #     activeWorkspace = {
-            #       border = "#a89984";
-            #       background = bg_color;
-            #       text = "#a89984";
-            #     };
+                activeWorkspace = {
+                  border = "#a89984";
+                  background = bg_color;
+                  text = "#a89984";
+                };
 
-            #     inactiveWorkspace = {
-            #       border = "#928374";
-            #       background = bg_color;
-            #       text = "#928374";
-            #     };
+                inactiveWorkspace = {
+                  border = "#928374";
+                  background = bg_color;
+                  text = "#928374";
+                };
 
-            #     urgentWorkspace = {
-            #       border = urgent_bg;
-            #       background = bg_color;
-            #       text = urgent_bg;
-            #     };
-            #   };
+                urgentWorkspace = {
+                  border = urgent_bg;
+                  background = bg_color;
+                  text = urgent_bg;
+                };
+              };
 
-            #   extraConfig = ''
-            #     padding 3px 0
-            #     workspace_min_width 50
-            #     separator_symbol " "
-            #   '';
+              extraConfig = ''
+                padding 3px 0
+                workspace_min_width 50
+                separator_symbol " "
+              '';
 
-            #   trayOutput = "primary";
-            #   trayPadding = 5;
-            # }
+              trayOutput = "primary";
+              trayPadding = 5;
+            }
           ];
 
           startup = [

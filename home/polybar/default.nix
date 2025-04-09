@@ -1,7 +1,7 @@
 { config, pkgs, lib, ...}:
 let
   selectedPolybarTheme = "blocks";
-  polybarThemesDir = ./polybar-themes;
+  polybarThemesDir = ./themes;
   selectedThemeDir = "${polybarThemesDir}/${selectedPolybarTheme}";
 in
 {
@@ -10,7 +10,7 @@ in
     polybarFull
   ];
 
-  xdg.configFile."polybar" = {
+  xdg.configFile."polybar/${selectedPolybarTheme}" = {
     source = selectedThemeDir;
     recursive = true;
   };

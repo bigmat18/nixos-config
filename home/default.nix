@@ -6,7 +6,6 @@
     ./i3status
     ./picom
     ./zsh
-    ./polybar
   ];
 
   programs.home-manager.enable = true;
