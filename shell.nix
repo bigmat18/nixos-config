@@ -25,6 +25,8 @@ pkgs.mkShell {
 
       wayland 
       wayland-protocols
+      wayland-scanner
+      libxkbcommon
   ];
 
   shellHook = ''

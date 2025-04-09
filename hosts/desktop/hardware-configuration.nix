@@ -10,7 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   boot.kernelParams = [ "nvidia-drm.modeset=1" ];
@@ -32,13 +32,20 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/11106953-3375-49d6-b729-93ee2383c3fb";
+    { device = "/dev/disk/by-uuid/2ee3d63b-c2b3-495a-8d1c-0ce1aa1c46f1";
       fsType = "ext4";
     };
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/BBA9-BFC8";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/a050ff98-e579-4198-a04f-b28c21d28f75"; }
+    [ { device = "/dev/disk/by-uuid/67ff953d-726e-4ed1-a1c6-9df7c313f961"; }
     ];
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -49,6 +56,7 @@
   # networking.interfaces.wlp0s20f0u1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;  
   hardware.keyboard.qmk.enable = true;
 }
+
