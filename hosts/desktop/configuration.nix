@@ -66,7 +66,6 @@
     picom
     pulseaudioFull
     pavucontrol
-    vim
     unrar
     unzip
     rclone

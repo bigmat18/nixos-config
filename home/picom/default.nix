@@ -7,5 +7,6 @@
       "80:class_g = 'Alacritty'"
     ];
     vSync = true;
+    shadow = true;
   };
 }

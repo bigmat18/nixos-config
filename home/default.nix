@@ -7,6 +7,7 @@
     ./picom
     ./zsh
     ./polybar
+    ./nvim
   ];
 
   programs.home-manager.enable = true;
