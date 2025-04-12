@@ -14,7 +14,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, ...}@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, nvim-config, ... }@inputs:
     let 
       system = "x86_64-linux"; 
       pkgs = nixpkgs.legacyPackages.${system};
@@ -22,7 +22,7 @@
     in
     {
       nixosConfigurations.macbook2019 = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
 
         modules = [
           ./hosts/macbook2019/configuration.nix
@@ -32,12 +32,15 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.bigmat18 = import ./hosts/macbook2019/home.nix;
+
+            home-manager.users.bigmat18 =
+              (import ./hosts/macbook2019/home.nix { config = {}; pkgs = pkgs; });
           }
         ];
       };
+
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/desktop/configuration.nix
           ./system/substituter.nix
@@ -45,11 +48,14 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.bigmat18 = import ./hosts/desktop/home.nix;
+
+            # Stessa cosa per la configurazione desktop
+            home-manager.users.bigmat18 =
+              (import ./hosts/desktop/home.nix { config = {}; pkgs = pkgs; });
           }
         ];
       };  
-       
+
       nix.settings.allowed-uris = [ "github:" ];
       devShells.${system}.default = import ./shell.nix { inherit pkgs; };
     };

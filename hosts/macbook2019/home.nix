@@ -12,7 +12,6 @@
     "memory" 
     "cpu_temperature 0"
     "battery 0"
-    "tztime localdate"
     "tztime localtime"
   ];
 
