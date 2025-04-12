@@ -48,8 +48,9 @@
             home-manager.users.bigmat18 = import ./hosts/desktop/home.nix;
           }
         ];
-      };
-
+      };  
+       
+      nix.settings.allowed-uris = [ "github:" ];
       devShells.${system}.default = import ./shell.nix { inherit pkgs; };
     };
 }
