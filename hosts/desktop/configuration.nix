@@ -17,7 +17,7 @@
   services = {
     xserver = {
       layout = "us";
-      xkbVariant = "";
+      xkbVariant = "intl";
       xkbOptions = "compose:ralt";
       enable = true;
       autorun = false;
@@ -95,6 +95,13 @@
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono
     nerd-fonts.dejavu-sans-mono
+    nerd-fonts.iosevka
+
+    fantasque-sans-mono
+    noto-fonts
+    terminus_font
+    material-design-icons
+    siji
   ];
 
   programs = {

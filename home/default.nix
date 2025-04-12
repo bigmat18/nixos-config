@@ -6,6 +6,7 @@
     ./i3status
     ./picom
     ./zsh
+    ./polybar
   ];
 
   programs.home-manager.enable = true;
@@ -26,7 +27,6 @@
     "cpu_usage" 
     "memory" 
     "cpu_temperature 0"
-    "tztime localdate"
     "tztime localtime"
   ];
 

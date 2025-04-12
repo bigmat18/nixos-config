@@ -5,11 +5,19 @@ with lib;
 let
   modifier = "Mod4";
   refresh_i3status = "killall -SIGUSR1 i3status";
-  bg_color = "#282828";
-  inactive_bg = "#3c3836";
-  text_color = "#ebdbb2";
-  focus_bg = "#d79921";
-  urgent_bg = "#cc241d";
+
+  gruvboxColors = {
+    bg           = "#282828";  # Background color
+    fg           = "#ebdbb2";  # Foreground color
+    bg_inactive  = "#3c3836";  # Inactive background color
+    gray         = "#928374";  # Gray color
+    dark          = "#1d2021";  # Dark color
+    blue          = "#458588";  # Blue color
+    yellow        = "#d79921";  # Yellow color
+    red           = "#cc241d";  # Red color
+    green         = "#8ec07c";  # Green color
+  };
+
 in
 {
   options = {
@@ -161,87 +169,39 @@ in
 
           colors = {
             focused = {
-              text = text_color; 
-              background = focus_bg;
-              border = focus_bg;
-              childBorder = focus_bg;
-              indicator = focus_bg;
+              text = gruvboxColors.fg;
+              background = gruvboxColors.yellow;  # Giallo per focus
+              border = gruvboxColors.yellow;      # Giallo per il bordo
+              childBorder = gruvboxColors.yellow; # Giallo per il bordo dei figli
+              indicator = gruvboxColors.yellow;   # Giallo per l'indicatore
             };
 
             focusedInactive = {
-              text = text_color; 
-              background = focus_bg; 
-              border = focus_bg;
-              childBorder = focus_bg;
-              indicator = focus_bg;
+              text = gruvboxColors.fg;
+              background = gruvboxColors.yellow;  # Giallo per focus inattivo
+              border = gruvboxColors.yellow;      # Giallo per il bordo
+              childBorder = gruvboxColors.yellow; # Giallo per il bordo dei figli
+              indicator = gruvboxColors.yellow;   # Giallo per l'indicatore
             };
 
             unfocused = {
-              text = text_color;
-              background = inactive_bg;
-              border = inactive_bg;
-              childBorder = inactive_bg;
-              indicator = inactive_bg;
+              text = gruvboxColors.fg;
+              background = gruvboxColors.bg_inactive;
+              border = gruvboxColors.bg_inactive;
+              childBorder = gruvboxColors.bg_inactive;
+              indicator = gruvboxColors.bg_inactive;
             };
 
             urgent = {
-              text = text_color;
-              background = urgent_bg;
-              border = urgent_bg;
-              childBorder = urgent_bg;
-              indicator = urgent_bg;
+              text = gruvboxColors.fg;
+              background = gruvboxColors.red;  # Rosso per urgenza
+              border = gruvboxColors.red;      # Rosso per il bordo
+              childBorder = gruvboxColors.red; # Rosso per il bordo dei figli
+              indicator = gruvboxColors.red;   # Rosso per l'indicatore
             };
           };
 
-          bars = [
-            {
-              statusCommand = "i3status";
-              position = "top";
-              fonts = {
-                names = ["DejaVu Sans Mono"];
-                size = 12.0;
-              };
-
-              colors = {
-                background = bg_color;
-                statusline = text_color;
-                separator = "#928374";
-
-                focusedWorkspace = {
-                  border = focus_bg;
-                  background = bg_color;
-                  text = focus_bg;
-                };
-
-                activeWorkspace = {
-                  border = "#a89984";
-                  background = bg_color;
-                  text = "#a89984";
-                };
-
-                inactiveWorkspace = {
-                  border = "#928374";
-                  background = bg_color;
-                  text = "#928374";
-                };
-
-                urgentWorkspace = {
-                  border = urgent_bg;
-                  background = bg_color;
-                  text = urgent_bg;
-                };
-              };
-
-              extraConfig = ''
-                padding 3px 0
-                workspace_min_width 50
-                separator_symbol " "
-              '';
-
-              trayOutput = "primary";
-              trayPadding = 5;
-            }
-          ];
+          bars = [];
 
           startup = [
             {
@@ -268,6 +228,6 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../background/Chris-Bumstead.jpeg;
+    home.file.".config/background.jpeg".source = ../../background/ign_astronaut.png;
   };
 }

@@ -1,15 +1,25 @@
-{ config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 
 with lib;
 
-let 
-  cfg = config.services.i3status;
+let
+  gruvboxColors = {
+    bg           = "#282828";  # Background color
+    fg           = "#ebdbb2";  # Foreground color
+    bg_inactive  = "#3c3836";  # Inactive background color
+    gray         = "#928374";  # Gray color
+    dark          = "#1d2021";  # Dark color
+    blue          = "#458588";  # Blue color
+    yellow        = "#d79921";  # Yellow color
+    red           = "#cc241d";  # Red color
+    green         = "#8ec07c";  # Green color
+  };
 
   modulesDefinition = {
     "volume master" = {
       settings = {
-        format = "<span color='#b8bb26' size='large'> </span> <span bgcolor='#b8bb26' foreground='black'> %volume </span>";
-        format_muted = "<span color='#fb4934'> %volume</span>";
+        format = "VOL %volume";
+        format_muted = "VOL muted";
         device = "default";
         mixer = "Master";
         mixer_idx = 0;
@@ -18,110 +28,85 @@ let
 
     "wireless _first_" = {
       settings = {
-        format_up = "<span color='#83a598' size='large'> </span> <span bgcolor='#83a598' foreground='black'>%quality %essid </span>";
-        format_down = "<span color='#fb4934'>  Offline</span>";
+        format_up = "%quality %essid";
+        format_down = "W: down";
       };
     };
 
     "disk /" = {
       settings = {
-        format = "<span color='#8ec07c' size='large'> </span> <span bgcolor='#8ec07c' foreground='black'> %avail </span>";
-        prefix_type = "custom";
+        format = "%avail";
       };
     };
 
     "memory" = {
       settings = {
-        format = "<span color='#d3869b' size='large'> </span> <span bgcolor='#d3869b' foreground='white'> %used </span>";
-        threshold_degraded = "10%";
-        format_degraded = "MEMORY: %fr";
+        format = "%used";
       };
     };
 
     "cpu_temperature 0" = {
       settings = {
-        format = "<span color='#fb8c00' size='large'>󱠇 </span> <span bgcolor='#fb8c00' foreground='white'> %degrees °C </span>";
+        format = "T: %degrees °C";
         max_threshold = 50;
-      };
-    };
-
-    "tztime localdate" = {
-      settings = {
-        format = "<span color='#d79921' size='large'> </span> <span bgcolor='#d79921' foreground='black'> %a %d-%m-%Y </span>";
       };
     };
 
     "battery 0" = {
       settings = {
-        format = "<span color='#8ec07c' size='large'>%status</span> <span bgcolor='#8ec07c' foreground='black'> %percentage </span>";
-        status_chr = "⚡  ";
-        status_bat = " ";
-        status_unk = "? UNK";
-        status_full = "󰂄 FULL";
+        format = "%status %percentage %remaining";
+        format_down = "";
+        status_chr = "CHR";
+        status_bat = "BAT";
+        status_unk = "UNK";
+        status_full = "FULL";
+        path = "/sys/class/power_supply/BAT%d/uevent";
+        low_threshold = 10;
       };
     };
 
     "tztime localtime" = {
       settings = {
-        format = "<span color='#00bfa5' size='large'>  </span><span bgcolor='#00bfa5' foreground='black'> %I:%M %p </span> ";
+        format = "%A %d/%m/%Y %H:%M:%S";
       };
     };
 
     "disk /home" = {
       settings = {
-        format = "  %avail ";
-        prefix_type = "custom";
-      };
-    };
-
-    "run_watch DHCP" = {
-      settings = {
-        pidfile = "/var/run/dhclient*.pid";
-      };
-    };
-
-    "run_watch VPN" = {
-      settings = {
-        pidfile = "/var/run/vpnc/pid";
-      };
-    };
-
-    "ethernet eno16777736" = {
-      settings = {
-        format_up = " %ip ";
-        format_down = "  ";
+        format = "%avail";
       };
     };
 
     "cpu_usage" = {
       settings = {
-        format = "  %usage ";
+        format = "CPU %usage";
       };
     };
 
     "load" = {
       settings = {
-        format = "  %1min ";
+        format = "%1min";
         max_threshold = 5;
       };
     };
   };
 
-  modules = builtins.listToAttrs (builtins.genList (i: 
-    let name = builtins.elemAt cfg.activeModules i; in {
+  modules = builtins.listToAttrs (builtins.genList (i:
+    let name = builtins.elemAt config.services.i3status.activeModules i; in {
       name = name;
-      value = modulesDefinition.${name} // { 
-        enable = true; 
-        position = i; 
+      value = modulesDefinition.${name} // {
+        enable = true;
+        position = i;
       };
     }
-  ) (builtins.length cfg.activeModules));
+  ) (builtins.length config.services.i3status.activeModules));
+
 in
 {
   options = {
     services.i3status.activeModules = mkOption {
       type = types.listOf types.str;
-      default = [ ];
+      default = [];
       description = "Lista dei moduli attivi in i3status.";
     };
   };
@@ -134,13 +119,69 @@ in
         output_format = "i3bar";
         colors = false;
         interval = 5;
-        color_good = "#aaff00";
-        color_degraded = "#00dddd";
-        color_bad = "#ff8800";
+        color_good = gruvboxColors.green;
+        color_degraded = gruvboxColors.blue;
+        color_bad = gruvboxColors.red;
         markup = "pango";
       };
 
       modules = modules;
     };
+
+    xsession.windowManager.i3.config.bars = [
+      {
+        statusCommand = "i3status";
+        position = "top";
+        fonts = {
+          names = ["DejaVu Sans Mono"];
+          size = 12.0;
+        };
+
+        colors = {
+          background = gruvboxColors.bg;
+          statusline = gruvboxColors.fg;
+          separator = gruvboxColors.yellow;
+
+          focusedWorkspace = {
+            border = gruvboxColors.bg;
+            background = gruvboxColors.yellow;
+            text = gruvboxColors.bg;
+          };
+
+          activeWorkspace = {
+            border = gruvboxColors.bg_inactive;
+            background = gruvboxColors.bg;
+            text = gruvboxColors.yellow;
+          };
+
+          inactiveWorkspace = {
+            border = gruvboxColors.bg_inactive;
+            background = gruvboxColors.dark;
+            text = gruvboxColors.gray;
+          };
+
+          urgentWorkspace = {
+            border = gruvboxColors.red;
+            background = gruvboxColors.dark;
+            text = gruvboxColors.fg;
+          };
+
+          bindingMode = {
+            border = gruvboxColors.red;
+            background = gruvboxColors.dark;
+            text = gruvboxColors.fg;
+          };
+        };
+
+        extraConfig = ''
+          padding 8px 7px
+          workspace_min_width 40
+          separator_symbol " | "
+        '';
+
+        trayOutput = "primary";
+        trayPadding = 5;
+      }
+    ];
   };
 }
