@@ -51,28 +51,11 @@
         "type": "github"
       }
     },
-    "nvim-config": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1744489924,
-        "narHash": "sha256-S9EHdJsO31zDSV/DbCHLjtAoMpUeXhKcnr+XdsWfEZc=",
-        "owner": "bigmat18",
-        "repo": "nvim-config",
-        "rev": "32c00586fdfd23188c0891dfac26592f2ae2165a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bigmat18",
-        "repo": "nvim-config",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
-        "nvim-config": "nvim-config"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

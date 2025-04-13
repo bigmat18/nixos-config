@@ -4,6 +4,8 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
       cmake
       gcc
+      llvmPackages.clang
+      llvmPackages.clang-tools
       pkg-config
       ninja
       gdb
