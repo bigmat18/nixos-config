@@ -16,78 +16,16 @@ let
   };
 
   modulesDefinition = {
-    "volume master" = {
-      settings = {
-        format = "VOL %volume";
-        format_muted = "VOL muted";
-        device = "default";
-        mixer = "Master";
-        mixer_idx = 0;
-      };
-    };
-
-    "wireless _first_" = {
-      settings = {
-        format_up = "%quality %essid";
-        format_down = "W: down";
-      };
-    };
-
-    "disk /" = {
-      settings = {
-        format = "%avail";
-      };
-    };
-
-    "memory" = {
-      settings = {
-        format = "Porn Folder: %used";
-      };
-    };
-
-    "cpu_temperature 0" = {
-      settings = {
-        format = "Your Mom Temp: %degrees °C";
-      };
-    };
-
-    "battery 0" = {
-      settings = {
-        format = "%status %percentage %remaining";
-        format_down = "";
-        status_chr = "CHR";
-        status_bat = "BAT";
-        status_unk = "UNK";
-        status_full = "FULL";
-        path = "/sys/class/power_supply/BAT%d/uevent";
-        low_threshold = 10;
-      };
-    };
-
-    "tztime localtime" = {
-      settings = {
-        format = "%A %d/%m/%Y %H:%M:%S";
-      };
-    };
-
-    "disk /home" = {
-      settings = {
-        format = "%avail";
-      };
-    };
-
-    "cpu_usage" = {
-      settings = {
-        format = "Body Fat %usage";
-      };
-    };
-
-    "load" = {
-      settings = {
-        format = "%1min";
-        max_threshold = 5;
-      };
-    };
+    "volume master" = { settings = { format = "VOL %volume"; format_muted = "VOL muted"; device = "default"; mixer = "Master"; mixer_idx = 0; }; };
+    "wireless _first_" = { settings = { format_up = "%quality %essid"; format_down = "W: down"; }; };
+    "disk /" = { settings = { format = "%avail"; }; };
+    "memory" = { settings = { format = "Porn Folder: %used"; }; };
+    "cpu_temperature 0" = { settings = { format = "Your Mom Temp: %degrees °C"; }; };
+    "battery 0" = { settings = { format = "%status %percentage %remaining"; format_down = ""; status_chr = "CHR"; status_bat = "BAT"; status_unk = "UNK"; status_full = "FULL"; path = "/sys/class/power_supply/BAT%d/uevent"; low_threshold = 10; }; };
+    "tztime localtime" = { settings = { format = "%A %d/%m/%Y %H:%M:%S"; }; };
+    "disk /home" = { settings = { format = "%avail"; }; };
+    "cpu_usage" = { settings = { format = "Body Fat: %usage"; }; };
+    "load" = { settings = { format = "Body Fat: cpu_usage"; }; };
   };
 
   modules = builtins.listToAttrs (builtins.genList (i:
@@ -109,10 +47,38 @@ in
       default = [];
       description = "Lista dei moduli attivi in i3status.";
     };
+    services.i3status.useAlternativeStatusCommand = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Usa un command alternativo al posto di i3status.";
+    };
   };
 
   config = {
     home.packages = with pkgs; [ lm_sensors ];
+
+    home.file.".config/i3status/cpu_temp.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+        TEMP=$(sensors | awk '/k10temp-pci-00c3/,/^$/' | grep 'Tctl:' | awk '{print $2}')
+        echo "$TEMP"
+      '';
+      executable = true;
+    };
+
+    home.file.".config/i3status/i3status-wrapper.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+        i3status | while :
+        do
+          read line
+          custom_output=$(${config.home.homeDirectory}/.config/i3status/cpu_temp.sh)
+          line=''${line//custom_tmp/$custom_output}
+          echo "$line"
+        done
+      '';
+      executable = true;
+    };
 
     programs.i3status = {
       enable = true;
@@ -132,7 +98,7 @@ in
 
     xsession.windowManager.i3.config.bars = [
       {
-        statusCommand = "i3status";        
+        statusCommand = if config.services.i3status.useAlternativeStatusCommand then "${config.home.homeDirectory}/.config/i3status/i3status-wrapper.sh" else "i3status";     
         position = "top";
         fonts = {
           names = ["DejaVu Sans Mono"];
