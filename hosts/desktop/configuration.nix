@@ -73,6 +73,7 @@
     fastfetch
     htop
     firefox
+    smartgit
     
     vscode
     

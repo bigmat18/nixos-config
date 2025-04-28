@@ -15,6 +15,8 @@
     "tztime localtime"
   ];
 
+  services.i3status.useAlternativeStatusCommand = true;
+
   services.i3.startupCommands = [
     {
       command = "xrandr --output HDMI-0 --rotate inverted &&" +

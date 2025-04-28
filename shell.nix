@@ -4,15 +4,18 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
       cmake
       gcc
-      llvmPackages.clang
-      llvmPackages.clang-tools
+      clang
+      clang-tools
       pkg-config
       ninja
       gdb
       gdbgui
 
+      qt5.full
+ 
       mesa
       libGL
+      libGLU
       xorg.libX11.dev
       xorg.libXrandr
       xorg.libXinerama

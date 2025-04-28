@@ -22,14 +22,5 @@
     ".config/rclone/rclone.conf".source = ../dotfiles/rclone/rclone.conf;
   };
 
-  services.i3status.activeModules = [ 
-    "volume master"  
-    "wireless _first_" 
-    "cpu_usage" 
-    "memory" 
-    "cpu_temperature 0"
-    "tztime localtime"
-  ];
-
   systemd.user.startServices = "sd-switch";
 }

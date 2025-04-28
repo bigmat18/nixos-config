@@ -25,7 +25,7 @@ let
     "tztime localtime" = { settings = { format = "%A %d/%m/%Y %H:%M:%S"; }; };
     "disk /home" = { settings = { format = "%avail"; }; };
     "cpu_usage" = { settings = { format = "Body Fat: %usage"; }; };
-    "load" = { settings = { format = "Body Fat: cpu_usage"; }; };
+    "load" = { settings = { format = "Your Mom Temp: custom_tmp"; }; };
   };
 
   modules = builtins.listToAttrs (builtins.genList (i:
