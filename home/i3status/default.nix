@@ -47,7 +47,7 @@ let
 
     "cpu_temperature 0" = {
       settings = {
-        format = "Your Mom Temp: custom_tmp";
+        format = "Your Mom Temp: %degrees °C";
       };
     };
 
@@ -114,29 +114,6 @@ in
   config = {
     home.packages = with pkgs; [ lm_sensors ];
 
-    home.file.".config/i3status/cpu_temp.sh" = {
-      text = ''
-        #!/usr/bin/env bash
-        TEMP=$(sensors | awk '/k10temp-pci-00c3/,/^$/' | grep 'Tctl:' | awk '{print $2}')
-        echo "$TEMP"
-      '';
-      executable = true;
-    };
-
-    home.file.".config/i3status/i3status-wrapper.sh" = {
-      text = ''
-        #!/usr/bin/env bash
-        i3status | while :
-        do
-          read line
-          custom_output=$(${config.home.homeDirectory}/.config/i3status/cpu_temp.sh)
-          line=''${line//custom_tmp/$custom_output}
-          echo "$line"
-        done
-      '';
-      executable = true;
-    };
-
     programs.i3status = {
       enable = true;
       enableDefault = false;
@@ -155,7 +132,7 @@ in
 
     xsession.windowManager.i3.config.bars = [
       {
-        statusCommand = "${config.home.homeDirectory}/.config/i3status/i3status-wrapper.sh";        
+        statusCommand = "i3status";        
         position = "top";
         fonts = {
           names = ["DejaVu Sans Mono"];
