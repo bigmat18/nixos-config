@@ -91,6 +91,16 @@
 
   programs.light.enable = true;
 
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    gcc
+    gcc13
+    zlib
+    glib
+  ];
+
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono
