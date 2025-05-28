@@ -35,6 +35,7 @@ pkgs.mkShell {
 
       stdenv.cc.cc.lib
       temurin-bin-11
+      bash
   ];
 
   shellHook = ''

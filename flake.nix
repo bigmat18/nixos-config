@@ -17,8 +17,17 @@
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let 
       system = "x86_64-linux"; 
-      pkgs = nixpkgs.legacyPackages.${system};
+      nixpkgsUnfree = import nixpkgs {
+        system = system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+      pkgs = nixpkgsUnfree;
       formatter = pkgs.nixfmt-rfc-style;
+
+      defaultShell = import ./default-shell.nix { inherit pkgs; };
+      cudaShell = import ./cuda-shell.nix { inherit pkgs; };
     in
     {
       nixosConfigurations.macbook2019 = nixpkgs.lib.nixosSystem {
@@ -57,6 +66,10 @@
       };  
 
       nix.settings.allowed-uris = [ "github:" ];
-      devShells.${system}.default = import ./shell.nix { inherit pkgs; };
+      devShells.${system} = {
+          default = defaultShell;
+          cuda = cudaShell;
+      };
+      
     };
 }

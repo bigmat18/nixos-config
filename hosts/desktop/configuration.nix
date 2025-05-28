@@ -87,10 +87,21 @@
 
     wget
     via
+
+    killall
+    linuxKernel.packages.linux_zen.perf
+
+    cairo
+    (hwloc.overrideAttrs (old: {
+      configureFlags = old.configureFlags or [] ++ [
+        "--enable-cairo"
+        "--enable-x11"
+      ];
+      buildInputs = (old.buildInputs or []) ++ [ cairo xorg.libX11 pkg-config ];
+    }))
   ];
 
   programs.light.enable = true;
-
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
