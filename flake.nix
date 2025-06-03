@@ -26,8 +26,9 @@
       pkgs = nixpkgsUnfree;
       formatter = pkgs.nixfmt-rfc-style;
 
-      defaultShell = import ./default-shell.nix { inherit pkgs; };
-      cudaShell = import ./cuda-shell.nix { inherit pkgs; };
+      defaultShell = import ./shells/default-shell.nix { inherit pkgs; };
+      cudaShell = import ./shells/cuda-shell.nix { inherit pkgs; };
+      mpiShell = import ./shells/mpi-shell.nix { inherit pkgs; };
     in
     {
       nixosConfigurations.macbook2019 = nixpkgs.lib.nixosSystem {
@@ -69,6 +70,7 @@
       devShells.${system} = {
           default = defaultShell;
           cuda = cudaShell;
+          mpi = mpiShell;
       };
       
     };

@@ -69,16 +69,16 @@
     unrar
     unzip
     rclone
-    obsidian
     fastfetch
     htop
+
+    obsidian
     firefox
     smartgit
-    
     vscode
-    
     discord
     spotify
+    
     mpv
 
     xclip
@@ -90,7 +90,9 @@
 
     killall
     linuxKernel.packages.linux_zen.perf
+    meshlab-unstable
 
+    # ==== lstopo command with graphics 
     cairo
     (hwloc.overrideAttrs (old: {
       configureFlags = old.configureFlags or [] ++ [
@@ -100,6 +102,7 @@
       buildInputs = (old.buildInputs or []) ++ [ cairo xorg.libX11 pkg-config ];
     }))
   ];
+  # ====================================
 
   programs.light.enable = true;
 

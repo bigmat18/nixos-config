@@ -34,7 +34,11 @@ pkgs.mkShell {
       libxkbcommon
 
       stdenv.cc.cc.lib
+
+      # Java execution
       temurin-bin-11
+
+      # To fix strange bugs
       bash
   ];
 
@@ -43,6 +47,5 @@ pkgs.mkShell {
     export SHELL=${pkgs.zsh}/bin/zsh
     export PATH=${pkgs.gdb}/bin:$PATH
     exec ${pkgs.zsh}/bin/zsh
-    echo "✅ Ambiente di sviluppo C++ pronto!"
   '';
 }
