@@ -1,0 +1,11 @@
+TOPO Lists by Priority (Second row is work load):
+- [][Hight] Fix SonicWall
+- [][Hight] Setup nvim
+- [][Medium] Install Zoom tools
+- [][Hight] Setup Night shitf
+- [][Medium] setup comand for auto shell
+- [][Medium] i3 auto open chat bot
+- [][Small] Fix Bluetooth bug
+- [][Small] Fix Mic Bug
+- [][Small] Create nice README
+- [][Small] Refactoring home-manager

@@ -78,7 +78,8 @@
     vscode
     discord
     spotify
-    
+
+    zathura
     mpv
 
     xclip
@@ -87,6 +88,7 @@
 
     wget
     via
+    bear
 
     killall
     linuxKernel.packages.linux_zen.perf

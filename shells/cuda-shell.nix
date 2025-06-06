@@ -17,7 +17,7 @@ pkgs.mkShell {
     xorg.libXi xorg.libXmu freeglut
     xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib
 
-    ncurses5 stdenv.cc binutils gcc cmake gdb gdbgui
+    ncurses5 stdenv.cc binutils gcc cmake gdb gdbgui clang-tools
   ];
    shellHook = ''
       export LD_LIBRARY_PATH=/run/opengl-driver/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudatoolkit}/lib:$LD_LIBRARY_PATH
