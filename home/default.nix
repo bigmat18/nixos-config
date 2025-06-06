@@ -8,6 +8,7 @@
     ./zsh
     ./polybar
     ./nvim
+    ./tmux
   ];
 
   programs.home-manager.enable = true;

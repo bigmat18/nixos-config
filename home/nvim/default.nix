@@ -17,8 +17,6 @@
 
     extraPackages = with pkgs; [
       lua-language-server
-      tmux
-      bear
       xclip
       wl-clipboard
     ];
