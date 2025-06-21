@@ -12,12 +12,13 @@ pkgs.mkShell {
     cudaPackages.cuda_nvprof
     cudaPackages.nsight_compute
     cudaPackages.nsight_systems
+    cudaPackages.libcublas
 
     libGLU libGL
     xorg.libXi xorg.libXmu freeglut
     xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib
 
-    ncurses5 stdenv.cc binutils gcc cmake gdb gdbgui clang-tools
+    ncurses5 stdenv.cc binutils gcc cmake gdb gdbgui clang-tools python313Packages.ninja
   ];
    shellHook = ''
       export LD_LIBRARY_PATH=/run/opengl-driver/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.cudatoolkit}/lib:$LD_LIBRARY_PATH

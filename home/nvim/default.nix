@@ -17,6 +17,7 @@
 
     extraPackages = with pkgs; [
       lua-language-server
+      cmake-language-server
       xclip
       wl-clipboard
     ];
@@ -87,6 +88,9 @@
       popup-nvim
       telescope-fzf-native-nvim
       neodev-nvim
+      nerdcommenter
+      zen-mode-nvim
+      vim-visual-multi
     ];
 
     extraLuaConfig = ''

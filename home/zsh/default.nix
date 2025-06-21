@@ -8,7 +8,7 @@
 
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch /home/bigmat18/nixos-config#desktop";
+      update = "sudo nixos-rebuild switch --flake /home/bigmat18/nixos-config#desktop";
       cuda = "nix develop /home/bigmat18/nixos-config#cuda";
       mpi = "nix develop /home/bigmat18/nixos-config#mpi";
       default = "nix develop /home/bigmat18/nixos-config";
