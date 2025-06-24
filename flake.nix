@@ -12,6 +12,8 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
@@ -53,11 +55,13 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/desktop/configuration.nix
-          ./system/substituter.nix
-
+          # ./hosts/desktop/stylix.nix
+          ./system/substituter.nix  
+          # inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
+            
 
             # Stessa cosa per la configurazione desktop
             home-manager.users.bigmat18 =

@@ -1,7 +1,6 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-
   imports = [
     ./hardware-configuration.nix
     ../../system/network.nix
@@ -42,6 +41,7 @@
     };
     gvfs.enable = true;
     blueman.enable = true;
+    flatpak.enable = true;
     pipewire = {
       enable = true;
       alsa = {
@@ -61,10 +61,11 @@
 
   environment.systemPackages = with pkgs; [
     git
+    ranger
+    light
     networkmanagerapplet
-    pasystray
+    dconf
     picom
-    pulseaudioFull
     pavucontrol
     unrar
     unzip
@@ -76,9 +77,11 @@
     firefox
     smartgit
     vscode
-    discord
-    spotify
-
+    discord-canary
+    
+    vulkan-loader
+    vulkan-tools
+    
     zathura
     mpv
 
@@ -93,6 +96,7 @@
     killall
     linuxKernel.packages.linux_zen.perf
     meshlab-unstable
+    brightnessctl
 
     # ==== lstopo command with graphics 
     cairo
@@ -103,19 +107,9 @@
       ];
       buildInputs = (old.buildInputs or []) ++ [ cairo xorg.libX11 pkg-config ];
     }))
+
   ];
   # ====================================
-
-  programs.light.enable = true;
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    gcc
-    gcc13
-    zlib
-    glib
-  ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
@@ -130,19 +124,22 @@
     siji
   ];
 
-  programs = {
-    thunar.enable = true;
-    zsh.enable = true;
-    dconf.enable = true;
-  };
+  programs.zsh.enable = true; # To fix rebuild bug
 
   security = {
-    rtkit.enable = true;
-    polkit.enable = true;
+    rtkit.enable = true;   # For audio purposes
+    polkit.enable = true;  # Used to control system preferences
   };
   
   hardware = {
     bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true; 
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   
   # Don't touch this

@@ -1,6 +1,8 @@
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
+  name = "default-env-shell";
+
   buildInputs = with pkgs; [
       cmake
       gcc
@@ -40,6 +42,9 @@ pkgs.mkShell {
 
       # To fix strange bugs
       bash
+
+      nimble
+      nim-unwrapped
   ];
 
   shellHook = ''

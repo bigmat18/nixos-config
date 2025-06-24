@@ -9,6 +9,7 @@
     ./polybar
     ./nvim
     ./tmux
+    ./rofi
   ];
 
   programs.home-manager.enable = true;

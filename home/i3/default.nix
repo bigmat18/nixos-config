@@ -44,8 +44,6 @@ in
 
   config = {
     home.packages = with pkgs; [
-      i3status
-      rofi
       alacritty
       flameshot
       feh
@@ -61,16 +59,18 @@ in
           inherit modifier;
           floating.modifier = modifier;
           floating.border = 2;
-          fonts = {
-            size = 12.0;
-          };
+          # fonts = {
+          #   size = 12.0;
+          # };
 
           keybindings = {
             "${modifier}+Return"  = "exec alacritty";
-            # "${modifier}+Shift+s" = "exec flameshot gui";
+            "${modifier}+z" = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | default'";
             "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d"       = "exec rofi -show drun";
+            "${modifier}+c"       = "exec rofi -show calc -modi calc -no-show-match -no-sort";
+
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit' 'i3-msg exit'";
@@ -105,10 +105,10 @@ in
             "${modifier}+Shift+9" = "move container to workspace number 9";
 
             # change focus
-            "${modifier}+j" = "focus left";
+            "${modifier}+j" = "focus up";
             "${modifier}+k" = "focus down";
-            "${modifier}+l" = "focus up";
-            "${modifier}+ograve" = "focus right";
+            "${modifier}+l" = "focus right";
+            "${modifier}+h" = "focus left";
 
             # alternatively, you can use the cursor keys:
             "${modifier}+Left" = "focus left";
@@ -117,10 +117,10 @@ in
             "${modifier}+Right" = "focus right";
 
             # move focused window
-            "${modifier}+Shift+j" = "move left";
+            "${modifier}+Shift+j" = "move up";
             "${modifier}+Shift+k" = "move down";
-            "${modifier}+Shift+l" = "move up";
-            "${modifier}+Shift+ograve" = "move right";
+            "${modifier}+Shift+l" = "move right";
+            "${modifier}+Shift+h" = "move left";
 
             # alternatively, you can use the cursor keys:
             "${modifier}+Shift+Left" = "move left";
@@ -129,10 +129,10 @@ in
             "${modifier}+Shift+Right" = "move right";
 
             # split in horizontal orientation
-            "${modifier}+h" = "split h";
+            # "${modifier}+h" = "split h";
 
             # split in vertical orientation
-            "${modifier}+v" = "split v";
+            # "${modifier}+v" = "split v";
 
             # enter fullscreen mode for the focused container
             "${modifier}+f" = "fullscreen toggle";
@@ -216,6 +216,11 @@ in
             }
             {
               command = "picom";
+              always = false;
+              notification = false;
+            }
+            {
+              command = "blueman-applet";
               always = false;
               notification = false;
             }

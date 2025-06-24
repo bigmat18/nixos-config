@@ -2,6 +2,7 @@
 { pkgs }:
 
 pkgs.mkShell {
+  name = "mpi-env-shell";
 
   buildInputs = with pkgs; [
     cmake
