@@ -12,7 +12,6 @@ pkgs.mkShell {
     cudaPackages.cuda_nvprof
     cudaPackages.nsight_compute
     cudaPackages.nsight_systems
-    cudaPackages.libcublas
 
     libGLU libGL
     xorg.libXi xorg.libXmu freeglut

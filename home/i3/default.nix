@@ -55,21 +55,28 @@ in
       windowManager.i3 = {
         enable = true;
 
+        extraConfig = ''
+          for_window [class="FloatingRanger"] floating enable
+          for_window [class="ScratchpadFirefox"] move scratchpad
+        '';
+        # for_window [class="firefox" title="T3 Chat Explanation - T3 Chat — Mozilla Firefox"] floating enable, resize set 1400 1000, move position center
+
         config = {
           inherit modifier;
           floating.modifier = modifier;
           floating.border = 2;
-          # fonts = {
-          #   size = 12.0;
-          # };
+          fonts = {
+            size = 12.0;
+          };
 
           keybindings = {
             "${modifier}+Return"  = "exec alacritty";
-            "${modifier}+z" = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | default'";
+            "${modifier}+z"       = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | default'";
             "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d"       = "exec rofi -show drun";
             "${modifier}+c"       = "exec rofi -show calc -modi calc -no-show-match -no-sort";
+            "${modifier}+Shift+f" = "exec --no-startup-id alacritty --class FloatingRanger -e ranger";
 
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
@@ -129,10 +136,10 @@ in
             "${modifier}+Shift+Right" = "move right";
 
             # split in horizontal orientation
-            # "${modifier}+h" = "split h";
+            "${modifier}+b" = "split h";
 
             # split in vertical orientation
-            # "${modifier}+v" = "split v";
+            "${modifier}+v" = "split v";
 
             # enter fullscreen mode for the focused container
             "${modifier}+f" = "fullscreen toggle";
@@ -152,6 +159,9 @@ in
             "${modifier}+a" = "focus parent";
 
             "${modifier}+r" = "mode resize";
+
+            "${modifier}+bar" = "move scratchpad";
+            "${modifier}+apostrophe" = "scratchpad show";
           };
 
           modes.resize = {
@@ -229,6 +239,11 @@ in
               always = true;
               notification = false;
             }
+            #{
+              #command = "firefox --class \"ScratchpadFirefox\" --new-window \"https://calendar.google.com\"";
+              #always = true;
+              #notification = false;
+            #}
           ] ++ config.services.i3.startupCommands;
         };
       };

@@ -12,6 +12,7 @@
   boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.kernelModules = [ "kvm-amd" "tun" ];
   boot.extraModulePackages = [ ];
+  # boot.kernelPackages = pkgs.linuxPackages_latest; # Used to fix AMD driver bug (it seems not work)
 
   boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
@@ -21,12 +22,11 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   }; 
 
   hardware.opengl = {
     enable = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
     ];

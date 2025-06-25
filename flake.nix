@@ -54,10 +54,20 @@
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/desktop/configuration.nix
           # ./hosts/desktop/stylix.nix
-          ./system/substituter.nix  
           # inputs.stylix.nixosModules.stylix
+
+          ./hosts/desktop/configuration.nix
+          ./system/substituter.nix  
+
+          # ==== Add to fix AMD GPU drivers bug after system update ====
+          ({ config, pkgs, ... }: {
+            nixpkgs.overlays = [
+              (import ./overlay/amd-overlay.nix)
+            ];
+          })
+          # ==== Add to fix AMD GPU drivers bug after system update ====
+
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
