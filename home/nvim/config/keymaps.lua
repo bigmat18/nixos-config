@@ -6,8 +6,8 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("i", "jk", "<ESC>")
 
 -- mov up and down the section selected
-vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- mov when search something
 vim.keymap.set("n", "n", "nzzzv")
@@ -18,6 +18,7 @@ vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
 
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x')
+vim.keymap.set("x", "x", '"_x')
 
 -- in visual mode paste over the selected section withour copy the text
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -52,6 +53,11 @@ vim.keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
 vim.keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
 vim.keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
 vim.keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
+
+vim.keymap.set('n', '<A-h>', ':vertical resize -2<CR>')
+vim.keymap.set('n', '<A-l>', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<A-j>', ':resize -2<CR>')
+vim.keymap.set('n', '<A-k>', ':resize +2<CR>')
 
 vim.keymap.set("n", "<leader>to", ":tabnew %<CR>") -- open new tab
 vim.keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab

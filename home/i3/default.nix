@@ -161,7 +161,7 @@ in
             "${modifier}+r" = "mode resize";
 
             "${modifier}+bar" = "move scratchpad";
-            "${modifier}+apostrophe" = "scratchpad show";
+            "${modifier}+p" = "scratchpad show";
           };
 
           modes.resize = {
