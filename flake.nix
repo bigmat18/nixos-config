@@ -12,8 +12,6 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    stylix.url = "github:danth/stylix";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
@@ -31,7 +29,6 @@
       defaultShell = import ./shells/default-shell.nix { inherit pkgs; };
       mpiShell = import ./shells/mpi-shell.nix { inherit pkgs; };
       cudaShell = import ./shells/cuda-shell.nix { inherit pkgs; };
-      cudaFHS = import ./fhs/cuda-fhs.nix { inherit pkgs; };
     in
     {
       nixosConfigurations.macbook2019 = nixpkgs.lib.nixosSystem {
@@ -55,9 +52,6 @@
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          # ./hosts/desktop/stylix.nix
-          # inputs.stylix.nixosModules.stylix
-
           ./hosts/desktop/configuration.nix
           ./system/substituter.nix  
 
@@ -72,9 +66,6 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit inputs; };
-            
-
-            # Stessa cosa per la configurazione desktop
             home-manager.users.bigmat18 =
               (import ./hosts/desktop/home.nix { config = {}; pkgs = pkgs; });
           }
@@ -86,7 +77,6 @@
           default = defaultShell;
           mpi-shell = mpiShell;
           cuda-shell = cudaShell;
-          cuda-fhs = cudaFHS;
       };
       
     };

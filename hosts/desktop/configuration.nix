@@ -5,10 +5,10 @@
     ./hardware-configuration.nix
     ../../system/network.nix
     ../../system/users.nix
+    ../../system/fonts.nix
+    ../../system/nvidia.nix
+    ../../system/boot.nix
   ];
-
-  boot.loader.systemd-boot.enable = true; 
-  boot.loader.efi.canTouchEfiVariables = true;
 
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "it_IT.UTF-8";
@@ -20,7 +20,6 @@
       xkbOptions = "compose:ralt";
       enable = true;
       autorun = false;
-      videoDrivers = [ "nvidia" ];
       windowManager.i3 = {
         enable = true;
       };
@@ -41,7 +40,6 @@
     };
     gvfs.enable = true;
     blueman.enable = true;
-    flatpak.enable = true;
     pipewire = {
       enable = true;
       alsa = {
@@ -81,9 +79,6 @@
     vscode
     discord-canary
     
-    vulkan-loader
-    vulkan-tools
-    
     zathura
     mpv
 
@@ -113,19 +108,6 @@
     # ==== lstopo command with graphics ====
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
-    nerd-fonts.droid-sans-mono
-    nerd-fonts.dejavu-sans-mono
-    nerd-fonts.iosevka
-
-    fantasque-sans-mono
-    noto-fonts
-    terminus_font
-    material-design-icons
-    siji
-  ];
-
   programs.zsh.enable = true; # To fix rebuild bug
 
   security = {
@@ -138,12 +120,10 @@
     bluetooth.powerOnBoot = true;
   };
 
-  xdg.portal = {
+  virtualisation.docker = {
     enable = true;
-    xdgOpenUsePortal = true; 
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-  
+
   # Don't touch this
   system.stateVersion = "23.05";
 }

@@ -12,7 +12,6 @@
       mpi = "nix develop /home/bigmat18/nixos-config#mpi-sell";
       default = "nix develop /home/bigmat18/nixos-config";
       cuda = "nix develop --option sandbox false /home/bigmat18/nixos-config#cuda-shell";
-      cuda-fhs = "nix develop --option sandbox false /home/bigmat18/nixos-config#cuda-fhs";
     };
     history.size = 10000;
 
