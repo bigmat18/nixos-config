@@ -56,6 +56,7 @@
     config = {
       allowUnfree = true;
       pulseaudio = true;
+      cudaSupport = true;
     };
   };
 
@@ -72,6 +73,7 @@
     rclone
     fastfetch
     htop
+    pulseaudio # Here to audio mix
 
     obsidian
     firefox
@@ -97,8 +99,9 @@
     linuxKernel.packages.linux_zen.perf
     meshlab-unstable
     brightnessctl
+    ripgrep
 
-    # ==== lstopo command with graphics 
+    # ==== lstopo command with graphics ==== 
     cairo
     (hwloc.overrideAttrs (old: {
       configureFlags = old.configureFlags or [] ++ [
@@ -107,9 +110,8 @@
       ];
       buildInputs = (old.buildInputs or []) ++ [ cairo xorg.libX11 pkg-config ];
     }))
-
+    # ==== lstopo command with graphics ====
   ];
-  # ====================================
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code

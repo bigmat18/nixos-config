@@ -102,7 +102,7 @@ in
         position = "top";
         fonts = {
           names = ["DejaVu Sans Mono"];
-          size = 12.0;
+          size = 10.0;
         };
 
         colors = {
@@ -142,8 +142,8 @@ in
         };
 
         extraConfig = ''
-          padding 8px 7px
-          workspace_min_width 40
+          padding 5px 7px
+          workspace_min_width 35
           separator_symbol " | "
         '';
 

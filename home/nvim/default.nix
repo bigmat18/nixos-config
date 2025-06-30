@@ -81,6 +81,11 @@
         config = toLuaFile (nvimPluginsPath + /autopairs.lua);
       }
 
+      {
+        plugin = alpha-nvim;
+        config = toLuaFile (nvimPluginsPath + /alpha.lua);
+      }
+
       nvim-scrollbar
       vim-signify
       vim-tmux-navigator
@@ -91,6 +96,7 @@
       nerdcommenter
       zen-mode-nvim
       vim-visual-multi
+      # blink-ripgrep-nvim
     ];
 
     extraLuaConfig = ''

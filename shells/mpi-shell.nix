@@ -16,7 +16,6 @@ pkgs.mkShell {
     gdbgui
 
     cmake
-    pkg-config
     openmpi
     llvmPackages.openmp
   ];
