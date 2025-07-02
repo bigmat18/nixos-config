@@ -12,19 +12,17 @@
         light
         brightnessctl
         dconf
+
         killall
         wget
         unzip
         unrar
-        htop
-        bear
-        fastfetch
         linuxKernel.packages.linux_zen.perf
         xclip
         wl-clipboard
-        via
 
         # === Produttività e sviluppo ===
+        via
         obsidian
         smartgit
         vscode
@@ -33,7 +31,6 @@
 
         # === Multimedia e comunicazione ===
         mpv
-        firefox
         discord-canary
 
         # ==== lstopo command with graphics ==== 

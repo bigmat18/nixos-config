@@ -13,7 +13,7 @@ pkgs.mkShell {
   name = "cuda-env-shell";
   
   buildInputs = with pkgs; [
-    git gitRepo gnupg autoconf curl
+    git gitRepo gnupg autoconf curl bear
     procps gnumake util-linux m4 gperf unzip
     
     linuxPackages.nvidia_x11

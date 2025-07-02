@@ -12,6 +12,9 @@
     ./git
     ./ranger
     ./zathura
+    ./htop
+    ./fastfetch
+    ./firefox
   ];
 
   programs.home-manager.enable = true;

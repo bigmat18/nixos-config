@@ -6,14 +6,9 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    # autosuggestions.enable = true;
 
     shellAliases = {
       ll = "ls -l";
-      update = "sudo nixos-rebuild switch --flake /home/bigmat18/nixos-config#desktop";
-      mpi = "nix develop /home/bigmat18/nixos-config#mpi-sell";
-      default = "nix develop /home/bigmat18/nixos-config";
-      cuda = "nix develop --option sandbox false /home/bigmat18/nixos-config#cuda-shell";
     };
     history.size = 10000;
 
@@ -24,9 +19,40 @@
     };
 
     initContent = ''
-      # Configurazioni extra
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan,bold"
-      export EDITOR=vim
+      export EDITOR=nvim
+
+      update() {
+        if [[ -z "$1" ]]; then
+          echo "Usage: update <setup-name>"
+          return 1
+        fi
+        sudo nixos-rebuild switch --flake /home/bigmat18/nixos-config#"$1"
+      }
+
+      shell() {
+        if [[ -z "$1" ]]; then
+          echo "Usage: shell <setup-name>"
+          return 1
+        fi
+        nix develop --option sandbox false /home/bigmat18/nixos-config#"$1"
+      }
+
+      home() {
+        if [[ -z "$1" ]]; then
+          echo "Usage: home <setup-name>"
+          return 1
+        fi
+        home-manager switch --flake /home/bigmat18/nixos-config#"$1"
+      }
+
+      get() {
+        if [[ -z "$1" ]]; then
+          echo "Usage: install <package-name>"
+          return 1
+        fi
+        nix shell nixpkgs#"$1"
+      }
     '';
   };
 }
