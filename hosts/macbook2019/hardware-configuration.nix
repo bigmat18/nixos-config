@@ -10,6 +10,7 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [];
   boot.extraModprobeConfig = ''
@@ -45,7 +46,7 @@
   hardware.firmware = [
     (pkgs.stdenvNoCC.mkDerivation (final: {
      	name = "brcm-firmware";
-      src = ../../firmware/brcm;
+      src = ./firmware/brcm;
       installPhase = ''
         mkdir -p $out/lib/firmware/brcm
         cp ${final.src}/* "$out/lib/firmware/brcm"

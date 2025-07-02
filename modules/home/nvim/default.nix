@@ -20,6 +20,7 @@
       cmake-language-server
       xclip
       wl-clipboard
+      ripgrep
     ];
 
     plugins = with pkgs.vimPlugins; [

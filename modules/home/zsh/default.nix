@@ -1,5 +1,7 @@
 { config, pkgs, lib, ...}:
 {
+  home.packages = [ pkgs.zsh ];
+  
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -21,7 +23,7 @@
       theme = "robbyrussell";
     };
 
-    initExtra = ''
+    initContent = ''
       # Configurazioni extra
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan,bold"
       export EDITOR=vim

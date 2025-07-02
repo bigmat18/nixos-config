@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ../../home
-    ../../home/obs-studio
+    ../../modules/home
   ];
 
   services.i3status.activeModules = [ 

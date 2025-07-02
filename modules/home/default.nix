@@ -6,10 +6,12 @@
     ./i3status
     ./picom
     ./zsh
-    ./polybar
     ./nvim
     ./tmux
     ./rofi
+    ./git
+    ./ranger
+    ./zathura
   ];
 
   programs.home-manager.enable = true;
@@ -18,10 +20,10 @@
   home.homeDirectory = "/home/bigmat18";
 
   home.file = {
-    ".xinitrc".source = ../dotfiles/.xinitrc;
-    ".bash_profile".source = ../dotfiles/.bash_profile;
-    ".zprofile".source = ../dotfiles/.zprofile;
-    ".config/rclone/rclone.conf".source = ../dotfiles/rclone/rclone.conf;
+    ".xinitrc".source = ../../dotfiles/.xinitrc;
+    ".bash_profile".source = ../../dotfiles/.bash_profile;
+    ".zprofile".source = ../../dotfiles/.zprofile;
+    ".config/rclone/rclone.conf".source = ../../dotfiles/rclone/rclone.conf;
   };
 
   systemd.user.startServices = "sd-switch";

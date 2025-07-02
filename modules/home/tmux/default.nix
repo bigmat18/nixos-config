@@ -1,5 +1,7 @@
 { config, pkgs, lib, inputs, ...}:
 {
+  home.packages = [ pkgs.tmux ];
+
   programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";

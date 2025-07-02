@@ -248,6 +248,6 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../background/ign_astronaut.png;
+    home.file.".config/background.jpeg".source = ../../../background/ign_astronaut.png;
   };
 }

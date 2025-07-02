@@ -1,5 +1,7 @@
 { config, pkgs, lib, ...}:
 {
+  home.packages = [ pkgs.picom ];
+
   services.picom = {
     enable = true;
     backend = "glx";

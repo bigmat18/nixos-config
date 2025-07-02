@@ -55,7 +55,7 @@ in
   };
 
   config = {
-    home.packages = with pkgs; [ lm_sensors ];
+    home.packages = with pkgs; [ i3status lm_sensors ];
 
     home.file.".config/i3status/cpu_temp.sh" = {
       text = ''
