@@ -57,10 +57,17 @@
         desktop = mkConfig "desktop" [ ];
       };
 
+      homeConfigurations = {
+        "debian" = home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs;
+          modules = [ mkHome "desktop" ];
+        };
+      };
+
       devShells.${system} = {
         default = defaultShell;
-        mpi-shell = mpiShell;
-        cuda-shell = cudaShell;
+        mpi = mpiShell;
+        cuda = cudaShell;
       };
 
       nix.settings.allowed-uris = [ "github:" ];
