@@ -220,17 +220,7 @@ in
               notification = false;
             }
             {
-              command = "rclone mount iclouddrive: ~/icloud/ --vfs-cache-mode full";
-              always = false;
-              notification = false;
-            }
-            {
               command = "picom";
-              always = false;
-              notification = false;
-            }
-            {
-              command = "blueman-applet";
               always = false;
               notification = false;
             }
@@ -239,11 +229,6 @@ in
               always = true;
               notification = false;
             }
-            #{
-              #command = "firefox --class \"ScratchpadFirefox\" --new-window \"https://calendar.google.com\"";
-              #always = true;
-              #notification = false;
-            #}
           ] ++ config.services.i3.startupCommands;
         };
       };

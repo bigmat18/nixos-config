@@ -25,5 +25,4 @@
     pavucontrol
   ];
 
-  users.users.bigmat18.extraGroups = [ "audio" "jackaudio" ];
 }

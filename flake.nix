@@ -54,13 +54,13 @@
     {
       nixosConfigurations = {
         macbook2019 = mkConfig "macbook2019" [ nixos-hardware.nixosModules.apple-t2 ];
-        desktop = mkConfig "desktop" [ ];
+        desktopNixOS = mkConfig "desktopNixOS" [ ];
       };
 
       homeConfigurations = {
-        "debian" = home-manager.lib.homeManagerConfiguration {
+        "desktopLinux" = home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs;
-          modules = [ mkHome "desktop" ];
+          modules = [ mkHome "desktopLinux" ];
         };
       };
 

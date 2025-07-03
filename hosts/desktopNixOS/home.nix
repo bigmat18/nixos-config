@@ -22,5 +22,15 @@
                 "xrandr --output DP-0 --rotate inverted &&" +
                 "xrandr --output DP-0 --left-of HDMI-0";
     }
+    {
+      command = "blueman-applet";
+      always = false;
+      notification = false;
+    }
+    {
+      command = "rclone mount iclouddrive: ~/icloud/ --vfs-cache-mode full";
+      always = false;
+      notification = false;
+    }
   ];
 }
