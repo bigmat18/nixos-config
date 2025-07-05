@@ -11,6 +11,7 @@
     ../../modules/system/xserver.nix
     ../../modules/system/substituter.nix
     ../../modules/system/pipewire.nix
+    ../../modules/system/docker.nix
   ];
 
   time.timeZone = "Europe/Rome";

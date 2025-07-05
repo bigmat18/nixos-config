@@ -5,7 +5,7 @@
     bigmat18 = {
       isNormalUser = true;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" "networkmanager" "audio" "jackaudio"];
+      extraGroups = [ "wheel" "networkmanager" "audio" "jackaudio" "docker"];
 
       packages = with pkgs; [ 
         # === Sistema e utilità ===
