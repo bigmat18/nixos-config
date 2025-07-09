@@ -35,21 +35,12 @@ pkgs.mkShell {
       wayland-scanner
       libxkbcommon
 
-      stdenv.cc.cc.lib
-
-      # Java execution
-      temurin-bin-11
-
-      # To fix strange bugs
-      bash
-
       nimble
       nim-unwrapped
   ];
 
   shellHook = ''
     export LD_LIBRARY_PATH=${pkgs.vulkan-loader}/lib:${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH
-    export SHELL=${pkgs.zsh}/bin/zsh
     export PATH=${pkgs.gdb}/bin:$PATH
     exec ${pkgs.zsh}/bin/zsh
   '';

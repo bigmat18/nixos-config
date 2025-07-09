@@ -24,6 +24,16 @@
     polkit.enable = true;  # Used to control system preferences
   };
 
+  programs.nix-ld.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
+  services.flatpak.enable = true;
+
   # Don't touch this
   system.stateVersion = "23.05";
 }

@@ -1,10 +1,8 @@
 { config, pkgs, lib, inputs, ...}:
 {
-  home.packages = [ pkgs.tmux ];
-
   programs.tmux = {
     enable = true;
-    shell = "zsh";
+    shell = "/home/bigmat18/.nix-profile/bin/zsh";
 
     terminal = "tmux-256color";
     historyLimit = 100000;
