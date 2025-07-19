@@ -17,7 +17,7 @@ pkgs.mkShell {
     procps gnumake util-linux m4 gperf unzip
     
     linuxPackages.nvidia_x11
-    cudaPackages.cudatoolkit    
+    cudaPackages.cudatoolkit
     cudaPackages.cuda_cudart
     cudaPackages.cuda_nvprof
 

@@ -4,16 +4,17 @@ pkgs.mkShell {
   name = "default-env-shell";
 
   buildInputs = with pkgs; [
-      cmake
       gcc
+      libgcc
+      gnumake
+      cmake
+      extra-cmake-modules
       clang
       clang-tools
       pkg-config
       ninja
       gdb
       gdbgui
-
-      qt5.full
  
       mesa
       libGL
