@@ -5,10 +5,7 @@ pkgs.mkShell {
 
   buildInputs = with pkgs; [
       gcc
-      libgcc
-      gnumake
       cmake
-      extra-cmake-modules
       clang
       clang-tools
       pkg-config
@@ -41,7 +38,7 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
-    export LD_LIBRARY_PATH=${pkgs.vulkan-loader}/lib:${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=${pkgs.vulkan-loader}/lib:$LD_LIBRARY_PATH
     export PATH=${pkgs.gdb}/bin:$PATH
     exec ${pkgs.zsh}/bin/zsh
   '';

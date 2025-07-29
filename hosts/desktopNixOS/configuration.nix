@@ -17,7 +17,6 @@
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "it_IT.UTF-8";
 
-
   programs.java = {
     enable = true;
     package = pkgs.openjdk;  # or specify a version like pkgs.openjdk17

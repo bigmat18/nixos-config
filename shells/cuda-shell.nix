@@ -26,7 +26,11 @@ pkgs.mkShell {
     xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
 
     ncurses5 stdenv.cc binutils gcc cmake 
-    gdb gdbgui clang-tools python313Packages.ninja
+    gdb gdbgui clang-tools python313Packages.ninja 
+    
+    pyright
+    python313Packages.matplotlib
+    python313Packages.pandas
   ];
 
    shellHook = ''

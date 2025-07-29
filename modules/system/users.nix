@@ -28,6 +28,7 @@
         vscode
         meshlab-unstable
         rclone
+        nvtopPackages.nvidia
 
         # === Multimedia e comunicazione ===
         mpv

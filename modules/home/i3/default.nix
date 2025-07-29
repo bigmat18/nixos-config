@@ -64,9 +64,9 @@ in
         config = {
           inherit modifier;
           floating.modifier = modifier;
-          floating.border = 2;
+          floating.border = 1;
           fonts = {
-            size = 12.0;
+            size = 11.0;
           };
 
           keybindings = {
@@ -173,8 +173,8 @@ in
             "Return" = "mode default";
           };
 
-          gaps.inner = 8;
-          window.border = 2;
+          gaps.inner = 6;
+          window.border = 1;
           window.titlebar = false;
 
           colors = {

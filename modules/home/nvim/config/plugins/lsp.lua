@@ -65,6 +65,7 @@ require("lspconfig").cmake.setup({
 require('lspconfig').clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
+    root_dir = require("lspconfig.util").root_pattern("compile_commands.json", ".git"),
 }
 
 
@@ -72,3 +73,9 @@ require('lspconfig').rnix.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
+
+require('lspconfig').pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+

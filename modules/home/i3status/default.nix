@@ -102,7 +102,7 @@ in
         position = "top";
         fonts = {
           names = ["DejaVu Sans Mono"];
-          size = 10.0;
+          size = 9.0;
         };
 
         colors = {
