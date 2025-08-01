@@ -7,6 +7,7 @@
 
     shellAliases = {
       ll = "ls -l";
+      ff = "fastfetch";
     };
     history.size = 10000;
 
