@@ -25,10 +25,14 @@
         via
         obsidian
         smartgit
+        spotify
+        spicetify-cli
         vscode
         meshlab-unstable
         rclone
         nvtopPackages.nvidia
+        btop
+        htop
 
         # === Multimedia e comunicazione ===
         mpv

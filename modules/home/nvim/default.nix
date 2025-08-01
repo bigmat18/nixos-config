@@ -1,5 +1,7 @@
-{ config, pkgs, lib, inputs, ...}:
+{ config, pkgs, lib, ...}:
 {
+  stylix.targets.neovim.enable = false;
+
   programs.neovim = 
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -44,7 +46,7 @@
 
       {
         plugin = gruvbox-nvim;
-        config = "colorscheme gruvbox";
+        config = toLuaFile (nvimPluginsPath + /gruvbox.lua);
       }
 
       {

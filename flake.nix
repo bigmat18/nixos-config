@@ -13,6 +13,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    stylix.url = "github:danth/stylix";
+    textfox.url = "github:adriankarlen/textfox";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
@@ -39,9 +41,17 @@
         inherit system;
         modules = [
           nixpkgsConfigModule
+          ./stylix.nix
           ./hosts/${host}/configuration.nix
+
+          inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager { 
-            home-manager.users.${user} = mkHome host; 
+            home-manager.users.${user} = {
+              imports = [
+                (mkHome host)
+                inputs.textfox.homeManagerModules.default
+              ];
+            }; 
           }
         ] ++ extraModules;
       };

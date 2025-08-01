@@ -1,10 +1,13 @@
-{ pkgs, ... }:
-{
-  # home.packages = [ pkgs.rofi ];
-  
+{ pkgs, lib, ... }:
+{  
+  stylix.targets.rofi.enable = false;
+
   programs.rofi = {
     enable = true;
     plugins = [ pkgs.rofi-calc ];
-    theme = "gruvbox-dark";
+    # extraConfig = {
+    #   show-icons = true;
+    # };
+    theme = lib.mkForce "gruvbox-dark-soft";
   };
 }

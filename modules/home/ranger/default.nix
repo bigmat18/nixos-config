@@ -5,7 +5,7 @@
   programs.ranger = {
     enable = true;
     extraConfig = ''
-      set colorscheme gruvbox
+      set colorscheme gruvbox-dark-soft
     '';
   };
 }

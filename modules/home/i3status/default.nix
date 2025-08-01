@@ -1,19 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, colorschema, ... }:
 
 with lib;
 
 let
-  gruvboxColors = {
-    bg           = "#282828";  # Background color
-    fg           = "#ebdbb2";  # Foreground color
-    bg_inactive  = "#3c3836";  # Inactive background color
-    gray         = "#928374";  # Gray color
-    dark          = "#1d2021";  # Dark color
-    blue          = "#458588";  # Blue color
-    yellow        = "#d79921";  # Yellow color
-    red           = "#cc241d";  # Red color
-    green         = "#8ec07c";  # Green color
-  };
+  gruvbox = colorschema;
 
   modulesDefinition = {
     "volume master" = { settings = { format = "VOL %volume"; format_muted = "VOL muted"; device = "default"; mixer = "Master"; mixer_idx = 0; }; };
@@ -87,9 +77,9 @@ in
         output_format = "i3bar";
         colors = false;
         interval = 5;
-        color_good = gruvboxColors.green;
-        color_degraded = gruvboxColors.blue;
-        color_bad = gruvboxColors.red;
+        color_good = gruvbox.base0B;
+        color_degraded = gruvbox.base0D;
+        color_bad = gruvbox.base08;
         markup = "pango";
       };
 
@@ -106,38 +96,38 @@ in
         };
 
         colors = {
-          background = gruvboxColors.bg;
-          statusline = gruvboxColors.fg;
-          separator = gruvboxColors.yellow;
+          background = gruvbox.base00;
+          statusline = gruvbox.base04;
+          separator = gruvbox.base04;
 
           focusedWorkspace = {
-            border = gruvboxColors.bg;
-            background = gruvboxColors.yellow;
-            text = gruvboxColors.bg;
+            border = gruvbox.base04;
+            background = gruvbox.base04;
+            text = gruvbox.base00;
           };
 
           activeWorkspace = {
-            border = gruvboxColors.bg_inactive;
-            background = gruvboxColors.bg;
-            text = gruvboxColors.yellow;
+            border = gruvbox.base04;
+            background = gruvbox.base00;
+            text = gruvbox.base0A;
           };
 
           inactiveWorkspace = {
-            border = gruvboxColors.bg_inactive;
-            background = gruvboxColors.dark;
-            text = gruvboxColors.gray;
+            border = gruvbox.base04;
+            background = gruvbox.base00;
+            text = gruvbox.base04;
           };
 
           urgentWorkspace = {
-            border = gruvboxColors.red;
-            background = gruvboxColors.dark;
-            text = gruvboxColors.fg;
+            border = gruvbox.base08;
+            background = gruvbox.base00;
+            text = gruvbox.base04;
           };
 
           bindingMode = {
-            border = gruvboxColors.red;
-            background = gruvboxColors.dark;
-            text = gruvboxColors.fg;
+            border = gruvbox.base08;
+            background = gruvbox.base00;
+            text = gruvbox.base04;
           };
         };
 

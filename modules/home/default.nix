@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, colorschema, ... }:
 
 {
   imports = [
@@ -10,11 +10,11 @@
     ./tmux
     ./rofi
     ./git
-    ./ranger
+    ./yazi
     ./zathura
-    ./htop
     ./fastfetch
     ./firefox
+    ./alacritty
   ];
 
   programs.home-manager.enable = true;

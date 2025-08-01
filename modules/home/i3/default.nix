@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ...}:
+{ config, pkgs, lib, colorschema, ...}:
 
 with lib;
 
@@ -6,17 +6,7 @@ let
   modifier = "Mod4";
   refresh_i3status = "killall -SIGUSR1 i3status";
 
-  gruvboxColors = {
-    bg           = "#282828";  # Background color
-    fg           = "#ebdbb2";  # Foreground color
-    bg_inactive  = "#3c3836";  # Inactive background color
-    gray         = "#928374";  # Gray color
-    dark          = "#1d2021";  # Dark color
-    blue          = "#458588";  # Blue color
-    yellow        = "#d79921";  # Yellow color
-    red           = "#cc241d";  # Red color
-    green         = "#8ec07c";  # Green color
-  };
+  gruvbox = colorschema;
 
 in
 {
@@ -44,7 +34,6 @@ in
 
   config = {
     home.packages = with pkgs; [
-      alacritty
       flameshot
       feh
     ];
@@ -59,15 +48,12 @@ in
           for_window [class="FloatingRanger"] floating enable
           for_window [class="ScratchpadFirefox"] move scratchpad
         '';
-        # for_window [class="firefox" title="T3 Chat Explanation - T3 Chat — Mozilla Firefox"] floating enable, resize set 1400 1000, move position center
 
         config = {
           inherit modifier;
           floating.modifier = modifier;
           floating.border = 1;
-          fonts = {
-            size = 11.0;
-          };
+          # fonts.size = 11.0;
 
           keybindings = {
             "${modifier}+Return"  = "exec alacritty";
@@ -76,7 +62,7 @@ in
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d"       = "exec rofi -show drun";
             "${modifier}+c"       = "exec rofi -show calc -modi calc -no-show-match -no-sort";
-            "${modifier}+Shift+f" = "exec --no-startup-id alacritty --class FloatingRanger -e ranger";
+            "${modifier}+Shift+f" = "exec --no-startup-id alacritty --class FloatingRanger -e yazi";
 
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
@@ -174,40 +160,37 @@ in
           };
 
           gaps.inner = 6;
-          window.border = 1;
+          window.border = 2;
           window.titlebar = false;
 
-          colors = {
+          colors = lib.mkForce {
             focused = {
-              text = gruvboxColors.fg;
-              background = gruvboxColors.yellow;  # Giallo per focus
-              border = gruvboxColors.yellow;      # Giallo per il bordo
-              childBorder = gruvboxColors.yellow; # Giallo per il bordo dei figli
-              indicator = gruvboxColors.yellow;   # Giallo per l'indicatore
+              text = gruvbox.base04;
+              background = gruvbox.base04;  # yellow
+              border = gruvbox.base04;
+              childBorder = gruvbox.base04;
+              indicator = gruvbox.base04;
             };
-
             focusedInactive = {
-              text = gruvboxColors.fg;
-              background = gruvboxColors.yellow;  # Giallo per focus inattivo
-              border = gruvboxColors.yellow;      # Giallo per il bordo
-              childBorder = gruvboxColors.yellow; # Giallo per il bordo dei figli
-              indicator = gruvboxColors.yellow;   # Giallo per l'indicatore
+              text = gruvbox.base04;
+              background = gruvbox.base03;  # gray
+              border = gruvbox.base03;
+              childBorder = gruvbox.base03;
+              indicator = gruvbox.base03;
             };
-
             unfocused = {
-              text = gruvboxColors.fg;
-              background = gruvboxColors.bg_inactive;
-              border = gruvboxColors.bg_inactive;
-              childBorder = gruvboxColors.bg_inactive;
-              indicator = gruvboxColors.bg_inactive;
+              text = gruvbox.base04;
+              background = gruvbox.base01;  # bg_inactive
+              border = gruvbox.base01;
+              childBorder = gruvbox.base01;
+              indicator = gruvbox.base01;
             };
-
             urgent = {
-              text = gruvboxColors.fg;
-              background = gruvboxColors.red;  # Rosso per urgenza
-              border = gruvboxColors.red;      # Rosso per il bordo
-              childBorder = gruvboxColors.red; # Rosso per il bordo dei figli
-              indicator = gruvboxColors.red;   # Rosso per l'indicatore
+              text = gruvbox.base04;
+              background = gruvbox.base08;  # red
+              border = gruvbox.base08;
+              childBorder = gruvbox.base08;
+              indicator = gruvbox.base08;
             };
           };
 
@@ -233,6 +216,6 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/ign_astronaut.png;
+    home.file.".config/background.jpeg".source = ../../../background/wallhaven-o5ky29_2560x1080.png;
   };
 }

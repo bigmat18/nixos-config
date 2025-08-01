@@ -1,8 +1,10 @@
 { config, pkgs, lib, inputs, ...}:
 {
+  stylix.targets.tmux.enable = false;
+
   programs.tmux = {
     enable = true;
-    shell = "/home/bigmat18/.nix-profile/bin/zsh";
+    shell = "zsh";
 
     terminal = "tmux-256color";
     historyLimit = 100000;
