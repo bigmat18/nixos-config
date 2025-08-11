@@ -7,20 +7,27 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     cmake
     gcc
-    clang
     clang-tools
     pkg-config
     ninja
+    binutils 
 
     gdb
     gdbgui
 
-    cmake
     openmpi
     llvmPackages.openmp
+    libunwind
+    libbacktrace
   ];
 
   shellHook = ''
+    export GCC_PATH=${pkgs.gcc}
+
+    export PATH=$GCC_PATH/bin:$PATH
+
+    export CC=$GCC_PATH/bin/gcc
+    export CXX=$GCC_PATH/bin/g++
     exec ${pkgs.zsh}/bin/zsh
   '';
 }

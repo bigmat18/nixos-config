@@ -45,7 +45,7 @@ in
         enable = true;
 
         extraConfig = ''
-          for_window [class="FloatingRanger"] floating enable
+          for_window [class="FloatingRanger"] floating enable, resize set 1200 600, move position center
           for_window [class="ScratchpadFirefox"] move scratchpad
         '';
 
@@ -57,7 +57,7 @@ in
 
           keybindings = {
             "${modifier}+Return"  = "exec alacritty";
-            "${modifier}+z"       = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | default'";
+            "${modifier}+z"       = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | shell default'";
             "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d"       = "exec rofi -show drun";

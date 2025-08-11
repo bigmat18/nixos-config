@@ -31,6 +31,7 @@ pkgs.mkShell {
     pyright
     python313Packages.matplotlib
     python313Packages.pandas
+    llvmPackages.openmp
   ];
 
    shellHook = ''

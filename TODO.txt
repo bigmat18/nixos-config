@@ -5,5 +5,5 @@ TOPO Lists by Priority (Second row is work load):
 - [][Hight] Setup Night shitf
 - [X][Medium] setup comand for auto shell
 - [X][Small] Fix Bluetooth bug
-- [][Small] Create nice README
-- [][Small] Refactoring home-manager
+- [X][Small] Create nice README
+- [X][Small] Refactoring home-manager
