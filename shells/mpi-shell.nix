@@ -1,4 +1,3 @@
-# shell.nix
 { pkgs }:
 
 pkgs.mkShell {
@@ -11,23 +10,19 @@ pkgs.mkShell {
     pkg-config
     ninja
     binutils 
-
     gdb
     gdbgui
-
     openmpi
-    llvmPackages.openmp
-    libunwind
-    libbacktrace
+    pyright
   ];
 
   shellHook = ''
     export GCC_PATH=${pkgs.gcc}
 
     export PATH=$GCC_PATH/bin:$PATH
-
     export CC=$GCC_PATH/bin/gcc
     export CXX=$GCC_PATH/bin/g++
+
     exec ${pkgs.zsh}/bin/zsh
   '';
 }

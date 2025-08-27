@@ -1,14 +1,4 @@
 { pkgs ? import <nixpkgs> {} }:
-let 
-  system = "x86_64-linux";
-  nixpkgs-latest = import (pkgs.fetchFromGitHub {
-      owner = "NixOS";
-      repo = "nixpkgs";
-      rev = "bf8717e806f4d5030271c096c2a67bc5834081cd";
-      sha256 = "sha256-KQeYFeFMwRKwgv91jcLPpaB1LLfI03Sf5QEYcrDaQ0g=";
-    }) { inherit system; config = { allowUnfree = true; }; };
-    pkgs_ = nixpkgs-latest;
-in 
 pkgs.mkShell {
   name = "cuda-env-shell";
   

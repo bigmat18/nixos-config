@@ -22,6 +22,7 @@ vim.keymap.set("x", "x", '"_x')
 
 -- in visual mode paste over the selected section withour copy the text
 vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("n", "XX", '"_dd', { noremap = true })
 
 -- go to next and prev error
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
