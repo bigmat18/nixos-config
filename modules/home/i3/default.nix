@@ -61,6 +61,7 @@ in
             "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
             "${modifier}+Shift+q" = "kill";
             "${modifier}+d"       = "exec rofi -show drun";
+            "${modifier}+b"       = "exec firefox";
             "${modifier}+c"       = "exec rofi -show calc -modi calc -no-show-match -no-sort";
             "${modifier}+Shift+f" = "exec --no-startup-id alacritty --class FloatingRanger -e yazi";
 
@@ -73,8 +74,8 @@ in
             "XF86AudioMute"        = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ${refresh_i3status}";
             "XF86AudioMicMute"     = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
 
-            "XF86MonBrightnessUp"  = "exec brightnessctl set +10%";
-            "XF86MonBrightnessDown" = "exec brightnessctl set 10%-";
+            "XF86MonBrightnessUp"   = "exec --no-startup-id bash ~/.config/i3/brightness.sh +";
+            "XF86MonBrightnessDown" = "exec --no-startup-id bash ~/.config/i3/brightness.sh -";
 
             "${modifier}+1" = "workspace number 1";
             "${modifier}+2" = "workspace number 2";
@@ -122,7 +123,7 @@ in
             "${modifier}+Shift+Right" = "move right";
 
             # split in horizontal orientation
-            "${modifier}+b" = "split h";
+            "${modifier}+n" = "split h";
 
             # split in vertical orientation
             "${modifier}+v" = "split v";
@@ -208,7 +209,7 @@ in
               notification = false;
             }
             {
-              command = "feh --no-fehbg --bg-scale ~/.config/background.jpeg --bg-scale ~/.config/background.jpeg";
+              command = "feh --no-fehbg --bg-fill ~/.config/background.jpeg --bg-fill ~/.config/background.jpeg";
               always = true;
               notification = false;
             }
@@ -217,5 +218,6 @@ in
       };
     };
     home.file.".config/background.jpeg".source = ../../../background/wallhaven-o5ky29_2560x1080.png;
+    home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }
