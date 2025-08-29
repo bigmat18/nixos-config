@@ -19,7 +19,7 @@
 
   services.i3.startupCommands = [
     {
-      command = "xrandr --output HDMI-0 &&" +
+      command = "xrandr --output HDMI-0 --rotate inverted --scale 1.25x1.25 &&" +
                 "xrandr --output DP-0 --rotate inverted &&" +
                 "xrandr --output DP-0 --left-of HDMI-0";
     }

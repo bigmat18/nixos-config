@@ -23,8 +23,6 @@
     wantedBy = [ "multi-user.target" ];
   };
 
-  
-
   services.logind.extraConfig = ''
     HandleLidSwitch=suspend
     HandleLidSwitchExternalPower=ignore

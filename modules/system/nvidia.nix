@@ -2,7 +2,7 @@
 {
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
@@ -25,4 +25,11 @@
 
   boot.kernelParams = [ "nvidia-drm.modeset=1" ];
   boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+
+  services.logind.extraConfig = ''
+    HandleSuspendKey=suspend
+    HandleLidSwitch=suspend
+    HandleLidSwitchDocked=ignore
+    HandleHibernateKey=hibernate
+  '';
 }

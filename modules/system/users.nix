@@ -9,8 +9,7 @@
 
       packages = with pkgs; [ 
         # === Sistema e utilità ===
-        light
-        brightnessctl
+        xdotool
         dconf
 
         killall
