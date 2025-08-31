@@ -5,7 +5,10 @@
     bigmat18 = {
       isNormalUser = true;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" "networkmanager" "audio" "jackaudio" "docker"];
+      extraGroups = [ 
+        "wheel" "networkmanager" "audio" "jackaudio" 
+        "docker" "libvirtd" "kvm" "qemu-libvirtd"
+      ];
 
       packages = with pkgs; [ 
         # === Sistema e utilità ===
@@ -37,6 +40,11 @@
         mpv
         discord-canary
 
+        # === Wine setup ===
+        wineWowPackages.stable
+        dxvk
+        vkd3d
+
         # ==== lstopo command with graphics ==== 
         cairo
         (hwloc.overrideAttrs (old: {
@@ -46,7 +54,6 @@
           ];
           buildInputs = (old.buildInputs or []) ++ [ cairo xorg.libX11 pkg-config ];
         }))
-        # ==== lstopo command with graphics ====
       ];
     };
   };

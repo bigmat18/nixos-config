@@ -26,7 +26,6 @@
     ".xinitrc".source = ../../dotfiles/.xinitrc;
     ".bash_profile".source = ../../dotfiles/.bash_profile;
     ".zprofile".source = ../../dotfiles/.zprofile;
-    ".config/rclone/rclone.conf".source = ../../dotfiles/rclone/rclone.conf;
   };
 
   systemd.user.startServices = "sd-switch";

@@ -12,6 +12,7 @@
     ../../modules/system/pipewire.nix
     ../../modules/system/docker.nix
     ../../modules/system/game.nix
+    ../../modules/system/vm.nix
   ];
 
   time.timeZone = "Europe/Rome";

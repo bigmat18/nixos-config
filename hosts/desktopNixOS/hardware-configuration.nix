@@ -8,11 +8,16 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-  boot.kernelModules = [ "kvm-amd" "tun" ];
+
+  boot.kernelParams = [ "nvidia-drm.modeset=1" "amd_iommu=on" ];
+  boot.kernelModules = [ "kvm-amd" "tun" "vfio-pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ];
+
   boot.extraModulePackages = [ ];
-
-
+  boot.extraModprobeConfig = ''
+    options vfio-pci ids=1002:13c0
+  '';
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/2ee3d63b-c2b3-495a-8d1c-0ce1aa1c46f1";
@@ -42,4 +47,3 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;  
   hardware.keyboard.qmk.enable = true;
 }
-
