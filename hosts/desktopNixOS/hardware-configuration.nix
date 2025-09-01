@@ -15,9 +15,9 @@
   boot.kernelModules = [ "kvm-amd" "tun" "vfio-pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ];
 
   boot.extraModulePackages = [ ];
-  boot.extraModprobeConfig = ''
-    options vfio-pci ids=1002:13c0
-  '';
+  # boot.extraModprobeConfig = ''
+  #   options vfio-pci ids=1002:13c0
+  # '';
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/2ee3d63b-c2b3-495a-8d1c-0ce1aa1c46f1";

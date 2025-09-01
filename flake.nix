@@ -67,6 +67,20 @@
         desktopNixOS = mkConfig "desktopNixOS" [];
       };
 
+      homeConfigurations = {
+        desktopLinux = home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs;
+          extraSpecialArgs = { inherit inputs system user; };
+          modules = [
+            nixpkgsConfigModule
+            ./stylix.nix
+            (mkHome "desktopLinux")
+            inputs.stylix.homeManagerModules.stylix
+            inputs.textfox.homeManagerModules.default
+          ];
+        };
+      };
+
       devShells.${system} = {
         default = defaultShell;
         mpi = mpiShell;
