@@ -8,6 +8,7 @@
     opacityRules = [
       "80:class_g = 'Alacritty'"
       "80:class_g = 'Code'"
+      "80:class_g = 'obsidian'"
     ];
     vSync = true;
     shadow = true;

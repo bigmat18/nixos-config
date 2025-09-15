@@ -14,6 +14,7 @@ pkgs.mkShell {
     gdbgui
     openmpi
     pyright
+    llvmPackages.openmp
   ];
 
   shellHook = ''

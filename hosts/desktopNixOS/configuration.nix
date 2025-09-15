@@ -16,7 +16,7 @@
   ];
 
   time.timeZone = "Europe/Rome";
-  i18n.defaultLocale = "it_IT.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   programs.java = {
     enable = true;

@@ -28,10 +28,5 @@
       always = false;
       notification = false;
     }
-    # {
-    #   command = "rclone mount iclouddrive: ~/icloud/ --vfs-cache-mode full";
-    #   always = false;
-    #   notification = false;
-    # }
   ];
 }

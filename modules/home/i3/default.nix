@@ -217,7 +217,7 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/wallhaven-o5ky29_2560x1080.png;
+    home.file.".config/background.jpeg".source = ../../../background/dragon.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

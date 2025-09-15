@@ -12,6 +12,7 @@
     ../../modules/system/xserver.nix
     ../../modules/system/substituter.nix
     ../../modules/system/pipewire.nix
+    ../../modules/system/power.nix
   ];
 
   time.timeZone = "Europe/Rome";
@@ -19,6 +20,7 @@
    
   security = {
     rtkit.enable = true;
+    polkit.enable = true;
   };
 
   # Don't touch this

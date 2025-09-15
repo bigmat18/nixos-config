@@ -31,7 +31,6 @@
         spicetify-cli
         vscode
         meshlab-unstable
-        rclone
         nvtopPackages.nvidia
         btop
         htop
