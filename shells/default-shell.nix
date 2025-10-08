@@ -35,9 +35,6 @@ pkgs.mkShell {
 
       nimble
       nim-unwrapped
-
-      pkgs.qt5.full
-      pkgs.qtcreator
   ];
 
   shellHook = ''

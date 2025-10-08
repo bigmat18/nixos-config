@@ -22,13 +22,29 @@
       system = "x86_64-linux";
       user = "bigmat18";
 
+      corto-overlay = final: prev: {
+        corto = prev.corto.overrideAttrs (oldAttrs: {
+          cmakeFlags =
+            (oldAttrs.cmakeFlags or []) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
+        });
+      };
+
+      meshlab-overlay = final: prev: {
+        meshlab = prev.meshlab.overrideAttrs (oldAttrs: {
+          cmakeFlags =
+            (oldAttrs.cmakeFlags or []) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
+        });
+      };
+
       mkHome = host: ./hosts/${host}/home.nix;
-      mkPkgs = import nixpkgs { inherit system; 
+      pkgs = import nixpkgs { 
+        inherit system; 
         config = {
           allowUnfree = true;
           cudaSupport = true;
           pulseaudio = true;
         }; 
+        overlays = [ corto-overlay meshlab-overlay ];
       };
 
       nixpkgsConfigModule = {
@@ -39,6 +55,7 @@
 
       mkConfig = host: extraModules: nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs pkgs; };
         modules = [
           nixpkgsConfigModule
           ./stylix.nix
@@ -56,9 +73,9 @@
         ] ++ extraModules;
       };
 
-      defaultShell = import ./shells/default-shell.nix { pkgs = mkPkgs; };
-      mpiShell = import ./shells/mpi-shell.nix { pkgs = mkPkgs; };
-      cudaShell = import ./shells/cuda-shell.nix { pkgs = mkPkgs; };
+      defaultShell = import ./shells/default-shell.nix { pkgs = pkgs; };
+      mpiShell = import ./shells/mpi-shell.nix { pkgs = pkgs; };
+      cudaShell = import ./shells/cuda-shell.nix { pkgs = pkgs; };
 
     in
     {
@@ -69,7 +86,7 @@
 
       homeConfigurations = {
         desktopLinux = home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs;
+          pkgs = pkgs;
           extraSpecialArgs = { inherit inputs system user; };
           modules = [
             nixpkgsConfigModule

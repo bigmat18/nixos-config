@@ -5,7 +5,6 @@
   virtualisation = {
     libvirtd = {
       enable = true;
-      qemuOvmf = true;
       qemuSwtpm = true;
     };
   };
@@ -17,7 +16,4 @@
     swtpm
     looking-glass-client
   ];
-
-  # environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
-  # virtualisation.spiceUSBRedirection.enable = true;
 }

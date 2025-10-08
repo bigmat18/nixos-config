@@ -19,7 +19,7 @@
         wget
         unzip
         unrar
-        linuxKernel.packages.linux_zen.perf
+        perf
         xclip
         wl-clipboard
 
@@ -30,7 +30,8 @@
         spotify
         spicetify-cli
         vscode
-        meshlab-unstable
+
+        meshlab
         nvtopPackages.nvidia
         btop
         htop
