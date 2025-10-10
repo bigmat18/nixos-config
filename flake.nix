@@ -43,6 +43,10 @@
           allowUnfree = true;
           cudaSupport = true;
           pulseaudio = true;
+
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19"
+          ];
         }; 
         overlays = [ corto-overlay meshlab-overlay ];
       };

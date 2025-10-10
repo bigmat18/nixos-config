@@ -6,7 +6,7 @@
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   }; 
 
   hardware.opengl = {
@@ -22,10 +22,4 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  # services.logind.settings.Login = ''
-  #   HandleSuspendKey=suspend
-  #   HandleLidSwitch=suspend
-  #   HandleLidSwitchDocked=ignore
-  # '';
 }

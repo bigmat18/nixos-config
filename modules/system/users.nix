@@ -27,8 +27,6 @@
         via
         obsidian
         smartgit
-        spotify
-        spicetify-cli
         vscode
 
         meshlab
@@ -38,7 +36,6 @@
 
         # === Multimedia e comunicazione ===
         mpv
-        discord-canary
 
         # === Wine setup ===
         wineWowPackages.stable

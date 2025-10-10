@@ -22,6 +22,7 @@ pkgs.mkShell {
       xorg.libXcursor
       xorg.libXxf86vm
       xorg.libXi
+      xorg.libxcb
 
       vulkan-headers
       vulkan-loader
@@ -35,6 +36,8 @@ pkgs.mkShell {
 
       nimble
       nim-unwrapped
+      qt5.full
+
   ];
 
   shellHook = ''
