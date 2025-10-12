@@ -1,6 +1,6 @@
 vim.diagnostic.config({
     virtual_text = {
-        prefix = '●', -- Usa icone Nerd Font se le hai (es. '')
+        prefix = '●',
         source = "if_many",
         spacing = 4,
     },
@@ -78,3 +78,22 @@ require('lspconfig').pyright.setup {
     capabilities = capabilities,
 }
 
+require('lspconfig').ts_ls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "typescript-language-server", "--stdio" },
+    filetypes = {
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact",
+        "typescript.tsx"
+    },
+    root_dir = require('lspconfig').util.root_pattern(
+        "package.json",
+        "tsconfig.json",
+        "jsconfig.json",
+        ".git"
+    ),
+    single_file_support = true,
+}

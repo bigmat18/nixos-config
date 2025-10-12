@@ -23,6 +23,9 @@
       xclip
       wl-clipboard
       ripgrep
+      nodejs_22
+      typescript
+      typescript-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [

@@ -18,6 +18,7 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
+    echo "✅ MPI shell ready"
     export GCC_PATH=${pkgs.gcc}
 
     export PATH=$GCC_PATH/bin:$PATH

@@ -25,6 +25,7 @@ pkgs.mkShell {
   ];
 
    shellHook = ''
+      echo "✅ CUDA shell ready"
       export CUDA_PATH=${pkgs.cudaPackages.cudatoolkit}/
       export GCC_PATH=${pkgs.gcc}
 
