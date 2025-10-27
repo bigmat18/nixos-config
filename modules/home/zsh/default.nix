@@ -17,6 +17,10 @@
       theme = "agnoster";
     };
 
+    envExtra = ''
+      export ZSH_DISABLE_COMPFIX=true
+    '';
+
     initContent = ''
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan,bold"
       export EDITOR=nvim

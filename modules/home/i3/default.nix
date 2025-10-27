@@ -56,18 +56,19 @@ in
           # fonts.size = 11.0;
 
           keybindings = {
-            "${modifier}+Return"  = "exec alacritty";
-            "${modifier}+z"       = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | shell default'";
-            "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
-            "${modifier}+Shift+q" = "kill";
-            "${modifier}+d"       = "exec rofi -show drun";
-            "${modifier}+b"       = "exec firefox";
-            "${modifier}+c"       = "exec rofi -show calc -modi calc -no-show-match -no-sort";
-            "${modifier}+Shift+f" = "exec --no-startup-id alacritty --class FloatingRanger -e yazi";
+            "${modifier}+Return"        = "exec alacritty";
+            "${modifier}+Shift+Return"  = "exec --no-startup-id alacritty -e distrobox-enter --root debian-box";
+            "${modifier}+z"             = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | shell default'";
+            "${modifier}+Shift+s"       = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
+            "${modifier}+Shift+q"       = "kill";
+            "${modifier}+d"             = "exec rofi -show drun";
+            "${modifier}+b"             = "exec firefox";
+            "${modifier}+c"             = "exec rofi -show calc -modi calc -no-show-match -no-sort";
+            "${modifier}+Shift+f"       = "exec --no-startup-id alacritty --class FloatingRanger -e yazi";
 
-            "${modifier}+Shift+c" = "reload";
-            "${modifier}+Shift+r" = "restart";
-            "${modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit' 'i3-msg exit'";
+            "${modifier}+Shift+c"       = "reload";
+            "${modifier}+Shift+r"       = "restart";
+            "${modifier}+Shift+e"       = "exec i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit' 'i3-msg exit'";
 
             "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && ${refresh_i3status}";
             "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && ${refresh_i3status}";
@@ -217,7 +218,7 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/nixos.png;
+    home.file.".config/background.jpeg".source = ../../../background/gruvbox_minimal_space.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

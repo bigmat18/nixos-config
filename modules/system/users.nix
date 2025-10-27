@@ -7,9 +7,12 @@
       shell = pkgs.zsh;
       extraGroups = [ 
         "wheel" "networkmanager" "audio" "jackaudio" 
-        "docker" "libvirtd" "kvm" "qemu-libvirtd"
+        "docker" "libvirtd" "kvm" "qemu-libvirtd" "podman"
       ];
 
+      # subUidRanges = [ { startUid = 1000; count = 65536; } ];
+      # subGidRanges = [ { startGid = 1000; count = 65536; } ];
+      
       packages = with pkgs; [ 
         # === Sistema e utilità ===
         xdotool
@@ -28,6 +31,10 @@
         obsidian
         smartgit
         vscode
+        scrcpy
+        android-tools
+        deskreen
+        prismlauncher
 
         meshlab
         nvtopPackages.nvidia

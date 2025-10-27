@@ -19,6 +19,6 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 22 443 500 4500 ];
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 }
