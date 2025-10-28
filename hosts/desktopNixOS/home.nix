@@ -21,7 +21,8 @@
     {
       command = "xrandr --output HDMI-0 --rotate inverted &&" +
                 "xrandr --output DP-0 --rotate inverted --mode 2560x1440 --rate 180 &&" +
-                "xrandr --output DP-0 --left-of HDMI-0";
+                "xrandr --output DP-0 --left-of HDMI-0 &&" +
+                "xrandr --output HDMI-0 --dpi 90";
     }
     {
       command = "blueman-applet";

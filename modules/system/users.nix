@@ -35,6 +35,9 @@
         android-tools
         deskreen
         prismlauncher
+        obs-studio
+        discord
+        spotify
 
         meshlab
         nvtopPackages.nvidia

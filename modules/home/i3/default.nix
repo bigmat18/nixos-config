@@ -118,9 +118,9 @@ in
             "${modifier}+Shift+h" = "move left";
 
             # alternatively, you can use the cursor keys:
-            "${modifier}+Shift+Left" = "move left";
-            "${modifier}+Shift+Down" = "move down";
-            "${modifier}+Shift+Up" = "move up";
+            "${modifier}+Shift+Left"  = "move left";
+            "${modifier}+Shift+Down"  = "move down";
+            "${modifier}+Shift+Up"    = "move up";
             "${modifier}+Shift+Right" = "move right";
 
             # split in horizontal orientation
@@ -218,7 +218,7 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/gruvbox_minimal_space.png;
+    home.file.".config/background.jpeg".source = ../../../background/gruvbox_tux.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

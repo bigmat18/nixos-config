@@ -31,9 +31,9 @@ in
     fonts = {
       sizes = {
         applications = 9;
-        terminal     = 11;
-        desktop      = 11;
-        popups       = 11;
+        terminal     = 9;
+        desktop      = 9;
+        popups       = 9;
       };
     };
   };

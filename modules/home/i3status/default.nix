@@ -44,7 +44,69 @@ in
     };
   };
 
-  config = {
+  config = let 
+    useAltStatusCmd = config.services.i3status.useAlternativeStatusCommand;
+    homeDir = config.home.homeDirectory;
+
+    barConfig = { outputName, fontSize } : {
+      statusCommand = if useAltStatusCmd
+                      then "${homeDir}/.config/i3status/i3status-wrapper.sh"
+                      else "i3status";
+      position = "top";
+      workspaceButtons = true;
+      fonts = {
+        names = ["DejaVu Sans Mono"];
+        size = fontSize * 1.0;
+      };
+
+      colors = {
+        background = gruvbox.base00;
+        statusline = gruvbox.base04;
+        separator = gruvbox.base04;
+
+        focusedWorkspace = {
+          border = gruvbox.base04;
+          background = gruvbox.base04;
+          text = gruvbox.base00;
+        };
+
+        activeWorkspace = {
+          border = gruvbox.base04;
+          background = gruvbox.base00;
+          text = gruvbox.base0A;
+        };
+
+        inactiveWorkspace = {
+          border = gruvbox.base04;
+          background = gruvbox.base00;
+          text = gruvbox.base04;
+        };
+
+        urgentWorkspace = {
+          border = gruvbox.base08;
+          background = gruvbox.base00;
+          text = gruvbox.base04;
+        };
+
+        bindingMode = {
+          border = gruvbox.base08;
+          background = gruvbox.base00;
+          text = gruvbox.base04;
+        };
+      };
+
+      extraConfig = ''
+        output ${outputName}
+        padding 5px 7px
+        workspace_min_width 35
+        separator_symbol " | "
+      '';
+
+      trayOutput = "primary";
+      trayPadding = 5;
+    };
+  in 
+  {
     home.packages = with pkgs; [ i3status lm_sensors ];
 
     home.file.".config/i3status/cpu_temp.sh" = {
@@ -62,7 +124,7 @@ in
         i3status | while :
         do
           read line
-          custom_output=$(${config.home.homeDirectory}/.config/i3status/cpu_temp.sh)
+          custom_output=$(${homeDir}/.config/i3status/cpu_temp.sh)
           line=''${line//custom_tmp/$custom_output}
           echo "$line"
         done
@@ -87,59 +149,8 @@ in
     };
 
     xsession.windowManager.i3.config.bars = [
-      {
-        statusCommand = if config.services.i3status.useAlternativeStatusCommand then "${config.home.homeDirectory}/.config/i3status/i3status-wrapper.sh" else "i3status";     
-        position = "top";
-        fonts = {
-          names = ["DejaVu Sans Mono"];
-          size = 9.0;
-        };
-
-        colors = {
-          background = gruvbox.base00;
-          statusline = gruvbox.base04;
-          separator = gruvbox.base04;
-
-          focusedWorkspace = {
-            border = gruvbox.base04;
-            background = gruvbox.base04;
-            text = gruvbox.base00;
-          };
-
-          activeWorkspace = {
-            border = gruvbox.base04;
-            background = gruvbox.base00;
-            text = gruvbox.base0A;
-          };
-
-          inactiveWorkspace = {
-            border = gruvbox.base04;
-            background = gruvbox.base00;
-            text = gruvbox.base04;
-          };
-
-          urgentWorkspace = {
-            border = gruvbox.base08;
-            background = gruvbox.base00;
-            text = gruvbox.base04;
-          };
-
-          bindingMode = {
-            border = gruvbox.base08;
-            background = gruvbox.base00;
-            text = gruvbox.base04;
-          };
-        };
-
-        extraConfig = ''
-          padding 5px 7px
-          workspace_min_width 35
-          separator_symbol " | "
-        '';
-
-        trayOutput = "primary";
-        trayPadding = 5;
-      }
+      (barConfig { outputName = "HDMI-0"; fontSize = 8; })
+      (barConfig { outputName = "DP-0"; fontSize = 10; })
     ];
   };
 }

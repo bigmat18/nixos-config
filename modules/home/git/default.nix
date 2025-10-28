@@ -6,7 +6,7 @@
   programs.git = {
     enable = true;
 
-    userName  = "Matteo Giuntoni";
+    userName  = "bigmat18";
     userEmail = "mat.giu2002@gmail.com";
 
     aliases = {

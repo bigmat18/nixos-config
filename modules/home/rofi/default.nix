@@ -4,6 +4,7 @@
 
   programs.rofi = {
     enable = true;
+    font = "Droid Sans Mono 10";
     plugins = [ pkgs.rofi-calc ];
     # extraConfig = {
     #   show-icons = true;
