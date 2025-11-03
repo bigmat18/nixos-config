@@ -102,7 +102,6 @@
       nerdcommenter
       zen-mode-nvim
       vim-visual-multi
-      # blink-ripgrep-nvim
     ];
 
     extraLuaConfig = ''

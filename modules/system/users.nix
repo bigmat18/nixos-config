@@ -9,9 +9,6 @@
         "wheel" "networkmanager" "audio" "jackaudio" 
         "docker" "libvirtd" "kvm" "qemu-libvirtd" "podman"
       ];
-
-      # subUidRanges = [ { startUid = 1000; count = 65536; } ];
-      # subGidRanges = [ { startGid = 1000; count = 65536; } ];
       
       packages = with pkgs; [ 
         # === Sistema e utilità ===
@@ -35,9 +32,7 @@
         android-tools
         deskreen
         prismlauncher
-        obs-studio
         discord
-        spotify
 
         meshlab
         nvtopPackages.nvidia

@@ -5,6 +5,11 @@ pkgs.mkShell {
 
   buildInputs = with pkgs; [
     bun
+    yarn
+
+    pyright
+    python313Packages.matplotlib
+    python313Packages.pandas
   ];
 
   shellHook = ''

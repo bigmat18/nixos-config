@@ -53,7 +53,6 @@ in
           inherit modifier;
           floating.modifier = modifier;
           floating.border = 1;
-          # fonts.size = 11.0;
 
           keybindings = {
             "${modifier}+Return"        = "exec alacritty";
@@ -210,6 +209,11 @@ in
               notification = false;
             }
             {
+              command = "dunst";
+              always = false;
+              notification = false;
+            }
+            {
               command = "feh --no-fehbg --bg-fill ~/.config/background.jpeg --bg-fill ~/.config/background.jpeg";
               always = true;
               notification = false;
@@ -218,7 +222,7 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/gruvbox_tux.png;
+    home.file.".config/background.jpeg".source = ../../../background/nixos.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

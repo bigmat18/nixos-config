@@ -15,6 +15,8 @@
     ./fastfetch
     ./firefox
     ./alacritty
+    ./obs-studio
+    ./dust
   ];
 
   programs.home-manager.enable = true;
