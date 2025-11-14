@@ -23,6 +23,7 @@ pkgs.mkShell {
       xorg.libXxf86vm
       xorg.libXi
       xorg.libxcb
+      xorg.libXext
 
       vulkan-headers
       vulkan-loader
@@ -37,12 +38,21 @@ pkgs.mkShell {
       nimble
       nim-unwrapped
       qt5.full
+      glfw
 
   ];
 
   shellHook = ''
-    export LD_LIBRARY_PATH=${pkgs.vulkan-loader}/lib:$LD_LIBRARY_PATH
-    export PATH=${pkgs.gdb}/bin:$PATH
+    echo "✅ Default development shell ready"
+    export LD_LIBRARY_PATH=${pkgs.mesa}/lib:${pkgs.libGL}/lib:${pkgs.glfw}/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=${pkgs.vulkan-loader}/lib:$LD_LIBRARY_PATH    
+
+    export GCC_PATH=${pkgs.gcc}
+
+    export PATH=$GCC_PATH/bin:$PATH
+    export CC=$GCC_PATH/bin/gcc
+    export CXX=$GCC_PATH/bin/g++
+
     exec ${pkgs.zsh}/bin/zsh
   '';
 }

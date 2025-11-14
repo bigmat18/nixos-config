@@ -33,6 +33,7 @@
         deskreen
         prismlauncher
         discord
+        google-chrome
 
         meshlab
         nvtopPackages.nvidia
