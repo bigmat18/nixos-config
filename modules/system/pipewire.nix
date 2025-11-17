@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, username, ... }:
 
 {
   services.pipewire = {
@@ -17,13 +17,10 @@
   };
 
   hardware.pulseaudio.enable = false;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
-
   environment.systemPackages = with pkgs; [
     pulseaudio
     pavucontrol
   ];
 
+  users.users.${username}.extraGroups = [ "audio" "jackaudio"  ];
 }

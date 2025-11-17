@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   home.packages = [ pkgs.git ];
@@ -6,7 +6,7 @@
   programs.git = {
     enable = true;
 
-    userName  = "bigmat18";
+    userName  = "${username}";
     userEmail = "mat.giu2002@gmail.com";
 
     aliases = {

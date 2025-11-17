@@ -1,21 +1,15 @@
-{ pkgs, ...}:
+{ pkgs, username, ...}:
 {
-
-  virtualisation.podman = {
+  virtualisation.docker = {
     enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+    enableOnBoot = false;
   };
 
-  # virtualisation.docker.enable = true;
-  # virtualisation.docker.enableOnBoot = true;
+  environment.systemPackages = with pkgs; [
+    nvidia-container-toolkit # NVIDIA runtime/hooks for GPU in containers
+    xorg.xhost               # Control X11 access (add/remove allowed hosts)
+  ];
 
   hardware.nvidia-container-toolkit.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    nvidia-container-toolkit
-    xorg.xhost
-    distrobox
-    podman
-  ];
+  users.users.${username}.extraGroups = [ "docker" ];
 }

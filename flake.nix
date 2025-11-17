@@ -20,23 +20,10 @@
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
-      user = "bigmat18";
+      username = "bigmat18";
+      home = host: ./hosts/${host}/home.nix;
+      overlays = import ./overlays.nix { };
 
-      corto-overlay = final: prev: {
-        corto = prev.corto.overrideAttrs (oldAttrs: {
-          cmakeFlags =
-            (oldAttrs.cmakeFlags or []) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
-        });
-      };
-
-      meshlab-overlay = final: prev: {
-        meshlab = prev.meshlab.overrideAttrs (oldAttrs: {
-          cmakeFlags =
-            (oldAttrs.cmakeFlags or []) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
-        });
-      };
-
-      mkHome = host: ./hosts/${host}/home.nix;
       pkgs = import nixpkgs { 
         inherit system; 
         config = {
@@ -48,7 +35,10 @@
             "qtwebengine-5.15.19"
           ];
         }; 
-        overlays = [ corto-overlay meshlab-overlay ];
+        overlays = [
+          overlays.corto-overlay
+          overlays.meshlab-overlay
+        ];
       };
 
       nixpkgsConfigModule = {
@@ -57,9 +47,9 @@
         nixpkgs.config.pulseaudio = true;
       };
 
-      mkConfig = host: extraModules: nixpkgs.lib.nixosSystem {
+      config = host: extraModules: nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs; };
+        specialArgs = { inherit inputs pkgs username; };
         modules = [
           nixpkgsConfigModule
           ./stylix.nix
@@ -67,9 +57,10 @@
 
           inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager { 
-            home-manager.users.${user} = {
+            home-manager.extraSpecialArgs = { inherit username; };
+            home-manager.users.${username} = {
               imports = [
-                (mkHome host)
+                (home host)
                 inputs.textfox.homeManagerModules.default
               ];
             }; 
@@ -77,7 +68,7 @@
         ] ++ extraModules;
       };
 
-      defaultShell = import ./shells/default-shell.nix { pkgs = pkgs; };
+      graphicsShell = import ./shells/graphics-shell.nix { pkgs = pkgs; };
       mpiShell = import ./shells/mpi-shell.nix { pkgs = pkgs; };
       cudaShell = import ./shells/cuda-shell.nix { pkgs = pkgs; };
       jsShell = import ./shells/js-shell.nix { pkgs = pkgs; };
@@ -85,18 +76,18 @@
     in
     {
       nixosConfigurations = {
-        macbook2019 = mkConfig "macbook2019" [ nixos-hardware.nixosModules.apple-t2 ];
-        desktopNixOS = mkConfig "desktopNixOS" [];
+        macbook2019 = config "macbook2019" [ nixos-hardware.nixosModules.apple-t2 ];
+        desktopNixOS = config "desktopNixOS" [];
       };
 
       homeConfigurations = {
         desktopLinux = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
-          extraSpecialArgs = { inherit inputs system user; };
+          extraSpecialArgs = { inherit inputs system username; };
           modules = [
             nixpkgsConfigModule
             ./stylix.nix
-            (mkHome "desktopLinux")
+            (home "desktopLinux")
             inputs.stylix.homeManagerModules.stylix
             inputs.textfox.homeManagerModules.default
           ];
@@ -104,7 +95,7 @@
       };
 
       devShells.${system} = {
-        default = defaultShell;
+        graphics = graphicsShell;
         mpi = mpiShell;
         cuda = cudaShell;
         js = jsShell;

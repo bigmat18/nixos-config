@@ -13,18 +13,12 @@
     ../../modules/system/docker.nix
     ../../modules/system/game.nix
     ../../modules/system/vm.nix
+    ../../modules/system/bluetooth.nix
+    ../../modules/system/podman.nix
   ];
 
   time.timeZone = "Europe/Rome";
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # Used for flatpak
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = with pkgs; [
-  #     xdg-desktop-portal-gtk
-  #   ];
-  # };
 
   security = {
     rtkit.enable = true;   # For audio purposes
@@ -34,7 +28,6 @@
   services = {
     dbus.enable = true;
     gvfs.enable = true;
-    # flatpak.enable = true;
   };
 
   programs = {
@@ -49,8 +42,19 @@
   };
 
   environment.systemPackages = with pkgs; [
-    lxsession
-    python3
+    lxsession    # X11 session manager
+    python3      # Python interpreter
+    xdotool      # Simulate X11 input
+    dconf        # GNOME config backend/CLI
+    killall      # Kill by process name
+    wget         # CLI downloader
+    unzip        # Unzip ZIP files
+    unrar        # Extract RAR files
+    xclip        # X11 clipboard CLI
+    wl-clipboard # Wayland clipboard (wl-copy/paste)
+    btop         # TUI resource monitor
+    htop         # Interactive process viewer
+    perf         # Kernel perf profiler
   ];
 
   services.tailscale.enable = true;

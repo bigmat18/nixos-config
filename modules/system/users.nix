@@ -1,29 +1,14 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, username, ... }:
 
 {
   users.users = {
-    bigmat18 = {
+    ${username} = {
       isNormalUser = true;
       shell = pkgs.zsh;
-      extraGroups = [ 
-        "wheel" "networkmanager" "audio" "jackaudio" 
-        "docker" "libvirtd" "kvm" "qemu-libvirtd" "podman"
-      ];
+      extraGroups = [ "wheel" ];
       
       packages = with pkgs; [ 
-        # === Sistema e utilità ===
-        xdotool
-        dconf
-
-        killall
-        wget
-        unzip
-        unrar
-        perf
-        xclip
-        wl-clipboard
-
-        # === Produttività e sviluppo ===
+        # === General applications ===
         via
         obsidian
         smartgit
@@ -34,13 +19,9 @@
         prismlauncher
         discord
         google-chrome
-
         meshlab
         nvtopPackages.nvidia
-        btop
-        htop
-
-        # === Multimedia e comunicazione ===
+        distrobox
         mpv
 
         # === Wine setup ===

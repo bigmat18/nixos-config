@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 {
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = ["bigmat18"];
+  users.groups.libvirtd.members = [ "${username}" ];
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -9,11 +9,13 @@
     };
   };
   
-  environment.systemPackages = with pkgs; [ 
-    qemu 
-    virt-manager 
-    win-virtio 
-    swtpm
-    looking-glass-client
+  environment.systemPackages = with pkgs; [
+    qemu                 # System emulator/virtualizer (KVM/QEMU)
+    virt-manager         # GUI to manage libvirt VMs
+    win-virtio           # Windows VirtIO drivers (paravirt disk/net)
+    swtpm                # Software TPM emulator (vTPM for VMs)
+    looking-glass-client # Share GPU framebuffer from VM to host (low-latency)
   ];
+
+  users.users.${username}.extraGroups = [ "libvirtd" "kvm" "qemu-libvirtd" ];
 }

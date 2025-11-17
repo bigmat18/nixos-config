@@ -1,7 +1,8 @@
-{ pkgs, ...}:
+{ pkgs, username, ...}:
 {
   networking.networkmanager.enable = true;
   networking.hostName = "nixbtw";
+  networking.firewall.enable = false;
 
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
@@ -19,6 +20,5 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 443 500 4500 ];
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
+  users.users.${username}.extraGroups = [ "networkmanager" ];
 }

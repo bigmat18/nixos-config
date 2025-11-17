@@ -57,7 +57,7 @@ in
           keybindings = {
             "${modifier}+Return"        = "exec alacritty";
             "${modifier}+Shift+Return"  = "exec --no-startup-id alacritty -e distrobox-enter --root debian-box";
-            "${modifier}+z"             = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | shell default'";
+            "${modifier}+z"             = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | get nimble nim-unwrapped'";
             "${modifier}+Shift+s"       = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
             "${modifier}+Shift+q"       = "kill";
             "${modifier}+d"             = "exec rofi -show drun";
@@ -216,6 +216,11 @@ in
             {
               command = "feh --no-fehbg --bg-fill ~/.config/background.jpeg --bg-fill ~/.config/background.jpeg";
               always = true;
+              notification = false;
+            }
+            {
+              command = "blueman-applet";
+              always = false;
               notification = false;
             }
           ] ++ config.services.i3.startupCommands;

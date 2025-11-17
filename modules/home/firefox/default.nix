@@ -1,15 +1,15 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, username, ... }:
 
 {
   programs.firefox = {
     enable = true;
-    profiles.bigmat18 = {
+    profiles.${username} = {
       path = "sryda9m2.default";
     };
   };
 
   textfox = {
     enable = true;
-    profile = "bigmat18";
+    profile = "${username}";
   };
 }

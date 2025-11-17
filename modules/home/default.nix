@@ -1,4 +1,4 @@
-{ config, pkgs, colorschema, ... }:
+{ config, pkgs, colorschema, username, ... }:
 
 {
   imports = [
@@ -17,12 +17,13 @@
     ./alacritty
     ./obs-studio
     ./dust
+    ./distrobox
   ];
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
-  home.username = "bigmat18";
-  home.homeDirectory = "/home/bigmat18";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
 
   home.file = {
     ".xinitrc".source = ../../dotfiles/.xinitrc;

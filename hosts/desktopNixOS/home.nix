@@ -26,10 +26,5 @@
       always = true;
       notification = false;
     }
-    {
-      command = "blueman-applet";
-      always = false;
-      notification = false;
-    }
   ];
 }
