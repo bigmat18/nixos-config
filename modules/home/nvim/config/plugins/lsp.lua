@@ -67,6 +67,11 @@ require('lspconfig').clangd.setup {
     capabilities = capabilities
 }
 
+require('lspconfig').glsl_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 
 require('lspconfig').rnix.setup {
     on_attach = on_attach,

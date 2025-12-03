@@ -6,6 +6,7 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     bun
     yarn
+    sqlite
 
     pyright
     python313Packages.matplotlib

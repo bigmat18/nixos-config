@@ -15,7 +15,6 @@
         vscode
         scrcpy
         android-tools
-        deskreen
         prismlauncher
         discord
         google-chrome

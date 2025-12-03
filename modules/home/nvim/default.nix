@@ -18,6 +18,7 @@
     vimdiffAlias = true;
 
     extraPackages = with pkgs; [
+      glsl_analyzer
       lua-language-server
       cmake-language-server
       xclip

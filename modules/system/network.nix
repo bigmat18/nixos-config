@@ -16,8 +16,13 @@
       AllowUsers = null;
       UseDns = true;
       X11Forwarding = true;
-      PermitRootLogin = "prohibit-password";
     };
+  };
+
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    openFirewall = true;
   };
 
   users.users.${username}.extraGroups = [ "networkmanager" ];
