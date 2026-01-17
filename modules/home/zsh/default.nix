@@ -56,6 +56,24 @@
         fi
         nix shell nixpkgs#"$1"
       }
+
+      ubuntu() {
+        xhost + && \
+        docker run --rm -it \
+          --hostname nixbtw \
+          --device nvidia.com/gpu=all \
+          --device /dev/net/tun \
+          -e DISPLAY=$DISPLAY \
+          -v /tmp/.X11-unix:/tmp/.X11-unix \
+          --cap-add=SYS_ADMIN \
+          --cap-add=NET_ADMIN \
+          --security-opt seccomp=unconfined \
+          --network=host \
+          -v /home/bigmat18:/home/bigmat18 \
+          -v /home/bigmat18/.zshrc_ubuntu:/home/bigmat18/.zshrc \
+          -w $(pwd) \
+          ubuntu "$@"
+      }
     '';
   };
 }
