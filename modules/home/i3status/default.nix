@@ -149,7 +149,7 @@ in
     };
 
     xsession.windowManager.i3.config.bars = [
-      (barConfig { outputName = "HDMI-0"; fontSize = 8; })
+      (barConfig { outputName = "HDMI-0"; fontSize = 7; })
       (barConfig { outputName = "DP-0"; fontSize = 10; })
     ];
   };

@@ -27,4 +27,12 @@
       notification = false;
     }
   ];
+
+  # services.i3.startupCommands = [
+  #   {
+  #     command = "xrandr --output HDMI-0 --rate 144 --rotate normal";
+  #     always = true;
+  #     notification = false;
+  #   }
+  # ];
 }

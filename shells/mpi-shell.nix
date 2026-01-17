@@ -15,6 +15,11 @@ pkgs.mkShell {
     openmpi
     pyright
     llvmPackages.openmp
+
+    python313Packages.pip
+    python313Packages.numpy
+    python313Packages.matplotlib
+    python313Packages.pymeshlab
   ];
 
   shellHook = ''

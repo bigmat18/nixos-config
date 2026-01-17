@@ -38,6 +38,7 @@
         overlays = [
           overlays.corto-overlay
           overlays.meshlab-overlay
+          overlays.pymeshlab-overlay
         ];
       };
 

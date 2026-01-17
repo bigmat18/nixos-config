@@ -9,8 +9,10 @@ pkgs.mkShell {
     sqlite
 
     pyright
+    python313Packages.pip
+    python313Packages.numpy
     python313Packages.matplotlib
-    python313Packages.pandas
+    virtualenv
   ];
 
   shellHook = ''

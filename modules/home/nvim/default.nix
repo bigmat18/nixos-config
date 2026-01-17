@@ -93,6 +93,12 @@
         config = toLuaFile (nvimPluginsPath + /alpha.lua);
       }
 
+      {
+        plugin = indent-blankline-nvim;
+        config = toLuaFile (nvimPluginsPath + /indent-blankline.lua);
+      }
+
+
       nvim-scrollbar
       vim-signify
       vim-tmux-navigator
@@ -103,6 +109,7 @@
       nerdcommenter
       zen-mode-nvim
       vim-visual-multi
+      nvim-treesitter-textobjects
     ];
 
     extraLuaConfig = ''
