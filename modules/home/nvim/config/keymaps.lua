@@ -82,6 +82,10 @@ vim.keymap.set("n", "<leader>fg", "<cmd>Telescope git_files<cr>") -- list availa
 
 -- nvim-tree keybinding
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explor
+
 vim.keymap.set("n", "<leader>z", function()
   require("zen-mode").toggle()
 end, { desc = "Toggle Zen Mode" })
+
+require("ibl").setup()
+require("oil").setup()

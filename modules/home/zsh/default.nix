@@ -69,9 +69,8 @@
           --cap-add=NET_ADMIN \
           --security-opt seccomp=unconfined \
           --network=host \
+          -v $HOME/.sonicwall:/root/.sonicwall \
           -v /home/bigmat18:/home/bigmat18 \
-          -v /home/bigmat18/.zshrc_ubuntu:/home/bigmat18/.zshrc \
-          -w $(pwd) \
           ubuntu "$@"
       }
     '';

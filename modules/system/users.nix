@@ -22,6 +22,7 @@
         nvtopPackages.nvidia
         distrobox
         mpv
+        ghidra
 
         # === Wine setup ===
         wineWowPackages.stable

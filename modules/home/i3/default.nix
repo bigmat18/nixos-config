@@ -227,7 +227,7 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/nixos.png;
+    home.file.".config/background.jpeg".source = ../../../background/gruvbox_minimal_space.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

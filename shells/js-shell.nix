@@ -6,13 +6,8 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     bun
     yarn
-    sqlite
-
-    pyright
-    python313Packages.pip
-    python313Packages.numpy
-    python313Packages.matplotlib
-    virtualenv
+    sqlite  
+    nodejs
   ];
 
   shellHook = ''

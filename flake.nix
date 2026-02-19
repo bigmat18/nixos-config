@@ -73,6 +73,7 @@
       mpiShell = import ./shells/mpi-shell.nix { pkgs = pkgs; };
       cudaShell = import ./shells/cuda-shell.nix { pkgs = pkgs; };
       jsShell = import ./shells/js-shell.nix { pkgs = pkgs; };
+      pyShell = import ./shells/py-shell.nix { pkgs = pkgs; };
 
     in
     {
@@ -100,6 +101,7 @@
         mpi = mpiShell;
         cuda = cudaShell;
         js = jsShell;
+        py = pyShell;
       };
 
       nix.settings.allowed-uris = [ "github:" ];

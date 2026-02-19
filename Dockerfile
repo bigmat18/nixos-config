@@ -17,11 +17,6 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN locale-gen en_US.UTF-8
-ENV LANG=en_US.UTF-8
-ENV LANGUAGE=en_US:en
-ENV LC_ALL=en_US.UTF-8
-
 RUN apt-get update && \
     cd /tmp && \
     wget https://developer.nvidia.com/downloads/assets/tools/secure/nsight-systems/2025_3/nsight-systems-2025.3.1_2025.3.1.90-1_amd64.deb && \
@@ -47,9 +42,6 @@ RUN userdel -r ubuntu && \
     echo "bigmat18 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 WORKDIR /home/bigmat18
-
-USER bigmat18
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 SHELL ["/bin/zsh", "-c"]
 CMD ["zsh"]

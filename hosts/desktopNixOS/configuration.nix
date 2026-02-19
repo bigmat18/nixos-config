@@ -48,6 +48,7 @@
     dconf        # GNOME config backend/CLI
     killall      # Kill by process name
     wget         # CLI downloader
+    zip          # ZIP file archiver
     unzip        # Unzip ZIP files
     unrar        # Extract RAR files
     xclip        # X11 clipboard CLI

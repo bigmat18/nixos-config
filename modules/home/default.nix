@@ -17,7 +17,6 @@
     ./alacritty
     ./obs-studio
     ./dust
-    ./distrobox
   ];
 
   programs.home-manager.enable = true;

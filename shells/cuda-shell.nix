@@ -3,7 +3,7 @@ pkgs.mkShell {
   name = "cuda-env-shell";
   
   buildInputs = with pkgs; [
-    git gitRepo gnupg autoconf curl bear
+    gnupg autoconf curl bear
     procps gnumake util-linux m4 gperf unzip
     
     linuxPackages.nvidia_x11
@@ -17,11 +17,6 @@ pkgs.mkShell {
 
     ncurses5 stdenv.cc binutils gcc cmake 
     gdb gdbgui clang-tools python313Packages.ninja 
-    
-    pyright
-    python313Packages.matplotlib
-    python313Packages.pandas
-    llvmPackages.openmp
   ];
 
    shellHook = ''
