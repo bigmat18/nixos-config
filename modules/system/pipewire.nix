@@ -16,7 +16,7 @@
     wireplumber.enable = true;
   };
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   environment.systemPackages = with pkgs; [
     pulseaudio
     pavucontrol

@@ -9,11 +9,11 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-25.11";
     textfox.url = "github:adriankarlen/textfox";
   };
 
@@ -22,7 +22,6 @@
       system = "x86_64-linux";
       username = "bigmat18";
       home = host: ./hosts/${host}/home.nix;
-      overlays = import ./overlays.nix { };
 
       pkgs = import nixpkgs { 
         inherit system; 
@@ -35,24 +34,14 @@
             "qtwebengine-5.15.19"
           ];
         }; 
-        overlays = [
-          overlays.corto-overlay
-          overlays.meshlab-overlay
-          overlays.pymeshlab-overlay
-        ];
-      };
-
-      nixpkgsConfigModule = {
-        nixpkgs.config.allowUnfree = true;
-        nixpkgs.config.cudaSupport = true;
-        nixpkgs.config.pulseaudio = true;
       };
 
       config = host: extraModules: nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs username; };
+        specialArgs = { inherit inputs username; };
         modules = [
-          nixpkgsConfigModule
+          { nixpkgs.pkgs = pkgs; }
+
           ./stylix.nix
           ./hosts/${host}/configuration.nix
 
@@ -82,19 +71,19 @@
         desktopNixOS = config "desktopNixOS" [];
       };
 
-      homeConfigurations = {
-        desktopLinux = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          extraSpecialArgs = { inherit inputs system username; };
-          modules = [
-            nixpkgsConfigModule
-            ./stylix.nix
-            (home "desktopLinux")
-            inputs.stylix.homeManagerModules.stylix
-            inputs.textfox.homeManagerModules.default
-          ];
-        };
-      };
+      # homeConfigurations = {
+      #   desktopLinux = home-manager.lib.homeManagerConfiguration {
+      #     pkgs = pkgs;
+      #     extraSpecialArgs = { inherit inputs system username; };
+      #     modules = [
+      #       nixpkgsConfigModule
+      #       ./stylix.nix
+      #       (home "desktopLinux")
+      #       inputs.stylix.homeManagerModules.stylix
+      #       inputs.textfox.homeManagerModules.default
+      #     ];
+      #   };
+      # };
 
       devShells.${system} = {
         graphics = graphicsShell;

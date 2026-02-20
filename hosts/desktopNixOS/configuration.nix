@@ -56,6 +56,8 @@
     btop         # TUI resource monitor
     htop         # Interactive process viewer
     perf         # Kernel perf profiler
+    nixd         # Il Language Server
+    nixpkgs-fmt  # Formattatore (consigliato per l'integrazione con l'LSP)
   ];
 
   services.tailscale.enable = true;

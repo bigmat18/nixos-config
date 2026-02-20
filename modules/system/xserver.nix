@@ -5,7 +5,7 @@
     enable = true;
     autorun = false;
 
-    layout = "us";
+    xkb.layout = "us";
     xkb.variant = "intl";
     xkb.options = "compose:ralt";
 
@@ -23,9 +23,9 @@
     displayManager = {
       startx.enable = true;
       lightdm.enable = lib.mkForce false;
-      defaultSession = "none+i3";
     };
-
-    libinput.enable = true;
   };
+
+  services.libinput.enable = true;
+  services.displayManager.defaultSession = "none+i3";
 }

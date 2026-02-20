@@ -5,14 +5,14 @@
   virtualisation = {
     libvirtd = {
       enable = true;
-      qemuSwtpm = true;
+      qemu.swtpm.enable = true;
     };
   };
   
   environment.systemPackages = with pkgs; [
     qemu                 # System emulator/virtualizer (KVM/QEMU)
     virt-manager         # GUI to manage libvirt VMs
-    win-virtio           # Windows VirtIO drivers (paravirt disk/net)
+    virtio-win           # Windows VirtIO drivers (paravirt disk/net)
     swtpm                # Software TPM emulator (vTPM for VMs)
     looking-glass-client # Share GPU framebuffer from VM to host (low-latency)
   ];

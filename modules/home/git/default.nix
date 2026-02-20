@@ -6,18 +6,18 @@
   programs.git = {
     enable = true;
 
-    userName  = "${username}";
-    userEmail = "mat.giu2002@gmail.com";
+    settings = {
+      user.name  = "${username}";
+      user.email = "mat.giu2002@gmail.com";
 
-    aliases = {
-      co = "checkout";
-      br = "branch";
-      ci = "commit";
-      st = "status";
-      lg = "log --oneline --graph --all";
-    };
+      alias = {
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        st = "status";
+        lg = "log --oneline --graph --all";
+      };
 
-    extraConfig = {
       core = {
         editor = "nvim";
         autocrlf = "input";

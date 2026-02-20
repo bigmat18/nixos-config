@@ -10,6 +10,8 @@
 
   textfox = {
     enable = true;
-    profile = "${username}";
+    profiles = [
+      "${username}"
+    ];
   };
 }
