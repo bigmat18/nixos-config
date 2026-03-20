@@ -64,7 +64,7 @@
 
       homeConfigurations = {
         qualcomm = homeConfig "qualcomm" "aarch64-linux" [
-          inputs.stylix.homeManagersModules.stylix
+          inputs.stylix.homeManagerModules.stylix
         ];
       };
 
