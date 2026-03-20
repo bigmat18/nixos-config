@@ -7,11 +7,4 @@
       path = "sryda9m2.default";
     };
   };
-
-  textfox = {
-    enable = true;
-    profiles = [
-      "${username}"
-    ];
-  };
 }

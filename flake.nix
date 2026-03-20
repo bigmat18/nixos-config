@@ -1,11 +1,7 @@
 {
   nixConfig = {
-    extra-substituters = [
-      "https://cache.soopy.moe"
-    ];
-    extra-trusted-public-keys = [
-      "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo="
-    ];
+    extra-substituters = [ "https://cache.soopy.moe" ];
+    extra-trusted-public-keys = [ "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo=" ];
   };
 
   inputs = {
@@ -19,80 +15,64 @@
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
-      system = "x86_64-linux";
       username = "bigmat18";
-      home = host: ./hosts/${host}/home.nix;
+      system = "x86_64-linux";
 
-      pkgs = import nixpkgs { 
+      customPkgs = system: import nixpkgs { 
         inherit system; 
         config = {
           allowUnfree = true;
           cudaSupport = true;
           pulseaudio = true;
-
-          permittedInsecurePackages = [
-            "qtwebengine-5.15.19"
-          ];
+          permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
         }; 
       };
 
-      config = host: extraModules: nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs username; };
-        modules = [
-          { nixpkgs.pkgs = pkgs; }
+      nixosConfig = host: system: extraModules: 
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit system inputs username; };
+          modules = [
+            { nixpkgs.pkgs = customPkgs system; }
+            ./hosts/${host}/configuration.nix
+            
+            home-manager.nixosModules.home-manager { 
+              home-manager.extraSpecialArgs = { inherit username inputs; };
+              home-manager.users.${username} = {
+                imports = [ ./hosts/${host}/home.nix ];
+              }; 
+            }
+          ] ++ extraModules;
+        };
 
-          ./stylix.nix
-          ./hosts/${host}/configuration.nix
-
-          inputs.stylix.nixosModules.stylix
-          home-manager.nixosModules.home-manager { 
-            home-manager.extraSpecialArgs = { inherit username; };
-            home-manager.users.${username} = {
-              imports = [
-                (home host)
-                inputs.textfox.homeManagerModules.default
-              ];
-            }; 
-          }
-        ] ++ extraModules;
-      };
-
-      graphicsShell = import ./shells/graphics-shell.nix { pkgs = pkgs; };
-      mpiShell = import ./shells/mpi-shell.nix { pkgs = pkgs; };
-      cudaShell = import ./shells/cuda-shell.nix { pkgs = pkgs; };
-      jsShell = import ./shells/js-shell.nix { pkgs = pkgs; };
-      pyShell = import ./shells/py-shell.nix { pkgs = pkgs; };
+      homeConfig = host: system: extraModules: 
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = customPkgs system;
+          extraSpecialArgs = { inherit inputs system username; };
+          modules = [
+            ./hosts/${host}/home.nix
+          ] ++ extraModules;
+        };
 
     in
     {
       nixosConfigurations = {
-        macbook2019 = config "macbook2019" [ nixos-hardware.nixosModules.apple-t2 ];
-        desktopNixOS = config "desktopNixOS" [];
+        desktop = nixosConfig "desktop" "x86_64-linux" [
+          inputs.stylix.nixosModules.stylix
+          ./stylix.nix
+        ];
       };
 
-      # homeConfigurations = {
-      #   desktopLinux = home-manager.lib.homeManagerConfiguration {
-      #     pkgs = pkgs;
-      #     extraSpecialArgs = { inherit inputs system username; };
-      #     modules = [
-      #       nixpkgsConfigModule
-      #       ./stylix.nix
-      #       (home "desktopLinux")
-      #       inputs.stylix.homeManagerModules.stylix
-      #       inputs.textfox.homeManagerModules.default
-      #     ];
-      #   };
-      # };
+      homeConfigurations = {
+        wsl = homeConfig "qualcomm" "x86_64-linux" [];
+      };
 
       devShells.${system} = {
-        graphics = graphicsShell;
-        mpi = mpiShell;
-        cuda = cudaShell;
-        js = jsShell;
-        py = pyShell;
+        graphics = import ./shells/graphics-shell.nix { pkgs = customPkgs system; };
+        mpi = import ./shells/mpi-shell.nix { pkgs = customPkgs system; };
+        cuda = import ./shells/cuda-shell.nix { pkgs = customPkgs system; };
+        js = import ./shells/js-shell.nix { pkgs = customPkgs system; };
+        py = import ./shells/py-shell.nix { pkgs = customPkgs system; };
       };
 
-      nix.settings.allowed-uris = [ "github:" ];
     };
 }

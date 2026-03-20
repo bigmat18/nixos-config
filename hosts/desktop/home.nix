@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, username, ... }:
 let
     ubuntu-startct-script = pkgs.writeShellScript "ubuntu-startct-wrapper" ''
       xhost +
@@ -17,9 +17,24 @@ let
         ubuntu startct
     '';
   in {
+ 
   imports = [
     ../../stylix.nix
-    ../../modules/home
+    ../../modules/home/i3
+    ../../modules/home/i3status
+    ../../modules/home/picom
+    ../../modules/home/zsh
+    ../../modules/home/nvim
+    ../../modules/home/tmux
+    ../../modules/home/rofi
+    ../../modules/home/git
+    ../../modules/home/yazi
+    ../../modules/home/zathura
+    ../../modules/home/fastfetch
+    ../../modules/home/firefox
+    ../../modules/home/alacritty
+    ../../modules/home/obs-studio
+    ../../modules/home/dust
   ];
 
   services.i3status.activeModules = [ 
@@ -53,12 +68,17 @@ let
       notification = false;
     }
   ];
+  
+  programs.home-manager.enable = true;
+  home.stateVersion = "24.11";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
 
-  # services.i3.startupCommands = [
-  #   {
-  #     command = "xrandr --output HDMI-0 --rate 144 --rotate normal";
-  #     always = true;
-  #     notification = false;
-  #   }
-  # ];
+  home.file = {
+    ".xinitrc".source = ../../dotfiles/.xinitrc;
+    ".bash_profile".source = ../../dotfiles/.bash_profile;
+    ".zprofile".source = ../../dotfiles/.zprofile;
+  };
+
+  systemd.user.startServices = "sd-switch";
 }

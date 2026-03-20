@@ -1,16 +1,13 @@
 { config, pkgs, lib, ...}:
+let
+  nvimConfigPath = ./config;
+  nvimPluginsPath = nvimConfigPath + /plugins;
+  luaFile = file: builtins.readFile (nvimPluginsPath + "/${file}");
+in  
 {
   stylix.targets.neovim.enable = false;
 
-  programs.neovim = 
-  let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-
-    nvimConfigPath = ./config;
-    nvimPluginsPath = nvimConfigPath + /plugins;
-  in  
-  {
+  programs.neovim = {
     enable = true;
 
     viAlias = true;
@@ -27,9 +24,18 @@
       nodejs_22
       typescript
       typescript-language-server
+      nil
     ];
 
     plugins = with pkgs.vimPlugins; [
+      nvim-web-devicons
+
+      {
+        plugin = nvim-tree-lua;
+        type = "lua";
+        config = luaFile "/nvim-tree.lua";
+      }
+
 
       {
         plugin = (nvim-treesitter.withPlugins (p: [
@@ -45,58 +51,61 @@
           p.tree-sitter-cuda
           p.tree-sitter-cpp
         ]));
-        config = toLuaFile (nvimPluginsPath + /treesitter.lua);
+        config = luaFile "/treesitter.lua";
+        type = "lua";
       }
 
       {
         plugin = gruvbox-nvim;
-        config = toLuaFile (nvimPluginsPath + /gruvbox.lua);
+        type = "lua";
+        config = luaFile "/gruvbox.lua";
       }
 
       {
         plugin = nvim-cmp;
-        config = toLuaFile (nvimPluginsPath + /cmp.lua);
+        type = "lua";
+        config = luaFile "/cmp.lua";
       }
 
       {
         plugin = telescope-nvim;
-        config = toLuaFile (nvimPluginsPath + /telescope.lua);
-      }
-
-      {
-        plugin = nvim-tree-lua;
-        config = toLuaFile (nvimPluginsPath + /nvim-tree.lua);
+        type = "lua";
+        config = luaFile "/telescope.lua";
       }
 
       {
         plugin = lualine-nvim;
-        config = toLuaFile (nvimPluginsPath + /lualine.lua);
+        type = "lua";
+        config = luaFile "/lualine.lua";
       }
 
       {
         plugin = harpoon;
-        config = toLuaFile (nvimPluginsPath + /harpoon.lua);
+        type = "lua";
+        config = luaFile "/harpoon.lua";
       }
 
       {
         plugin = nvim-lspconfig;
-        config = toLuaFile (nvimPluginsPath + /lsp.lua);
+        type = "lua";
+        config = luaFile "/lsp.lua";
       }
 
       {
         plugin = nvim-autopairs;
-        config = toLuaFile (nvimPluginsPath + /autopairs.lua);
+        type = "lua";
+        config = luaFile "/autopairs.lua";
       }
 
       {
         plugin = alpha-nvim;
-        config = toLuaFile (nvimPluginsPath + /alpha.lua);
+        type = "lua";
+        config = luaFile "/alpha.lua";
       }
 
       nvim-scrollbar
       vim-signify
       vim-tmux-navigator
-      nvim-web-devicons
       popup-nvim
       telescope-fzf-native-nvim
       neodev-nvim

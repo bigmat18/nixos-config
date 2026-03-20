@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ pkgs, ... }:
 { 
   imports = [
     ./hardware-configuration.nix
@@ -61,6 +61,8 @@
   ];
 
   services.tailscale.enable = true;
+
+  programs.direnv.enable = true;
 
   # Don't touch this
   system.stateVersion = "23.05";
