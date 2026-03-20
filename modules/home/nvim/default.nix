@@ -115,6 +115,8 @@ in
       nvim-treesitter-textobjects
       indent-blankline-nvim
       oil-nvim
+      luasnip
+      cmp-nvim-lsp
     ];
 
     extraLuaConfig = ''
