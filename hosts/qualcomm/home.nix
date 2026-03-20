@@ -3,8 +3,8 @@
 {
   imports = [
     ../../modules/home/tmux
-    ../../modules/home/tmux
-    ../../modules/home/tmux
+    ../../modules/home/nvim
+    ../../modules/home/zsh
   ];
 
   programs.home-manager.enable = true;

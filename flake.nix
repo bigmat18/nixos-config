@@ -63,7 +63,9 @@
       };
 
       homeConfigurations = {
-        qualcomm = homeConfig "qualcomm" "x86_64-linux" [];
+        qualcomm = homeConfig "qualcomm" "aarch64-linux" [
+          inputs.stylix.homeManagersModules.stylix
+        ];
       };
 
       devShells.${system} = {
