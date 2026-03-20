@@ -63,7 +63,7 @@
       };
 
       homeConfigurations = {
-        wsl = homeConfig "qualcomm" "x86_64-linux" [];
+        qualcomm = homeConfig "qualcomm" "x86_64-linux" [];
       };
 
       devShells.${system} = {
