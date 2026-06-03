@@ -8,7 +8,6 @@
     ../../modules/system/nvidia.nix
     ../../modules/system/boot.nix
     ../../modules/system/xserver.nix
-    ../../modules/system/substituter.nix
     ../../modules/system/pipewire.nix
     ../../modules/system/docker.nix
     ../../modules/system/game.nix

@@ -58,16 +58,16 @@ let
 
   services.i3status.useAlternativeStatusCommand = true;
 
-  services.i3.startupCommands = [
-    {
-      command = "xrandr --output HDMI-0 --rotate inverted &&" +
-                "xrandr --output DP-0 --rotate inverted --mode 2560x1440 --rate 180 &&" +
-                "xrandr --output DP-0 --left-of HDMI-0 &&" +
-                "xrandr --output HDMI-0 --dpi 90";
-      always = true;
-      notification = false;
-    }
-  ];
+  # services.i3.startupCommands = [
+  #   {
+  #     command = "xrandr --output HDMI-0 --rotate inverted &&" +
+  #               "xrandr --output DP-0 --rotate inverted --mode 2560x1440 --rate 180 &&" +
+  #               "xrandr --output DP-0 --left-of HDMI-0 &&" +
+  #               "xrandr --output HDMI-0 --dpi 90";
+  #     always = true;
+  #     notification = false;
+  #   }
+  # ];
   
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
