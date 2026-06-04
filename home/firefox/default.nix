@@ -1,9 +1,9 @@
-{ config, pkgs, inputs, username, ... }:
+{ config, pkgs, inputs, vars, ... }:
 
 {
   programs.firefox = {
     enable = true;
-    profiles.${username} = {
+    profiles.${vars.username} = {
       path = "sryda9m2.default";
     };
   };

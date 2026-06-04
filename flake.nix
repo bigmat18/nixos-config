@@ -1,73 +1,71 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:danth/stylix/release-25.11";
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-25.11";
+    };
+    
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
-    let
-      username = "bigmat18";
-      system = "x86_64-linux";
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
 
-      customPkgs = system: import nixpkgs { 
-        inherit system; 
-        config = {
-          allowUnfree = true;
-          cudaSupport = true;
-          pulseaudio = true;
-          permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
-        }; 
+    vars = import ./vars.nix;
+    systems = [
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
+    forAllSystems = nixpkgs.lib.getAttrs systems;
+
+    mkNixOSConfig = path: nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs outputs vars; };
+      modules = [ path ];
+    };
+
+    mkDarwinConfig = path: nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs outputs vars; };
+      modules = [ path ];
+    };
+
+    mkHomeConfig = path: home-manager.lib.homeManagerConfiguratio{
+      specialArgs = { inherit inputs outputs vars; };
+      modules = [ path ];
+    };
+
+    in {
+
+      overlays = let
+        path = ./packages;
+        files = builtins.attrNames (builtins.readDir path);
+        nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
+      in {      
+        automaticPackages = final: prev: {
+          myPkgs = builtins.listToAttrs (map (fileName: {
+            name = builtins.replaceStrings [".nix"] [""] fileName;
+            value = prev.callPackage (path + "/${fileName}") { inherit vars; };
+          }) nixFiles);
+        };
       };
 
-      nixosConfig = host: system: extraModules: 
-        nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit system inputs username; };
-          modules = [
-            { nixpkgs.pkgs = customPkgs system; }
-            ./hosts/${host}/configuration.nix
-            
-            home-manager.nixosModules.home-manager { 
-              home-manager.extraSpecialArgs = { inherit username inputs; };
-              home-manager.users.${username} = {
-                imports = [ ./hosts/${host}/home.nix ];
-              }; 
-            }
-          ] ++ extraModules;
-        };
+      homeConfigurations = {};
 
-      homeConfig = host: system: extraModules: 
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = customPkgs system;
-          extraSpecialArgs = { inherit inputs system username; };
-          modules = [
-            ./hosts/${host}/home.nix
-          ] ++ extraModules;
-        };
+      darwinConfigurations = {};
 
-    in
-    {
       nixosConfigurations = {
-        desktop = nixosConfig "desktop" "x86_64-linux" [
-          inputs.stylix.nixosModules.stylix
-          ./stylix.nix
-        ];
-      };
-
-      homeConfigurations = {
-        qualcomm = homeConfig "qualcomm" "aarch64-linux" [
-          inputs.stylix.homeManagerModules.stylix
-        ];
-      };
-
-      devShells.${system} = {
-        graphics = import ./shells/graphics-shell.nix { pkgs = customPkgs system; };
-        mpi = import ./shells/mpi-shell.nix { pkgs = customPkgs system; };
-        cuda = import ./shells/cuda-shell.nix { pkgs = customPkgs system; };
-        js = import ./shells/js-shell.nix { pkgs = customPkgs system; };
-        py = import ./shells/py-shell.nix { pkgs = customPkgs system; };
+        oryx = mkNixOSConfig ./hosts/oryx/configuration.nix;
       };
 
     };

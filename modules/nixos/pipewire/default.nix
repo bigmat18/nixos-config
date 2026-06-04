@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, vars, ... }:
 
 {
   services.pipewire = {
@@ -22,5 +22,5 @@
     pavucontrol
   ];
 
-  users.users.${username}.extraGroups = [ "audio" "jackaudio"  ];
+  users.users.${vars.username}.extraGroups = [ "audio" "jackaudio"  ];
 }

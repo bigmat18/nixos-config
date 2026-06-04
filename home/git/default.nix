@@ -1,4 +1,4 @@
-{ config, pkgs, username, ... }:
+{ config, pkgs, vars, ... }:
 
 {
   home.packages = [ pkgs.git ];
@@ -7,8 +7,8 @@
     enable = true;
 
     settings = {
-      user.name  = "${username}";
-      user.email = "mat.giu2002@gmail.com";
+      user.name  = "${vars.username}";
+      user.email = "${vars.email}";
 
       alias = {
         co = "checkout";

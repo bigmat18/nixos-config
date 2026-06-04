@@ -1,8 +1,8 @@
-{ pkgs, lib, username, ... }:
+{ pkgs, lib, vars, ... }:
 
 {
   users.users = {
-    ${username} = {
+    ${vars.username} = {
       isNormalUser = true;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];

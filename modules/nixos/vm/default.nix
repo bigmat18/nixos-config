@@ -1,7 +1,7 @@
-{ config, pkgs, username, ... }:
+{ config, pkgs, vars, ... }:
 {
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "${username}" ];
+  users.groups.libvirtd.members = [ "${vars.username}" ];
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -17,5 +17,5 @@
     looking-glass-client # Share GPU framebuffer from VM to host (low-latency)
   ];
 
-  users.users.${username}.extraGroups = [ "libvirtd" "kvm" "qemu-libvirtd" ];
+  users.users.${vars.username}.extraGroups = [ "libvirtd" "kvm" "qemu-libvirtd" ];
 }

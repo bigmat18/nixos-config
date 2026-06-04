@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorschema, ...}:
+{ config, pkgs, lib, vars, ...}:
 
 with lib;
 
@@ -6,7 +6,7 @@ let
   modifier = "Mod4";
   refresh_i3status = "killall -SIGUSR1 i3status";
 
-  gruvbox = colorschema;
+  gruvbox = vars.colorschema;
 
 in
 {
@@ -227,7 +227,7 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../../background/gruvbox_minimal_space.png;
+    home.file.".config/background.jpeg".source = ../../background/nixos.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

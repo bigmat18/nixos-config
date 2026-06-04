@@ -1,4 +1,4 @@
-{ pkgs, username, ...}:
+{ pkgs, vars, ...}:
 {
   virtualisation.docker = {
     enable = true;
@@ -11,5 +11,5 @@
   ];
 
   hardware.nvidia-container-toolkit.enable = true;
-  users.users.${username}.extraGroups = [ "docker" ];
+  users.users.${vars.username}.extraGroups = [ "docker" ];
 }

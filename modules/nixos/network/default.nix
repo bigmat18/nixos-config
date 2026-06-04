@@ -1,4 +1,4 @@
-{ pkgs, username, ...}:
+{ pkgs, vars, ...}:
 {
   networking.networkmanager.enable = true;
   networking.hostName = "nixbtw";
@@ -25,5 +25,5 @@
     openFirewall = true;
   };
 
-  users.users.${username}.extraGroups = [ "networkmanager" ];
+  users.users.${vars.username}.extraGroups = [ "networkmanager" ];
 }

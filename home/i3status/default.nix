@@ -1,9 +1,9 @@
-{ config, pkgs, lib, colorschema, ... }:
+{ config, pkgs, lib, vars, ... }:
 
 with lib;
 
 let
-  gruvbox = colorschema;
+  gruvbox = vars.colorschema;
 
   modulesDefinition = {
     "volume master" = { settings = { format = "VOL %volume"; format_muted = "VOL muted"; device = "default"; mixer = "Master"; mixer_idx = 0; }; };
