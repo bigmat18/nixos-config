@@ -13,29 +13,30 @@
       url = "github:danth/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
 
     vars = import ./vars.nix;
-    systems = [
-      "x86_64-linux"
-      "aarch64-darwin"
-    ];
-    forAllSystems = nixpkgs.lib.getAttrs systems;
 
     mkNixOSConfig = path: nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs outputs vars self; };
       modules = [ path ];
     };
 
-    mkDarwinConfig = path: nixpkgs.lib.nixosSystem {
+    mkDarwinConfig = path: nix-darwin.lib.darwinSystem {
       specialArgs = { inherit inputs outputs vars self; };
       modules = [ path ];
     };
@@ -47,19 +48,6 @@
 
     in {
 
-      overlays = let
-        path = ./packages;
-        files = builtins.attrNames (builtins.readDir path);
-        nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
-      in {      
-        automaticPackages = final: prev: {
-          myPkgs = builtins.listToAttrs (map (fileName: {
-            name = builtins.replaceStrings [".nix"] [""] fileName;
-            value = prev.callPackage (path + "/${fileName}") { inherit vars; };
-          }) nixFiles);
-        };
-      };
-
       homeConfigurations = {};
 
       darwinConfigurations = {};
@@ -67,6 +55,12 @@
       nixosConfigurations = {
         oryx = mkNixOSConfig ./hosts/oryx/configuration.nix;
       };
+
+      overlays = import ./libs/mkOverlays.nix { inherit vars; path = ./packages/overlays; };
+
+      packages = import ./libs/mkBuild.nix { inherit nixpkgs vars; path = ./packages/derivations; };
+
+      devShells = import ./libs/mkBuild.nix { inherit nixpkgs vars; path = ./shells; };
 
     };
 }

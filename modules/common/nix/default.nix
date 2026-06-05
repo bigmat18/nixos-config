@@ -9,7 +9,7 @@
       ];
     };
 
-    overlays = builtins.attrValues outputs.overlays;
+    overlays = outputs.overlays;
   };
 
   nix = {
