@@ -1,8 +1,11 @@
-{ vars, ... }:
+{ vars, pkgs, ... }:
 {
   stylix = {
     enable = true;
-    image = ./background/nixos.png;
+    image = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/brands/nixos.png";
+      hash = "sha256-M4Q5/Sm5ZVOe324V9pEF9497M0VpcQMPTJHOwW2ZQmg=";
+    };
     base16Scheme = vars.colorschema;
 
     fonts = {
