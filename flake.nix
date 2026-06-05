@@ -31,17 +31,17 @@
     forAllSystems = nixpkgs.lib.getAttrs systems;
 
     mkNixOSConfig = path: nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs outputs vars; };
+      specialArgs = { inherit inputs outputs vars self; };
       modules = [ path ];
     };
 
     mkDarwinConfig = path: nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs outputs vars; };
+      specialArgs = { inherit inputs outputs vars self; };
       modules = [ path ];
     };
 
-    mkHomeConfig = path: home-manager.lib.homeManagerConfiguratio{
-      specialArgs = { inherit inputs outputs vars; };
+    mkHomeConfig = path: home-manager.lib.homeManagerConfiguration {
+      specialArgs = { inherit inputs outputs vars self; };
       modules = [ path ];
     };
 

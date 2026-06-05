@@ -1,4 +1,4 @@
-{ pkgs, lib, vars, ... }:
+{ pkgs, vars, ... }:
 
 {
   users.users = {

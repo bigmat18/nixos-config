@@ -2,6 +2,7 @@
 {
   stylix = {
     enable = true;
+    image = ./background/nixos.png;
     base16Scheme = vars.colorschema;
 
     fonts = {

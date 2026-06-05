@@ -14,7 +14,6 @@
 
     ../../modules/nixos/network
     ../../modules/nixos/users
-    ../../modules/nixos/fonts
     ../../modules/nixos/nvidia
     ../../modules/nixos/boot
     ../../modules/nixos/xserver
@@ -23,7 +22,11 @@
     ../../modules/nixos/game
     ../../modules/nixos/vm
     ../../modules/nixos/bluetooth
-    ../../modules/nixos/nix
+    ../../modules/nixos/sonicwall
+
+    ../../modules/common/fonts
+    ../../modules/common/nix
+    ../../modules/common/nix-scripts
   ];
 
   home-manager = {
@@ -47,7 +50,6 @@
         ../../home/alacritty
         ../../home/obs-studio
         ../../home/dust
-        ../../home/connect-tunnel
       ];
 
       services.i3status = {
@@ -63,9 +65,22 @@
       };
 
       home.file = {
-        ".xinitrc".source = ../../dotfiles/.xinitrc;
-        ".bash_profile".source = ../../dotfiles/.bash_profile;
-        ".zprofile".source = ../../dotfiles/.zprofile;
+        ".xinitrc".text = ''
+          xset s off -dpms  
+          exec i3
+        '';
+
+        ".bash_profile".text = ''
+          if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+            startx
+          fi
+        '';
+
+        ".zprofile".text = ''
+          if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+            startx
+          fi
+        '';
       };
 
       home.stateVersion = "24.11";

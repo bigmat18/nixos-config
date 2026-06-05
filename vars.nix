@@ -1,7 +1,8 @@
-{
+rec {
   fullName = "Matteo Giuntoni";
   username = "bigmat18";
   email = "mat.giu2002@gmail.com";
+  configDir = "/home/${username}/nixos-config";
 
   colorschema = {
     base00 = "#32302f"; # background

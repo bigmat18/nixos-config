@@ -1,7 +1,6 @@
 { pkgs, vars, ...}:
 {
   networking.networkmanager.enable = true;
-  networking.hostName = "nixbtw";
   networking.firewall.enable = false;
 
   environment.systemPackages = with pkgs; [

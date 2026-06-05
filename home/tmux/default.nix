@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ...}:
+{ pkgs, ... }:
 {
   stylix.targets.tmux.enable = false;
 

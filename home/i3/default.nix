@@ -214,7 +214,7 @@ in
               notification = false;
             }
             {
-              command = "feh --no-fehbg --bg-fill ~/.config/background.jpeg --bg-fill ~/.config/background.jpeg";
+              command = "feh --no-fehbg --bg-fill ${config.stylix.image} --bg-fill ${config.stylix.image}";
               always = true;
               notification = false;
             }
@@ -227,7 +227,6 @@ in
         };
       };
     };
-    home.file.".config/background.jpeg".source = ../../background/nixos.png;
     home.file.".config/i3/brightness.sh".source = ./brightness.sh;
   };
 }

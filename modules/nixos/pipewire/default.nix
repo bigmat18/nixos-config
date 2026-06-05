@@ -1,4 +1,4 @@
-{ config, lib, pkgs, vars, ... }:
+{ pkgs, vars, ... }:
 
 {
   services.pipewire = {

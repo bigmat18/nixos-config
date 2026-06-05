@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
@@ -9,10 +11,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   }; 
 
-  # hardware.opengl = {
-  #   enable = true;
-  # };
-
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -20,6 +18,4 @@
       nvidia-vaapi-driver
     ];
   };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
 }
