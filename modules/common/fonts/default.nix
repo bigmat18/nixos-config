@@ -14,6 +14,7 @@ let
     noto-fonts
     siji
     terminus_font
+    dejavu_fonts
   ];
 in
 {

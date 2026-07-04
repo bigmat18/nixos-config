@@ -17,6 +17,8 @@ in
     ../../modules/common/fonts
     ../../modules/common/nix
     ../../modules/common/nix-scripts
+
+    ../../modules/darwin/homebrew
   ];
 
   home-manager = {
@@ -28,6 +30,10 @@ in
       imports = [
         ../../home/nvim
         ../../home/tmux
+        ../../home/zsh
+        ../../home/git
+        ../../home/alacritty
+        ../../home/fastfetch
       ];
 
       home.stateVersion = "24.11";
@@ -41,4 +47,5 @@ in
 
   system.stateVersion = 4;
   nixpkgs.hostPlatform = "aarch64-darwin";
+  system.primaryUser = "${username}";
 } 
