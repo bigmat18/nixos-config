@@ -1,4 +1,4 @@
-{ outputs, ... }:
+{ outputs, pkgs, lib, ... }:
 {
   nixpkgs = {
     config = {
@@ -8,7 +8,6 @@
         "qtwebengine-5.15.19" 
       ];
     };
-
     overlays = outputs.overlays;
   };
 
@@ -16,9 +15,16 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "@wheel" ]; 
-      auto-optimise-store = true; 
     };
-
+  }
+  
+  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    enable = false;
+  }
+  
+  // lib.optionalAttrs pkgs.stdenv.isLinux {
+    optimise.automatic = true;
+    
     gc = {
       automatic = true;
       dates = "weekly";

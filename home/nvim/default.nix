@@ -19,12 +19,13 @@ in
       lua-language-server
       cmake-language-server
       xclip
-      wl-clipboard
       ripgrep
       nodejs_22
       typescript
       typescript-language-server
       nil
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      wl-clipboard
     ];
 
     plugins = with pkgs.vimPlugins; [

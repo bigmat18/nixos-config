@@ -15,7 +15,7 @@
     };
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -50,7 +50,9 @@
 
       homeConfigurations = {};
 
-      darwinConfigurations = {};
+      darwinConfigurations = {
+        crota = mkDarwinConfig ./hosts/crota/configuration.nix;
+      };
 
       nixosConfigurations = {
         oryx = mkNixOSConfig ./hosts/oryx/configuration.nix;
