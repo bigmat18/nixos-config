@@ -6,8 +6,11 @@ let
       echo "Use: update <setup-name>"
       exit 1
     fi
-    sudo nixos-rebuild switch --flake "${vars.configDir}#$1"
-  '';
+    if [[ "$(uname)" == "Darwin" ]]; then
+      sudo darwin-rebuild switch --flake "${vars.configDir}#$1"
+    else
+      sudo nixos-rebuild switch --flake "${vars.configDir}#$1"
+    fi  '';
 
   shell = pkgs.writeShellScriptBin "shell" ''
     if [[ -z "$1" ]]; then

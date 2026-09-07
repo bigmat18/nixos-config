@@ -26,23 +26,34 @@
     home-manager,
     nix-darwin,
     ...
-  } @ inputs: let
+  } @ inputs: 
+  let
     inherit (self) outputs;
 
-    vars = import ./vars.nix;
+    defaultVars = import ./vars.nix;
+    vars = extraVars: defaultVars // extraVars;
 
-    mkNixOSConfig = path: nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs outputs vars self; };
+    mkNixOSConfig = path: extraVars: nixpkgs.lib.nixosSystem {
+      specialArgs = { 
+        inherit inputs outputs self; 
+        vars = vars extraVars;
+      };
       modules = [ path ];
     };
 
-    mkDarwinConfig = path: nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit inputs outputs vars self; };
+    mkDarwinConfig = path: extraVars: nix-darwin.lib.darwinSystem {
+      specialArgs = { 
+        inherit inputs outputs self; 
+        vars = vars extraVars;
+      };
       modules = [ path ];
     };
 
-    mkHomeConfig = path: home-manager.lib.homeManagerConfiguration {
-      specialArgs = { inherit inputs outputs vars self; };
+    mkHomeConfig = path: extraVars: home-manager.lib.homeManagerConfiguration {
+      specialArgs = { 
+        inherit inputs outputs self; 
+        vars = vars extraVars;
+      };
       modules = [ path ];
     };
 
@@ -51,11 +62,14 @@
       homeConfigurations = {};
 
       darwinConfigurations = {
-        crota = mkDarwinConfig ./hosts/crota/configuration.nix;
+        crota = mkDarwinConfig ./hosts/crota/configuration.nix {
+          username = "giuntoni";
+          configDir = "/Users/giuntoni/Desktop/nixos-config";
+        };
       };
 
       nixosConfigurations = {
-        oryx = mkNixOSConfig ./hosts/oryx/configuration.nix;
+        oryx = mkNixOSConfig ./hosts/oryx/configuration.nix {};
       };
 
       overlays = import ./libs/mkOverlays.nix { inherit vars; path = ./packages/overlays; };

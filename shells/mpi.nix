@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, vars, ... }:
 
 pkgs.mkShell {
   name = "mpi-env-shell";

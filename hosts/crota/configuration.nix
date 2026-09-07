@@ -5,9 +5,6 @@
   pkgs,
   ... 
 }:
-let 
-  username = "giuntoni";
-in 
 {
   imports = [
     inputs.home-manager.darwinModules.home-manager
@@ -26,7 +23,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
 
-    users.${username} = { 
+    users.${vars.username} = { 
       imports = [
         ../../home/nvim
         ../../home/tmux
@@ -40,12 +37,12 @@ in
     };
   };
 
-  users.users.${username} = {
-    name = "${username}";
-    home = "/Users/${username}";
+  users.users.${vars.username} = {
+    name = "${vars.username}";
+    home = "/Users/${vars.username}";
   };
 
   system.stateVersion = 4;
   nixpkgs.hostPlatform = "aarch64-darwin";
-  system.primaryUser = "${username}";
+  system.primaryUser = "${vars.username}";
 } 

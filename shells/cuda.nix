@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs, vars, ... }:
 pkgs.mkShell {
   name = "cuda-env-shell";
   
