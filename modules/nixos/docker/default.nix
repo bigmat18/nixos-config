@@ -12,4 +12,8 @@
 
   hardware.nvidia-container-toolkit.enable = true;
   users.users.${vars.username}.extraGroups = [ "docker" ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "docker-28.5.2"
+  ];
 }

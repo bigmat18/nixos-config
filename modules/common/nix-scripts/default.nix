@@ -6,10 +6,12 @@ let
       echo "Use: update <setup-name>"
       exit 1
     fi
+    target="$1"
+    shift
     if [[ "$(uname)" == "Darwin" ]]; then
-      sudo darwin-rebuild switch --flake "${vars.configDir}#$1"
+      sudo darwin-rebuild switch --flake "${vars.configDir}#$target" "$@"
     else
-      sudo nixos-rebuild switch --flake "${vars.configDir}#$1"
+      sudo nixos-rebuild switch --flake "${vars.configDir}#$target" "$@"
     fi  '';
 
   shell = pkgs.writeShellScriptBin "shell" ''
@@ -25,7 +27,8 @@ let
       echo "Use: home <setup-name>"
       exit 1
     fi
-    home-manager switch --flake "${vars.configDir}#$1"
+    shift
+    home-manager switch --flake "${vars.configDir}#$1" "$@"
   '';
 
   get = pkgs.writeShellScriptBin "get" ''

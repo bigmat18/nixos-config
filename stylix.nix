@@ -14,9 +14,9 @@ in
 
     fonts = {
       sizes = {
-        applications = 9;
+        applications = 11;
         terminal     = 11;
-        desktop      = 9;
+        desktop      = 11;
         popups       = 11;
       };
 

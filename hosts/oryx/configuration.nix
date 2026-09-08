@@ -131,7 +131,7 @@
     htop         # Interactive process viewer
     perf         # Kernel perf profiler
     nixd         # Il Language Server
-    nixpkgs-fmt  # Formattatore (consigliato per l'integrazione con l'LSP)
+    nixpkgs-fmt  # Formattater
   ];
 
   # Don't touch this

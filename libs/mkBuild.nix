@@ -5,7 +5,7 @@ let
   mkForSystem = system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      files = builtins.readDir path;
+      files = if builtins.pathExists path then builtins.readDir path else {};
       nixFiles = builtins.filter (name: 
         files.${name} == "regular" && builtins.match ".*\\.nix" name != null
       ) (builtins.attrNames files);
