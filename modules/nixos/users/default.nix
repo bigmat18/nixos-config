@@ -24,7 +24,7 @@
         mpv
 
         # === Wine setup ===
-        wineWowPackages.stable
+        wineWow64Packages.stable
         dxvk
         vkd3d
 
@@ -33,9 +33,8 @@
         (hwloc.overrideAttrs (old: {
           configureFlags = old.configureFlags or [] ++ [
             "--enable-cairo"
-            "--enable-x11"
           ];
-          buildInputs = (old.buildInputs or []) ++ [ cairo xorg.libX11 pkg-config ];
+          buildInputs = (old.buildInputs or []) ++ [ cairo pkg-config ];
         }))
       ];
     };

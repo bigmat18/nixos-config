@@ -19,7 +19,7 @@ pkgs.mkShell {
       qt5.full
       glfw
 
-      xorg.libX11.dev
+      libx11.dev
       xorg.libXrandr
       xorg.libXinerama
       xorg.libXcursor

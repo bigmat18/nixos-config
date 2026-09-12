@@ -1,4 +1,10 @@
-{ config, pkgs, lib, vars, ...}:
+{
+  config,
+  pkgs,
+  lib,
+  vars,
+  ...
+}:
 
 with lib;
 
@@ -6,27 +12,29 @@ let
   modifier = "Mod4";
   refresh_i3status = "killall -SIGUSR1 i3status";
 
-  gruvbox = vars.colorschema;
+  gruvbox = vars.colorscheme;
 
 in
 {
   options = {
     services.i3.startupCommands = mkOption {
-      type = types.listOf (types.submodule {
-        options = {
-          command = mkOption {
-            type = types.str;
+      type = types.listOf (
+        types.submodule {
+          options = {
+            command = mkOption {
+              type = types.str;
+            };
+            always = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            notification = mkOption {
+              type = types.bool;
+              default = false;
+            };
           };
-          always = mkOption {
-            type = types.bool;
-            default = false;
-          };
-          notification = mkOption {
-            type = types.bool;
-            default = false;
-          };
-        };
-      });
+        }
+      );
       default = [ ];
       description = "List of commands to run on startup";
     };
@@ -55,26 +63,31 @@ in
           floating.border = 1;
 
           keybindings = {
-            "${modifier}+Return"        = "exec alacritty";
-            "${modifier}+Shift+Return"  = "exec --no-startup-id alacritty -e distrobox-enter --root debian-box";
-            "${modifier}+z"             = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | get nimble nim-unwrapped'";
-            "${modifier}+Shift+s"       = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
-            "${modifier}+Shift+q"       = "kill";
-            "${modifier}+d"             = "exec rofi -show drun";
-            "${modifier}+b"             = "exec firefox";
-            "${modifier}+c"             = "exec rofi -show calc -modi calc -no-show-match -no-sort";
-            "${modifier}+Shift+f"       = "exec --no-startup-id alacritty --class FloatingRanger -e yazi";
+            "${modifier}+Return" = "exec alacritty";
+            "${modifier}+Shift+Return" = "exec --no-startup-id alacritty -e distrobox-enter --root debian-box";
+            "${modifier}+z" = "exec sh -c '/home/bigmat18/3rdparty/boomer/boomer | get nimble nim-unwrapped'";
+            "${modifier}+Shift+s" = "exec flameshot gui -r | xclip -selection clipboard -t image/png";
+            "${modifier}+Shift+q" = "kill";
+            "${modifier}+d" = "exec rofi -show drun";
+            "${modifier}+b" = "exec firefox";
+            "${modifier}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
+            "${modifier}+Shift+f" = "exec --no-startup-id alacritty --class FloatingRanger -e yazi";
 
-            "${modifier}+Shift+c"       = "reload";
-            "${modifier}+Shift+r"       = "restart";
-            "${modifier}+Shift+e"       = "exec i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit' 'i3-msg exit'";
+            "${modifier}+Shift+c" = "reload";
+            "${modifier}+Shift+r" = "restart";
+            "${modifier}+Shift+e" =
+              "exec i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit' 'i3-msg exit'";
 
-            "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && ${refresh_i3status}";
-            "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && ${refresh_i3status}";
-            "XF86AudioMute"        = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ${refresh_i3status}";
-            "XF86AudioMicMute"     = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
+            "XF86AudioRaiseVolume" =
+              "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && ${refresh_i3status}";
+            "XF86AudioLowerVolume" =
+              "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && ${refresh_i3status}";
+            "XF86AudioMute" =
+              "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ${refresh_i3status}";
+            "XF86AudioMicMute" =
+              "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && ${refresh_i3status}";
 
-            "XF86MonBrightnessUp"   = "exec --no-startup-id bash ~/.config/i3/brightness.sh +";
+            "XF86MonBrightnessUp" = "exec --no-startup-id bash ~/.config/i3/brightness.sh +";
             "XF86MonBrightnessDown" = "exec --no-startup-id bash ~/.config/i3/brightness.sh -";
 
             "${modifier}+1" = "workspace number 1";
@@ -117,9 +130,9 @@ in
             "${modifier}+Shift+h" = "move left";
 
             # alternatively, you can use the cursor keys:
-            "${modifier}+Shift+Left"  = "move left";
-            "${modifier}+Shift+Down"  = "move down";
-            "${modifier}+Shift+Up"    = "move up";
+            "${modifier}+Shift+Left" = "move left";
+            "${modifier}+Shift+Down" = "move down";
+            "${modifier}+Shift+Up" = "move up";
             "${modifier}+Shift+Right" = "move right";
 
             # split in horizontal orientation
@@ -167,35 +180,35 @@ in
           colors = lib.mkForce {
             focused = {
               text = gruvbox.base04;
-              background = gruvbox.base04;  # yellow
+              background = gruvbox.base04; # yellow
               border = gruvbox.base04;
               childBorder = gruvbox.base04;
               indicator = gruvbox.base04;
             };
             focusedInactive = {
               text = gruvbox.base04;
-              background = gruvbox.base03;  # gray
+              background = gruvbox.base03; # gray
               border = gruvbox.base03;
               childBorder = gruvbox.base03;
               indicator = gruvbox.base03;
             };
             unfocused = {
               text = gruvbox.base04;
-              background = gruvbox.base01;  # bg_inactive
+              background = gruvbox.base01; # bg_inactive
               border = gruvbox.base01;
               childBorder = gruvbox.base01;
               indicator = gruvbox.base01;
             };
             urgent = {
               text = gruvbox.base04;
-              background = gruvbox.base08;  # red
+              background = gruvbox.base08; # red
               border = gruvbox.base08;
               childBorder = gruvbox.base08;
               indicator = gruvbox.base08;
             };
           };
 
-          bars = [];
+          bars = [ ];
 
           startup = [
             {
@@ -223,10 +236,32 @@ in
               always = false;
               notification = false;
             }
-          ] ++ config.services.i3.startupCommands;
+          ]
+          ++ config.services.i3.startupCommands;
         };
       };
     };
-    home.file.".config/i3/brightness.sh".source = ./brightness.sh;
+
+    home.file = {
+      ".xinitrc".text = ''
+        xset s off -dpms
+        exec i3
+      '';
+
+      ".bash_profile".text = ''
+        if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+          startx
+        fi
+      '';
+
+      ".zprofile".text = ''
+        if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+          startx
+        fi
+      '';
+
+      ".config/i3/brightness.sh".source = ./brightness.sh;
+    };
+
   };
 }

@@ -1,10 +1,11 @@
-{ 
+{
   inputs,
   outputs,
   vars,
   pkgs,
-  ... 
-}: { 
+  ...
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
@@ -16,13 +17,13 @@
     ../../modules/nixos/users
     ../../modules/nixos/nvidia
     ../../modules/nixos/boot
-    ../../modules/nixos/xserver
     ../../modules/nixos/pipewire
     ../../modules/nixos/docker
     ../../modules/nixos/game
     ../../modules/nixos/vm
     ../../modules/nixos/bluetooth
     ../../modules/nixos/sonicwall
+    ../../modules/nixos/wayland
 
     ../../modules/common/fonts
     ../../modules/common/nix
@@ -33,15 +34,15 @@
     extraSpecialArgs = { inherit inputs outputs vars; };
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.${vars.username} = { 
+    users.${vars.username} = {
       imports = [
-        ../../home/i3
-        ../../home/i3status
-        ../../home/picom
+        ../../home/sway
+        ../../home/waybar
+        ../../home/rofi
+
         ../../home/zsh
         ../../home/nvim
         ../../home/tmux
-        ../../home/rofi
         ../../home/git
         ../../home/yazi
         ../../home/zathura
@@ -52,38 +53,7 @@
         ../../home/dust
       ];
 
-      services.i3status = {
-        useAlternativeStatusCommand = true;
-        activeModules = [ 
-          "volume master"  
-          "wireless _first_" 
-          "cpu_usage" 
-          "memory" 
-          "load"
-          "tztime localtime"
-        ];
-      };
-
-      home.file = {
-        ".xinitrc".text = ''
-          xset s off -dpms  
-          exec i3
-        '';
-
-        ".bash_profile".text = ''
-          if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-            startx
-          fi
-        '';
-
-        ".zprofile".text = ''
-          if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-            startx
-          fi
-        '';
-      };
-
-      home.stateVersion = "24.11";
+      home.stateVersion = "26.05";
       systemd.user.startServices = "sd-switch";
     };
   };
@@ -93,8 +63,8 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   security = {
-    rtkit.enable = true;   # For audio purposes
-    polkit.enable = true;  # Used to control system preferences
+    rtkit.enable = true; # For audio purposes
+    polkit.enable = true; # Used to control system preferences
   };
 
   services = {
@@ -116,23 +86,23 @@
   };
 
   environment.systemPackages = with pkgs; [
-    lxsession    # X11 session manager
-    python3      # Python interpreter
-    xdotool      # Simulate X11 input
-    dconf        # GNOME config backend/CLI
-    killall      # Kill by process name
-    wget         # CLI downloader
-    zip          # ZIP file archiver
-    unzip        # Unzip ZIP files
-    unrar        # Extract RAR files
-    xclip        # X11 clipboard CLI
-    wl-clipboard # Wayland clipboard (wl-copy/paste)
-    btop         # TUI resource monitor
-    htop         # Interactive process viewer
-    perf         # Kernel perf profiler
-    nixd         # Il Language Server
-    nixpkgs-fmt  # Formattater
+    python3 # Python interpreter
+    dconf # GNOME config backend/CLI
+    killall # Kill by process name
+    wget # CLI downloader
+    zip # ZIP file archiver
+    unzip # Unzip ZIP files
+    unrar # Extract RAR files
+    btop # TUI resource monitor
+    htop # Interactive process viewer
+    perf # Kernel perf profiler
+    nixd # Nix Language Server
+    nixpkgs-fmt # Nix Formattater
   ];
+
+  services.udev.extraRules = ''
+    ACTION=="add|change", SUBSYSTEM=="pci", ATTR{class}=="0x0c0330", ATTR{power/wakeup}="disabled"
+  '';
 
   # Don't touch this
   system.stateVersion = "23.05";

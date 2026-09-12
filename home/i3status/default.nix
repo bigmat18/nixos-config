@@ -3,7 +3,7 @@
 with lib;
 
 let
-  gruvbox = vars.colorschema;
+  gruvbox = vars.colorscheme;
 
   modulesDefinition = {
     "volume master" = { settings = { format = "VOL %volume"; format_muted = "VOL muted"; device = "default"; mixer = "Master"; mixer_idx = 0; }; };
@@ -150,7 +150,7 @@ in
 
     xsession.windowManager.i3.config.bars = [
       (barConfig { outputName = "HDMI-0"; fontSize = 10; })
-      (barConfig { outputName = "DP-0"; fontSize = 10; })
+      (barConfig { outputName = "DP-0"; fontSize = 12; })
     ];
   };
 }

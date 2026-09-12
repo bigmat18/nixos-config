@@ -13,7 +13,7 @@ pkgs.mkShell {
 
     libGLU libGL
     xorg.libXi xorg.libXmu freeglut
-    xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
+    xorg.libXext libx11 xorg.libXv xorg.libXrandr zlib 
 
     ncurses5 stdenv.cc binutils gcc cmake 
     gdb gdbgui clang-tools python313Packages.ninja 

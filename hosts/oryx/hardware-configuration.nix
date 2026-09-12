@@ -8,12 +8,8 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-
-  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
   boot.kernelModules = [ "kvm-amd" "tun" "vfio-pci" "vfio" "vfio_iommu_type1" "vfio_virqfd" ];
-
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

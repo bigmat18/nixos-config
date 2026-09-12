@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 {
   services.xserver = {
     enable = true;
@@ -22,10 +21,16 @@
 
     displayManager = {
       startx.enable = true;
-      lightdm.enable = lib.mkForce false;
     };
   };
 
   services.libinput.enable = true;
+  services.displayManager.ly.enable = true;
   services.displayManager.defaultSession = "none+i3";
+
+  environment.systemPackages = with pkgs; [
+    lxsession
+    xdotool
+    xclip
+  ];
 }

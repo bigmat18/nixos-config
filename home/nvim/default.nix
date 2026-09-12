@@ -120,7 +120,7 @@ in
       cmp-nvim-lsp
     ];
 
-    extraLuaConfig = ''
+    initLua = ''
       ${builtins.readFile (nvimConfigPath + /options.lua)}
       ${builtins.readFile (nvimConfigPath + /keymaps.lua)}
     '';

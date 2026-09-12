@@ -1,9 +1,9 @@
-{ 
+{
   inputs,
   outputs,
   vars,
   pkgs,
-  ... 
+  ...
 }:
 {
   imports = [
@@ -23,7 +23,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
 
-    users.${vars.username} = { 
+    users.${vars.username} = {
       imports = [
         ../../home/nvim
         ../../home/tmux
@@ -33,7 +33,7 @@
         ../../home/fastfetch
       ];
 
-      home.stateVersion = "24.11";
+      home.stateVersion = "26.05";
     };
   };
 
@@ -45,4 +45,5 @@
   system.stateVersion = 4;
   nixpkgs.hostPlatform = "aarch64-darwin";
   system.primaryUser = "${vars.username}";
-} 
+}
+

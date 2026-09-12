@@ -10,7 +10,7 @@ in
       url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/brands/nixos.png";
       hash = "sha256-M4Q5/Sm5ZVOe324V9pEF9497M0VpcQMPTJHOwW2ZQmg=";
     };
-    base16Scheme = vars.colorschema;
+    base16Scheme = vars.colorscheme;
 
     fonts = {
       sizes = {
