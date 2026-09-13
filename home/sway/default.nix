@@ -76,7 +76,7 @@ in
           "HDMI-A-1" = {
             resolution = "1920x1080@60Hz";
             position = "2560,0";
-            scale = "0.8";
+            scale = "0.83";
             transform = "180";
             bg = "${config.stylix.image} fill";
           };

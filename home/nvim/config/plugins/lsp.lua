@@ -117,3 +117,18 @@ require('lspconfig').ts_ls.setup {
     ),
     single_file_support = true,
 }
+
+require('lspconfig').rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        ['rust-analyzer'] = {
+            diagnostics = {
+            enable = true,
+        },
+        cargo = {
+            allFeatures = true,
+        },
+    },
+  },
+}

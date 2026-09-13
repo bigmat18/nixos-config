@@ -1,4 +1,10 @@
-{ config, pkgs, lib, vars, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  vars,
+  ...
+}:
 {
   programs.waybar = {
     enable = true;
@@ -7,9 +13,9 @@
       mainBar = {
         layer = "top";
         position = "top";
-        
+
         modules-left = [ "sway/workspaces" ];
-        modules-center = [  ];
+        modules-center = [ ];
         modules-right = [
           "clock"
           "pulseaudio"
@@ -57,6 +63,8 @@
         "temperature" = {
           interval = 5;
           critical-threshold = 80;
+          hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
+          input-filename = "temp1_input";
           format = "Your Mom Temp: {temperatureC}°C";
         };
 
@@ -66,7 +74,11 @@
             critical = 10;
           };
           format = "{icon} {capacity}% {time}";
-          format-icons = ["BAT" "BAT" "BAT"];
+          format-icons = [
+            "BAT"
+            "BAT"
+            "BAT"
+          ];
           format-charging = "CHR {capacity}%";
           format-plugged = "FULL {capacity}%";
         };
@@ -98,9 +110,10 @@
         border-bottom: 2px solid transparent;
       }
 
+      #workspaces button.focused,
       #workspaces button.active {
-        background-color: ${vars.colorscheme.base00};
-        color: ${vars.colorscheme.base0A};
+        background-color: ${vars.colorscheme.base04};
+        color: ${vars.colorscheme.base00};
         border-bottom: 2px solid ${vars.colorscheme.base04};
       }
 
@@ -109,13 +122,7 @@
         color: ${vars.colorscheme.base00};
       }
 
-      /* Orologio: Niente bordi, solo padding */
-      #clock {
-        padding: 4px 16px;
-        color: ${vars.colorscheme.base04};
-      }
-
-      /* Moduli a destra: Separatore Gruvbox */
+      #clock
       #battery,
       #cpu,
       #memory,
