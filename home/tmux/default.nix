@@ -4,7 +4,6 @@
 
   programs.tmux = {
     enable = true;
-    shell = "zsh";
 
     terminal = "tmux-256color";
     historyLimit = 100000;

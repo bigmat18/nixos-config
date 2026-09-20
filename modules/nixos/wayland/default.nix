@@ -1,4 +1,10 @@
-{ config, lib, pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  ...
+}:
 
 let
   cfg = config.custom.wayland;
@@ -6,7 +12,10 @@ in
 {
   options.custom.wayland = {
     compositor = lib.mkOption {
-      type = lib.types.enum [ "sway" "hyprland" ];
+      type = lib.types.enum [
+        "sway"
+        "hyprland"
+      ];
       default = "sway";
     };
   };
@@ -36,9 +45,15 @@ in
 
     environment.sessionVariables = lib.mkMerge [
       {
-        NIXOS_OZONE_WL = "1";
         WLR_NO_HARDWARE_CURSORS = "1";
+        NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
+
+        # Toolkit grafici
+        QT_QPA_PLATFORM = "wayland;xcb";
+        GDK_BACKEND = "wayland,x11";
+        SDL_VIDEODRIVER = "wayland";
+        CLUTTER_BACKEND = "wayland";
       }
     ];
 

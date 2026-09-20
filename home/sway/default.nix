@@ -48,8 +48,8 @@ in
 
       extraConfig = ''
         default_floating_border pixel 2
-        for_window [app_id="FloatingRanger"] floating enable, resize set 1200 px 600 px, move position center
-        for_window [class="FloatingRanger"] floating enable, resize set 1200 px 600 px, move position center
+        for_window [app_id="FloatingRanger"] floating enable, resize set 50 ppt 50 ppt, move position center
+        for_window [class="FloatingRanger"] floating enable, resize set 50 ppt 50 ppt, move position center
       '';
 
       config = {
@@ -76,7 +76,7 @@ in
           "HDMI-A-1" = {
             resolution = "1920x1080@60Hz";
             position = "2560,0";
-            scale = "0.83";
+            scale = "1";
             transform = "180";
             bg = "${config.stylix.image} fill";
           };
