@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     ueberzugpp
@@ -6,8 +6,9 @@
     ffmpegthumbnailer
   ];
 
-  programs.yazi = { 
-    enable = true; 
+  programs.yazi = {
+    enable = true;
+
     settings = {
       preview = {
         image_filter = "lanczos3";
@@ -22,6 +23,30 @@
           0
           0
           0
+        ];
+      };
+
+      opener = {
+        pdf = [
+          {
+            run = "zathura %s1";
+            orphan = true;
+            desc = "Zathura";
+            for = "unix";
+          }
+        ];
+      };
+
+      open = {
+        prepend_rules = [
+          {
+            mime = "application/pdf";
+            use = "pdf";
+          }
+          {
+            url = "*.pdf";
+            use = "pdf";
+          }
         ];
       };
     };

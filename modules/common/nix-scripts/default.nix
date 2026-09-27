@@ -36,7 +36,9 @@ let
       echo "Use: get <package-name>"
       exit 1
     fi
-    nix shell nixpkgs#"$1"
+    target="$1"
+    shift
+    nix shell "$@" nixpkgs#"$target"
   '';
 
 in

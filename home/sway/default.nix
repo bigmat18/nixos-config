@@ -63,6 +63,10 @@ in
             workspace = "1";
             output = "DP-1";
           }
+          {
+            workspace = "2";
+            output = "HDMI-A-1";
+          }
         ];
 
         output = {

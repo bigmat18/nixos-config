@@ -11,7 +11,6 @@
         # === General applications ===
         via
         obsidian
-        smartgit
         vscode
         scrcpy
         android-tools

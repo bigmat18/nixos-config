@@ -5,6 +5,11 @@
 
   programs.gamemode.enable = true;
 
+programs.gamescope = {
+    enable = true;
+    capSysNice = true; # Permette a Gamescope di gestire scheduling e input senza drop di frame
+  };
+
   environment.systemPackages = with pkgs; [
     mangohud
     protonup-ng

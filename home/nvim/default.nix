@@ -24,7 +24,7 @@ in
       typescript
       typescript-language-server
       nil
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       wl-clipboard
     ];
 

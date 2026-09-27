@@ -8,6 +8,7 @@
     shellAliases = {
       ll = "ls -l";
       ff = "fastfetch";
+      open = "zathura";
     };
     history.size = 10000;
 
