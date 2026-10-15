@@ -14,6 +14,7 @@
     ../../stylix.nix
 
     ../../modules/nixos/network
+    ../../modules/nixos/sunshine
     ../../modules/nixos/users
     ../../modules/nixos/nvidia
     ../../modules/nixos/boot
@@ -51,6 +52,7 @@
         ../../home/alacritty
         ../../home/obs-studio
         ../../home/dust
+        ../../home/antigravity
       ];
 
       home.stateVersion = "26.05";

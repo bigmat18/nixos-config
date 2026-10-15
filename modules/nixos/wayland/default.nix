@@ -35,9 +35,7 @@ in
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd '${
-            if cfg.compositor == "sway" then "sway --unsupported-gpu" else "start-hyprland"
-          }'";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd 'sway --unsupported-gpu'";
           user = "${vars.username}";
         };
       };

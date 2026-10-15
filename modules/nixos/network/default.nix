@@ -1,4 +1,4 @@
-{ pkgs, vars, ...}:
+{ pkgs, vars, ... }:
 {
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
@@ -22,6 +22,20 @@
     enable = true;
     autoStart = true;
     openFirewall = true;
+
+    settings = {
+      capture = "wlr";
+      output_name = "HEADLESS-1";
+    };
+
+    applications = {
+      apps = [
+        {
+          name = "Desktop";
+          image-path = "desktop.png";
+        }
+      ];
+    };
   };
 
   users.users.${vars.username}.extraGroups = [ "networkmanager" ];

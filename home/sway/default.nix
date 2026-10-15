@@ -84,6 +84,9 @@ in
             transform = "180";
             bg = "${config.stylix.image} fill";
           };
+          "HEADLESS-1" = {
+            mode = "3072x1920@60Hz";
+          };
         };
 
         input = {
@@ -245,6 +248,17 @@ in
           {
             command = "wl-gammarelay-rs";
             always = false;
+          }
+
+          # Sunshine virtual monitor setup
+          { 
+            command = "${pkgs.sway}/bin/swaymsg create_output";
+          }
+          {
+            command = "systemctl --user import-environment SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
+          }
+          { 
+            command = "systemctl --user restart sunshine";
           }
         ]
         ++ config.services.sway.startupCommands;

@@ -91,7 +91,7 @@ in
 
     settings = {
       mainBar = sharedConfig // {
-        output = "DP-1";
+        output = [ "DP-1" "HEADLESS-1" ];
       };
 
       secondaryBar = sharedConfig // {
