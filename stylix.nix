@@ -7,8 +7,8 @@ in
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/brands/nixos.png";
-      hash = "sha256-M4Q5/Sm5ZVOe324V9pEF9497M0VpcQMPTJHOwW2ZQmg=";
+      url = "https://gruvbox-wallpapers.pages.dev/wallpapers/minimalistic/ALLqk82.png";
+      hash = "sha256-6BsRfgh0+3Da1oPD1Hgw74q+6CtLVMfoxa1jX9K7pOo=";
     };
     base16Scheme = vars.colorscheme;
 

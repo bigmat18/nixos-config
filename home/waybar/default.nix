@@ -109,9 +109,15 @@ in
       }
 
       window#waybar {
+        background-color: transparent;
+      }
+
+      window#waybar > box {
         background-color: ${vars.colorscheme.base00};
         color: ${vars.colorscheme.base04};
+        border: 1px solid ${vars.colorscheme.base04};
         min-height: 32px;
+        margin: 6px 6px 6px 6px;
       }
 
       #workspaces button {
