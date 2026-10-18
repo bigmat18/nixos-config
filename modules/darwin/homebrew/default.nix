@@ -10,8 +10,6 @@
 
     brews = [];
 
-    casks = [
-      "alacritty"
-    ];
+    casks = [];
   };
 }

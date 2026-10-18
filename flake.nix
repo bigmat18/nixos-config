@@ -3,6 +3,10 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
+
+    nixpkgs-intel = {
+      url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    };
     
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -17,6 +21,11 @@
     nix-darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-darwin-intel = {
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-intel";
     };
   };
 
@@ -41,12 +50,24 @@
       modules = [ path ];
     };
 
-    mkDarwinConfig = path: extraVars: nix-darwin.lib.darwinSystem {
+    mkDarwinConfig = path: extraVars: 
+    let
+      system = extraVars.system or "aarch64-darwin";
+      customPkgs = extraVars.pkgsInput or null;
+      darwin = extraVars.darwin or nix-darwin;
+    in darwin.lib.darwinSystem {
+      inherit system;
       specialArgs = { 
         inherit inputs outputs self; 
         vars = vars extraVars;
       };
-      modules = [ path ];
+      modules = [ path ] ++ (if customPkgs != null then [{
+          nixpkgs.config = nixpkgs.lib.mkForce {};
+          nixpkgs.pkgs = import customPkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        }] else []);
     };
 
     mkHomeConfig = path: extraVars: home-manager.lib.homeManagerConfiguration {
@@ -65,6 +86,13 @@
         crota = mkDarwinConfig ./hosts/crota/configuration.nix {
           username = "giuntoni";
           configDir = "/Users/giuntoni/Desktop/nixos-config";
+        };
+        savathun = mkDarwinConfig ./hosts/savathun/configuration.nix {
+          username = "matteogiu";
+          configDir = "/Users/matteogiu/Desktop/nixos-config";
+          pkgsInput = inputs.nixpkgs-intel;
+          darwin = inputs.nix-darwin-intel;
+          system = "x86_64-darwin";
         };
       };
 

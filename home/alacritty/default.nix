@@ -3,6 +3,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      window.decorations = "Buttonless";
       colors = {
         primary = {
           background = vars.colorscheme.base00;
