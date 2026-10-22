@@ -84,9 +84,10 @@ in
             transform = "180";
             bg = "${config.stylix.image} fill";
           };
-          "HEADLESS-1" = {
-            mode = "3072x1920@60Hz";
-          };
+          #"HEADLESS-1" = {
+            #mode = "3072x1920@60Hz";
+            #scale = "1.5";
+          #};
         };
 
         input = {

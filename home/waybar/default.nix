@@ -117,7 +117,10 @@ in
         color: ${vars.colorscheme.base04};
         border: 1px solid ${vars.colorscheme.base04};
         min-height: 32px;
-        margin: 6px 6px 6px 6px;
+        margin-top: 4px;
+        margin-bottom: 0px;
+        margin-right: 6px;
+        margin-left: 6px;
       }
 
       #workspaces button {

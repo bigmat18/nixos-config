@@ -1,8 +1,9 @@
-{ vars, ... }:
+{ vars, lib, ... }:
 {
   programs.alacritty = {
     enable = true;
     settings = {
+      window.opacity = lib.mkForce 0.95;
       window.decorations = "Buttonless";
       colors = {
         primary = {
